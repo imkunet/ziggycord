@@ -1,6 +1,6 @@
 # ziggycord
 
-![Discord](https://img.shields.io/discord/1151170687738847284?logo=discord&logoColor=%237289da&color=%237289da)
+[![Discord](https://img.shields.io/discord/1151170687738847284?logo=discord&logoColor=%237289da&color=%237289da)](https://discord.gg/NMdNywWGXn)
 
 ### Foreword
 
