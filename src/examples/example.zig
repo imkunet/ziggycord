@@ -1,6 +1,8 @@
 const std = @import("std");
 const print = std.debug.print;
 
+const ziggycord = @import("ziggycord");
+
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
@@ -15,5 +17,12 @@ pub fn main() !void {
         return;
     };
 
-    print("hello world! {s}\n", .{token});
+    var http = try ziggycord.ZiggycordHttpClient.init(allocator, token);
+    defer http.deinit();
+
+    print("going to try it now", .{});
+
+    const start = std.time.microTimestamp();
+    try http.getSelf();
+    print("queried in {d}μs\n", .{std.time.microTimestamp() - start});
 }
