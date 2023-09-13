@@ -1,0 +1,23 @@
+name: autodocs
+on:
+    push:
+        branches:
+            - main
+permissions:
+    contents: write
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      name: generate docs
+      steps:
+        - uses: actions/checkout@v3
+        - name: Setup Zig
+          uses: korandoru/setup-zig@v1
+          with:
+            zig-version: 0.11.0
+        - run: zig build docs
+        - name: Deploy to pages
+          uses: JamesIves/github-pages-deploy-action@v4
+          with:
+            folder: zig-out/docs
+    

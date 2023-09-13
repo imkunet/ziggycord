@@ -52,13 +52,17 @@ pub const ZiggycordHttpClient = struct {
         try req.start();
         try req.wait();
 
-        const body = try req.reader().readAllAlloc(self.allocator, 65535);
+        // hopefully 4MB will be enough to store the data from a single request
+        // the highest I can imagine Discord returning ATM is a 100 message batch
+        // filled with content and metadata
+        const body = try req.reader().readAllAlloc(self.allocator, 4_000_000);
         return .{ .body = body, .status = req.response.status };
     }
 
     pub fn getSelf(self: *ZiggycordHttpClient) !void {
         var res = try queryDiscord(self, .GET, "/users/@me");
         defer self.allocator.free(res.body);
+
         std.debug.print("status code: {d}\n", .{@intFromEnum(res.status)});
         std.debug.print("res from server: {s}\n", .{res.body});
     }
