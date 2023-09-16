@@ -21,6 +21,7 @@ pub fn build(b: *std.Build) !void {
         .target = target,
         .optimize = optimize,
     });
+    //test_exe.strip = true;
     test_exe.addModule("websocket", ws);
     test_exe.addModule("ziggycord", ziggycord);
 
