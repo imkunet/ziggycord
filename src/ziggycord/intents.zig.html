@@ -111,6 +111,32 @@
     </style>
 </head>
 <body>
-<pre><code><span class="line" id="L1"></span>
+<pre><code><span class="line" id="L1"><span class="tok-kw">const</span> testing = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std&quot;</span>).testing;</span>
+<span class="line" id="L2"></span>
+<span class="line" id="L3"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILDS = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">0</span>);</span>
+<span class="line" id="L4"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_MEMBERS = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">1</span>);</span>
+<span class="line" id="L5"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_MODERATION = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">2</span>);</span>
+<span class="line" id="L6"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_EMOJIS_AND_STICKERS = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">3</span>);</span>
+<span class="line" id="L7"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_INTEGRATIONS = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">4</span>);</span>
+<span class="line" id="L8"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_WEBHOOKS = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">5</span>);</span>
+<span class="line" id="L9"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_INVITES = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">6</span>);</span>
+<span class="line" id="L10"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_VOICE_STATES = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">7</span>);</span>
+<span class="line" id="L11"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_PRESENCES = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">8</span>);</span>
+<span class="line" id="L12"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_MESSAGES = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">9</span>);</span>
+<span class="line" id="L13"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_MESSAGE_REACTIONS = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">10</span>);</span>
+<span class="line" id="L14"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_MESSAGE_TYPING = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">11</span>);</span>
+<span class="line" id="L15"></span>
+<span class="line" id="L16"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> DIRECT_MESSAGES = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">12</span>);</span>
+<span class="line" id="L17"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> DIRECT_MESSAGE_REACTIONS = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">13</span>);</span>
+<span class="line" id="L18"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> DIRECT_MESSAGE_TYPING = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">14</span>);</span>
+<span class="line" id="L19"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> MESSAGE_CONTENT = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">15</span>);</span>
+<span class="line" id="L20"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> GUILD_SCHEDULED_EVENTS = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">16</span>);</span>
+<span class="line" id="L21"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> AUTO_MODERATION_CONFIGURATION = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">20</span>);</span>
+<span class="line" id="L22"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> AUTO_MODERATION_EXECUTION = (<span class="tok-number">1</span> &lt;&lt; <span class="tok-number">21</span>);</span>
+<span class="line" id="L23"></span>
+<span class="line" id="L24"><span class="tok-kw">test</span> <span class="tok-str">&quot;intents work (no idea why they shouldn't)&quot;</span> {</span>
+<span class="line" id="L25">    <span class="tok-kw">try</span> testing.expectEqual(<span class="tok-number">2098176</span>, GUILD_MESSAGE_REACTIONS | AUTO_MODERATION_EXECUTION);</span>
+<span class="line" id="L26">}</span>
+<span class="line" id="L27"></span>
 </code></pre></body>
 </html>

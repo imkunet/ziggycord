@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>http.zig - source view</title>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPNJREFUeNpi/P//PwMlgOXHUjly9E0G4hwgZmQiQZMqEK8H4v9QzUEgQSaoADK+zhH9iAGL+C0gDoAaNg9mGLoLfgA1awK9hS9gzgJxA9RQBmQDrgMxJzRMGKE4HYj/Ial5A8QmQLwCJoBsgBYW2+TR1ChDaWt4LOBxKsi/VUh8XiD+gq4IVyzwQAMJBoKwacZlAB8Qf0bi96IZhtOAe1D6LpqaEiz6rmEzQAeIzwGxCJpieFqApo/vQKyJboAaEBsAsSEupwI1MwKjGBTVHOhegMX5UajYRqiBjMgYmj400cVh0XgTiKdC0zhJgJHS7AwQYABm9EAdCKrEfAAAAABJRU5ErkJggg=="/>
+    <style>
+      body{
+        font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      pre > code {
+        display: block;
+        overflow: auto;
+        line-height: normal;
+        margin: 0em;
+      }
+      .tok-kw {
+          color: #333;
+          font-weight: bold;
+      }
+      .tok-str {
+          color: #d14;
+      }
+      .tok-builtin {
+          color: #005C7A;
+      }
+      .tok-comment {
+          color: #545454;
+          font-style: italic;
+      }
+      .tok-fn {
+          color: #900;
+          font-weight: bold;
+      }
+      .tok-null {
+          color: #005C5C;
+      }
+      .tok-number {
+          color: #005C5C;
+      }
+      .tok-type {
+          color: #458;
+          font-weight: bold;
+      }
+      pre {
+        counter-reset: line;
+      }
+      pre .line:before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        padding-right: 1em;
+        width: 2em;
+        text-align: right;
+        color: #999;
+      }
+      
+      .line {
+        width: 100%;
+        display: inline-block;
+      }
+      .line:target {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        background: #fafafa;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body{
+            background:#222;
+            color: #ccc;
+        }
+        pre > code {
+            color: #ccc;
+            background: #222;
+            border: unset;
+        }
+        .line:target {
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+            background: #333;
+        }
+        .tok-kw {
+            color: #eee;
+        }
+        .tok-str {
+            color: #2e5;
+        }
+        .tok-builtin {
+            color: #ff894c;
+        }
+        .tok-comment {
+            color: #aa7;
+        }
+        .tok-fn {
+            color: #B1A0F8;
+        }
+        .tok-null {
+            color: #ff8080;
+        }
+        .tok-number {
+            color: #ff8080;
+        }
+        .tok-type {
+            color: #68f;
+        }
+      }
+    </style>
+</head>
+<body>
+<pre><code><span class="line" id="L1"><span class="tok-kw">const</span> std = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std&quot;</span>);</span>
+<span class="line" id="L2"><span class="tok-kw">const</span> http = std.http;</span>
+<span class="line" id="L3"></span>
+<span class="line" id="L4"><span class="tok-kw">const</span> BASE_URL = <span class="tok-str">&quot;https://discord.com/api/v10&quot;</span>;</span>
+<span class="line" id="L5"><span class="tok-kw">const</span> VERSION = <span class="tok-str">&quot;0.0.1&quot;</span>;</span>
+<span class="line" id="L6"><span class="tok-kw">const</span> USER_AGENT = std.fmt.comptimePrint(<span class="tok-str">&quot;Ziggycord (https://github.com/imkunet/ziggycord/, v{s})&quot;</span>, .{VERSION});</span>
+<span class="line" id="L7"></span>
+<span class="line" id="L8"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> HttpClient = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L9">    allocator: std.mem.Allocator,</span>
+<span class="line" id="L10">    token: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>,</span>
+<span class="line" id="L11"></span>
+<span class="line" id="L12">    http_client: http.Client,</span>
+<span class="line" id="L13">    http_options: http.Client.Options,</span>
+<span class="line" id="L14">    http_headers: http.Headers,</span>
+<span class="line" id="L15"></span>
+<span class="line" id="L16">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">init</span>(allocator: std.mem.Allocator, token: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) !HttpClient {</span>
+<span class="line" id="L17">        <span class="tok-kw">var</span> headers = http.Headers.init(allocator);</span>
+<span class="line" id="L18">        <span class="tok-kw">try</span> headers.append(<span class="tok-str">&quot;Authorization&quot;</span>, token);</span>
+<span class="line" id="L19">        <span class="tok-kw">try</span> headers.append(<span class="tok-str">&quot;User-Agent&quot;</span>, USER_AGENT);</span>
+<span class="line" id="L20">        <span class="tok-kw">try</span> headers.append(<span class="tok-str">&quot;Content-Type&quot;</span>, <span class="tok-str">&quot;application/json&quot;</span>);</span>
+<span class="line" id="L21">        <span class="tok-kw">try</span> headers.append(<span class="tok-str">&quot;Accept&quot;</span>, <span class="tok-str">&quot;application/json&quot;</span>);</span>
+<span class="line" id="L22">        headers.sort();</span>
+<span class="line" id="L23"></span>
+<span class="line" id="L24">        <span class="tok-kw">return</span> .{</span>
+<span class="line" id="L25">            .allocator = allocator,</span>
+<span class="line" id="L26">            .token = token,</span>
+<span class="line" id="L27">            .http_client = http.Client{</span>
+<span class="line" id="L28">                .allocator = allocator,</span>
+<span class="line" id="L29">            },</span>
+<span class="line" id="L30">            .http_options = http.Client.Options{},</span>
+<span class="line" id="L31">            .http_headers = headers,</span>
+<span class="line" id="L32">        };</span>
+<span class="line" id="L33">    }</span>
+<span class="line" id="L34"></span>
+<span class="line" id="L35">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">deinit</span>(self: *HttpClient) <span class="tok-type">void</span> {</span>
+<span class="line" id="L36">        self.http_client.deinit();</span>
+<span class="line" id="L37">        self.http_headers.deinit();</span>
+<span class="line" id="L38">    }</span>
+<span class="line" id="L39"></span>
+<span class="line" id="L40">    <span class="tok-kw">const</span> QueryResponse = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L41">        body: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>,</span>
+<span class="line" id="L42">        status: http.Status,</span>
+<span class="line" id="L43">    };</span>
+<span class="line" id="L44"></span>
+<span class="line" id="L45">    <span class="tok-kw">fn</span> <span class="tok-fn">queryDiscord</span>(self: *HttpClient, method: http.Method, url: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) !QueryResponse {</span>
+<span class="line" id="L46">        <span class="tok-kw">const</span> uri = <span class="tok-kw">try</span> std.Uri.parse(url);</span>
+<span class="line" id="L47">        <span class="tok-kw">var</span> req = <span class="tok-kw">try</span> self.http_client.request(method, uri, self.http_headers, self.http_options);</span>
+<span class="line" id="L48">        <span class="tok-kw">defer</span> req.deinit();</span>
+<span class="line" id="L49">        <span class="tok-kw">try</span> req.start();</span>
+<span class="line" id="L50">        <span class="tok-kw">try</span> req.wait();</span>
+<span class="line" id="L51"></span>
+<span class="line" id="L52">        <span class="tok-comment">// hopefully 4MB will be enough to store the data from a single request</span>
+</span>
+<span class="line" id="L53">        <span class="tok-comment">// the highest I can imagine Discord returning ATM is a 100 message batch</span>
+</span>
+<span class="line" id="L54">        <span class="tok-comment">// filled with content and metadata</span>
+</span>
+<span class="line" id="L55">        <span class="tok-kw">const</span> body = <span class="tok-kw">try</span> req.reader().readAllAlloc(self.allocator, <span class="tok-number">4_000_000</span>);</span>
+<span class="line" id="L56">        <span class="tok-kw">return</span> .{ .body = body, .status = req.response.status };</span>
+<span class="line" id="L57">    }</span>
+<span class="line" id="L58"></span>
+<span class="line" id="L59">    <span class="tok-kw">fn</span> <span class="tok-fn">formatUrl</span>(</span>
+<span class="line" id="L60">        self: *HttpClient,</span>
+<span class="line" id="L61">        <span class="tok-kw">comptime</span> format: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>,</span>
+<span class="line" id="L62">        args: <span class="tok-kw">anytype</span>,</span>
+<span class="line" id="L63">    ) <span class="tok-type">void</span> {</span>
+<span class="line" id="L64">        _ = args;</span>
+<span class="line" id="L65">        _ = format;</span>
+<span class="line" id="L66">        _ = self;</span>
+<span class="line" id="L67">    }</span>
+<span class="line" id="L68"></span>
+<span class="line" id="L69">    <span class="tok-kw">fn</span> <span class="tok-fn">fixedUrl</span>(<span class="tok-kw">comptime</span> path: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) []<span class="tok-kw">const</span> <span class="tok-type">u8</span> {</span>
+<span class="line" id="L70">        <span class="tok-kw">return</span> BASE_URL ++ path;</span>
+<span class="line" id="L71">    }</span>
+<span class="line" id="L72"></span>
+<span class="line" id="L73">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">getSelf</span>(self: *HttpClient) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L74">        <span class="tok-kw">var</span> res = <span class="tok-kw">try</span> queryDiscord(self, .GET, <span class="tok-kw">comptime</span> fixedUrl(<span class="tok-str">&quot;/users/@me&quot;</span>));</span>
+<span class="line" id="L75">        <span class="tok-kw">defer</span> self.allocator.free(res.body);</span>
+<span class="line" id="L76"></span>
+<span class="line" id="L77">        std.debug.print(<span class="tok-str">&quot;status code: {d}\n&quot;</span>, .{<span class="tok-builtin">@intFromEnum</span>(res.status)});</span>
+<span class="line" id="L78">        std.debug.print(<span class="tok-str">&quot;res from server: {s}\n&quot;</span>, .{res.body});</span>
+<span class="line" id="L79">    }</span>
+<span class="line" id="L80">};</span>
+<span class="line" id="L81"></span>
+</code></pre></body>
+</html>
