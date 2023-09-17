@@ -1,11 +1,11 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
-const print = std.debug.print;
+const log = std.log;
 
 const ziggycord = @import("ziggycord");
 const HttpClient = ziggycord.http.HttpClient;
 
-pub fn customLogFn(comptime level: std.log.Level, comptime scope: @TypeOf(.EnumLiteral), comptime format: []const u8, args: anytype) void {
+pub fn customLogFn(comptime level: log.Level, comptime scope: @TypeOf(.EnumLiteral), comptime format: []const u8, args: anytype) void {
     const level_txt = comptime level.asText();
     const prefix2 = if (scope == .default) " " else "(" ++ @tagName(scope) ++ "): ";
     const stderr = std.io.getStdErr().writer();
@@ -22,11 +22,11 @@ pub const std_options = struct {
 fn getToken(allocator: Allocator) ?[]u8 {
     const token = std.process.getEnvVarOwned(allocator, "DISCORD_TOKEN") catch |err| {
         if (err == std.process.GetEnvVarOwnedError.EnvironmentVariableNotFound) {
-            std.log.err("Please specify the DISCORD_TOKEN environment variable\n", .{});
+            log.err("Please specify the DISCORD_TOKEN environment variable\n", .{});
             return null;
         }
 
-        std.log.err("Something went really wrong here: {any}\n", .{err});
+        log.err("Something went really wrong here: {any}\n", .{err});
         return null;
     };
 
@@ -43,10 +43,13 @@ pub fn main() !void {
     var http = try HttpClient.init(allocator, token);
     defer http.deinit();
 
-    std.log.info("going to try it now\n", .{});
+    log.info("going to try it now\n", .{});
 
     const start = std.time.microTimestamp();
-    try http.getSelf();
 
-    std.log.info("queried in {d}μs\n", .{std.time.microTimestamp() - start});
+    const user = try http.getSelf();
+    defer user.deinit();
+    log.info("my user id: {s}", .{user.value.id});
+
+    log.info("queried in {d}μs\n", .{std.time.microTimestamp() - start});
 }
