@@ -1,5 +1,7 @@
+pub const ID = []const u8;
+
 pub const User = struct {
-    id: []const u8,
+    id: ID,
     username: []const u8,
     discriminator: []const u8,
 };
