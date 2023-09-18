@@ -1,7 +1,9 @@
-pub const ID = []const u8;
+/// a "snowflake" is an ID in the Discord ecosystem
+pub const snowflake = @import("snowflake.zig");
+const Snowflake = snowflake.Snowflake;
 
 pub const User = struct {
-    id: ID,
+    id: Snowflake,
     username: []const u8,
     discriminator: []const u8,
 };

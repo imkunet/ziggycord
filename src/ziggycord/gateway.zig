@@ -6,16 +6,21 @@ const HttpClient = @import("http.zig").HttpClient;
 const types = @import("types.zig");
 const websocket = @import("websocket");
 
+/// Intents are the way to tell the Gateway what extra permissions your bot needs
+pub const GatewayIntents = @import("intents.zig");
+
 const GatewayConnectionError = error{
     InvalidGatewayHost,
 };
 
+/// Discord's "Gateway" is the way bots recieve events
 pub const GatewayClient = struct {
     allocator: Allocator,
     http: HttpClient,
 
     jitter: f32,
 
+    /// Create a new GatewayClient, needs an HttpClient
     pub fn init(allocator: Allocator, http: HttpClient) !@This() {
         return .{
             .allocator = allocator,
