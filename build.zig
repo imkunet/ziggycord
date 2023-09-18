@@ -8,10 +8,12 @@ pub fn build(b: *std.Build) !void {
         .source_file = .{ .path = "src/ziggycord/ziggycord.zig" },
     });
 
-    const ws = b.dependency("websocket_zig", .{
+    const ws = b.dependency("websocket", .{
         .target = target,
         .optimize = optimize,
-    }).module("websocket");
+    });
+
+    try ziggycord.dependencies.put("websocket", ws.module("websocket"));
 
     // test bot
 
@@ -22,7 +24,7 @@ pub fn build(b: *std.Build) !void {
         .optimize = optimize,
     });
     //test_exe.strip = true;
-    test_exe.addModule("websocket", ws);
+    //test_exe.addModule("websocket", ws.module("websocket"));
     test_exe.addModule("ziggycord", ziggycord);
 
     const install_example = b.addInstallArtifact(test_exe, .{});
@@ -38,7 +40,7 @@ pub fn build(b: *std.Build) !void {
         .target = target,
         .optimize = optimize,
     });
-    tests.addModule("websocket", ws);
+    tests.addModule("websocket", ws.module("websocket"));
     tests.addModule("ziggycord", ziggycord);
 
     const tests_step = b.step("test", "Run the tests");
@@ -51,7 +53,7 @@ pub fn build(b: *std.Build) !void {
         .target = target,
         .optimize = optimize,
     });
-    autodoc_test.addModule("websocket", ws);
+    autodoc_test.addModule("websocket", ws.module("websocket"));
     autodoc_test.addModule("ziggycord", ziggycord);
 
     const install_docs = b.addInstallDirectory(.{

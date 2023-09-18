@@ -21,9 +21,11 @@ pub const HttpClient = struct {
     http_options: http.Client.Options,
     http_headers: http.Headers,
 
-    pub fn init(allocator: Allocator, token: []const u8) !HttpClient {
+    pub fn init(allocator: Allocator, token: []const u8) !@This() {
+        const token_formatted = try std.fmt.allocPrint(allocator, "Bot {s}", .{token});
+
         var headers = http.Headers.init(allocator);
-        try headers.append("Authorization", token);
+        try headers.append("Authorization", token_formatted);
         try headers.append("User-Agent", USER_AGENT);
         try headers.append("Content-Type", "application/json");
         try headers.append("Accept", "application/json");
@@ -31,7 +33,7 @@ pub const HttpClient = struct {
 
         return .{
             .allocator = allocator,
-            .token = token,
+            .token = token_formatted,
             .http_client = http.Client{
                 .allocator = allocator,
             },
@@ -43,6 +45,7 @@ pub const HttpClient = struct {
     pub fn deinit(self: *@This()) void {
         self.http_client.deinit();
         self.http_headers.deinit();
+        self.allocator.free(self.token);
     }
 
     const QueryResponse = struct {
@@ -64,16 +67,6 @@ pub const HttpClient = struct {
         return .{ .body = body, .status = req.response.status };
     }
 
-    fn formatUrl(
-        self: *@This(),
-        comptime format: []const u8,
-        args: anytype,
-    ) void {
-        _ = args;
-        _ = format;
-        _ = self;
-    }
-
     fn fixedUrl(comptime path: []const u8) []const u8 {
         return BASE_URL ++ path;
     }
@@ -83,6 +76,23 @@ pub const HttpClient = struct {
             arena: ArenaAllocator,
             value: T,
 
+            fn init(arena: ArenaAllocator, value: T) @This() {
+                return .{
+                    .arena = arena,
+                    .value = value,
+                };
+            }
+
+            fn fromQuery(client: *HttpClient, method: http.Method, url: []const u8) !@This() {
+                var arena = ArenaAllocator.init(client.allocator);
+                const arena_allocator = arena.allocator();
+
+                const res = try client.queryDiscord(arena_allocator, method, url);
+                const parsed = try json.parseFromSliceLeaky(T, arena_allocator, res.body, PARSE_OPTIONS);
+
+                return ApiResponse(T){ .arena = arena, .value = parsed };
+            }
+
             pub fn deinit(self: @This()) void {
                 self.arena.deinit();
             }
@@ -90,15 +100,10 @@ pub const HttpClient = struct {
     }
 
     pub fn getSelf(self: *@This()) !ApiResponse(types.User) {
-        var arena = ArenaAllocator.init(self.allocator);
-        const allocator = arena.allocator();
+        return ApiResponse(types.User).fromQuery(self, .GET, comptime fixedUrl("/users/@me"));
+    }
 
-        const res = try queryDiscord(self, allocator, .GET, comptime fixedUrl("/users/@me"));
-        const parsed = try json.parseFromSliceLeaky(types.User, allocator, res.body, PARSE_OPTIONS);
-
-        return ApiResponse(types.User){
-            .arena = arena,
-            .value = parsed,
-        };
+    pub fn getGatewayBot(self: *@This()) !ApiResponse(types.BotGateway) {
+        return ApiResponse(types.BotGateway).fromQuery(self, .GET, comptime fixedUrl("/gateway/bot"));
     }
 };

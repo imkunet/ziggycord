@@ -4,6 +4,7 @@ const log = std.log;
 
 const ziggycord = @import("ziggycord");
 const HttpClient = ziggycord.http.HttpClient;
+const GatewayClient = ziggycord.gateway.GatewayClient;
 
 const ESC = "\x1b[";
 const RESET = ESC ++ "0m";
@@ -52,11 +53,6 @@ fn getToken(allocator: Allocator) ?[]u8 {
 }
 
 pub fn main() !void {
-    log.debug("hello", .{});
-    log.info("hello", .{});
-    log.warn("hello", .{});
-    log.err("hello", .{});
-
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
 
@@ -68,11 +64,22 @@ pub fn main() !void {
 
     log.info("going to try it now", .{});
 
-    const start = std.time.microTimestamp();
+    const start = std.time.milliTimestamp();
 
     const user = try http.getSelf();
     defer user.deinit();
     log.info("my user id: {s}", .{user.value.id});
 
-    log.info("queried in {d}μs", .{std.time.microTimestamp() - start});
+    log.info("queried in {d}ms", .{std.time.milliTimestamp() - start});
+
+    const gateway_info = try http.getGatewayBot();
+    defer gateway_info.deinit();
+
+    log.info("websocket url {s}", .{gateway_info.value.url});
+
+    var gateway_client = try GatewayClient.init(allocator, http);
+    try gateway_client.connect();
+
+    // sleep so we can check memory usage of the process
+    std.time.sleep(std.time.ns_per_s * 5);
 }
