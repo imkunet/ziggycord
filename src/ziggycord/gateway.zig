@@ -19,6 +19,7 @@ pub const GatewayClient = struct {
     http: HttpClient,
 
     jitter: f32,
+    intents: u32,
 
     /// Create a new GatewayClient, needs an HttpClient
     pub fn init(allocator: Allocator, http: HttpClient) !@This() {
@@ -26,6 +27,7 @@ pub const GatewayClient = struct {
             .allocator = allocator,
             .http = http,
             .jitter = std.crypto.random.float(f32),
+            .intents = GatewayIntents.DEFAULT,
         };
     }
 
