@@ -1,3 +1,5 @@
+const std = @import("std");
+
 /// a "snowflake" is an ID in the Discord ecosystem
 pub const snowflake = @import("snowflake.zig");
 const Snowflake = snowflake.Snowflake;
@@ -25,4 +27,28 @@ pub const BotGateway = struct {
     shards: i32,
     /// Information on the current session start limit
     session_start_limit: SessionStartLimit,
+};
+
+pub const GatewayMessage = struct {
+    op: u8,
+    d: ?std.json.Value,
+    s: ?i32,
+    t: ?[]const u8,
+};
+
+pub const GatewayR10Hello = struct {
+    heartbeat_interval: u32,
+};
+
+pub const IdentifyConnectionProperties = struct {
+    os: []const u8,
+    browser: []const u8,
+    device: []const u8,
+};
+
+pub const GatewayT2Identify = struct {
+    token: []const u8,
+    properties: IdentifyConnectionProperties,
+    // coming soon: compression o_O?, shard, large_threshold, presence
+    intents: u32,
 };

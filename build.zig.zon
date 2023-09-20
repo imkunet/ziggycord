@@ -2,8 +2,6 @@
     .name = "ziggycord",
     .version = "0.0.1",
 
-    // right now, there isn't a de facto web socket library
-    // future goals might be to just implement one
     .dependencies = .{
         // karlseguin/websocket.zig
         // https://github.com/karlseguin/websocket.zig

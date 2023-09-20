@@ -11,7 +11,7 @@ const BASE_URL = "https://discord.com/api/v10";
 const VERSION = "0.0.1";
 const USER_AGENT = std.fmt.comptimePrint("Ziggycord (https://github.com/imkunet/ziggycord/, v{s})", .{VERSION});
 
-const PARSE_OPTIONS = .{ .ignore_unknown_fields = true };
+const PARSE_OPTIONS = .{ .ignore_unknown_fields = true, .allocate = .alloc_always };
 
 pub const HttpClient = struct {
     allocator: Allocator,
@@ -89,6 +89,7 @@ pub const HttpClient = struct {
 
                 const res = try client.queryDiscord(arena_allocator, method, url);
                 const parsed = try json.parseFromSliceLeaky(T, arena_allocator, res.body, PARSE_OPTIONS);
+                arena_allocator.free(res.body);
 
                 return ApiResponse(T){ .arena = arena, .value = parsed };
             }

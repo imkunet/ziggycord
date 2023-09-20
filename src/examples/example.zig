@@ -24,13 +24,13 @@ fn levelText(comptime level: log.Level) []const u8 {
 
 pub fn coloredLogFn(comptime level: log.Level, comptime scope: @TypeOf(.EnumLiteral), comptime format: []const u8, args: anytype) void {
     const level_text = comptime levelText(level);
-    const scope_text = if (scope == .default) " " else "(" ++ @tagName(scope) ++ "): ";
+    const scope_text = comptime if (scope == .default) RESET ++ ": " else esc("90") ++ " [" ++ @tagName(scope) ++ "]" ++ RESET ++ ": ";
 
     const stderr = std.io.getStdErr().writer();
     std.debug.getStderrMutex().lock();
     defer std.debug.getStderrMutex().unlock();
 
-    nosuspend stderr.print(level_text ++ RESET ++ scope_text ++ format ++ "\n", args) catch return;
+    nosuspend stderr.print(level_text ++ scope_text ++ format ++ "\n", args) catch return;
 }
 
 pub const std_options = struct {
@@ -78,6 +78,7 @@ pub fn main() !void {
     log.info("websocket url {s}", .{gateway_info.value.url});
 
     var gateway_client = try GatewayClient.init(allocator, http);
+    defer gateway_client.deinit();
     try gateway_client.connect();
 
     // sleep so we can check memory usage of the process
