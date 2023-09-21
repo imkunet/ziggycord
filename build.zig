@@ -2,7 +2,9 @@ const std = @import("std");
 
 pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
-    const optimize = b.standardOptimizeOption(.{});
+    const optimize = b.standardOptimizeOption(.{
+        //.preferred_optimize_mode = .ReleaseFast,
+    });
 
     const ziggycord = b.addModule("ziggycord", .{
         .source_file = .{ .path = "src/ziggycord/ziggycord.zig" },
@@ -23,7 +25,7 @@ pub fn build(b: *std.Build) !void {
         .target = target,
         .optimize = optimize,
     });
-    test_exe.strip = true;
+    //test_exe.strip = true;
     //test_exe.addModule("websocket", ws.module("websocket"));
     test_exe.addModule("ziggycord", ziggycord);
 

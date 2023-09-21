@@ -2,6 +2,9 @@
 
 [![Discord](https://img.shields.io/discord/1151170687738847284?logo=discord&logoColor=%237289da&color=%237289da)](https://discord.gg/NMdNywWGXn) [![Autodocs](https://img.shields.io/badge/documentation-%23F7A41D?logo=Zig&labelColor=gray)](https://imkunet.github.io/ziggycord/)
 
+## is ziggycord ready for use?
+# no.
+
 ### Foreword
 
 **this library is not production ready**

@@ -32,9 +32,17 @@ pub const BotGateway = struct {
 pub const GatewayMessage = struct {
     op: u8,
     d: ?std.json.Value,
-    s: ?i32,
+    s: ?i64,
     t: ?[]const u8,
 };
+
+pub fn GatewayMessageOutgoing(comptime T: type) type {
+    return struct {
+        op: u8,
+        d: T,
+        s: ?i64,
+    };
+}
 
 pub const GatewayR10Hello = struct {
     heartbeat_interval: u32,
@@ -52,3 +60,5 @@ pub const GatewayT2Identify = struct {
     // coming soon: compression o_O?, shard, large_threshold, presence
     intents: u32,
 };
+
+pub const GatewayEvent = struct {};
