@@ -47,7 +47,10 @@ pub const GatewayClient = struct {
         client: *websocket.Client,
 
         sequence: ?i64 = null,
-        heart_handle: ?*std.Thread.ResetEvent = null,
+        heart_handle: std.Thread.ResetEvent = std.Thread.ResetEvent{},
+        heart_interval: u32 = 30_000,
+        heart_last_beat: i128 = -1,
+        heart_started: bool = false,
 
         pub fn handle(self: *@This(), message: websocket.Message) !void {
             const start = std.time.nanoTimestamp();
@@ -69,22 +72,18 @@ pub const GatewayClient = struct {
                     if (res.d) |raw_data| {
                         const hello = try json.parseFromValueLeaky(types.GatewayR10Hello, allocator, raw_data, IGNORE_UNNOWN);
                         const pause = @as(u32, @intFromFloat(self.gateway_client.jitter * @as(f32, @floatFromInt(hello.heartbeat_interval))));
-                        const interval = hello.heartbeat_interval;
+                        self.heart_interval = hello.heartbeat_interval;
 
-                        log.debug("R op10hello, heartbeat interval: {d}ms (first beat delay {d}ms)", .{
-                            pause,
-                            interval,
-                        });
+                        log.debug("R op10hello, heartbeat interval: {d}ms (first beat delay {d}ms)", .{ self.heart_interval, pause });
 
-                        if (self.heart_handle != null) {
-                            std.log.err("Hello from gateway improperly recieved twice, ignoring 2nd one...", .{});
+                        if (@cmpxchgStrong(bool, &self.heart_started, false, true, .Monotonic, .Monotonic) == null) {
+                            const thread = try std.Thread.spawn(.{
+                                .stack_size = 1 * 1024 * 1024, // 1MB, we'll see how it goes...
+                            }, start_heart, .{ self, pause });
+                            thread.detach();
+                        } else {
+                            log.debug("R op10 recieved while heart beating, not starting another heart...", .{});
                         }
-
-                        // TODO: launch heart 🚀
-                        var heart_handle = std.Thread.ResetEvent{};
-                        self.heart_handle = &heart_handle;
-                        const thread = try std.Thread.spawn(.{}, start_heart, .{ self, pause, interval });
-                        thread.detach();
 
                         const identify = types.GatewayT2Identify{
                             .token = self.gateway_client.http.token,
@@ -100,6 +99,11 @@ pub const GatewayClient = struct {
                     }
                 },
 
+                11 => {
+                    const ping_time = std.time.nanoTimestamp() - @atomicRmw(i128, &self.heart_last_beat, .Xchg, -1, .Monotonic);
+                    log.debug("<3 PONG (RTT {d}ns)", .{ping_time});
+                },
+
                 else => {
                     log.debug("R !! unknown op{d}", .{res.op});
                 },
@@ -109,31 +113,40 @@ pub const GatewayClient = struct {
             log.debug("R <- processed in {d:.2}ms", .{@as(f64, @floatFromInt(time)) / std.time.ns_per_ms});
         }
 
-        fn start_heart(self: *@This(), start_after: u32, interval: u32) !void {
-            const heart_handle = self.heart_handle.?;
+        fn start_heart(self: *@This(), start_after: u32) !void {
             var delay = start_after;
-            log.debug("<3 heart started {d}ms -> {d}ms", .{ start_after, interval });
-            while (!heart_handle.isSet()) {
-                heart_handle.timedWait(@as(u64, delay) * std.time.ns_per_ms) catch {};
-                if (heart_handle.isSet()) {
-                    log.debug("</3 cardiac arrest", .{});
-                    break;
-                }
+            log.debug("<3 heart started ({d}ms -> {d}ms)", .{ start_after, self.heart_interval });
+
+            while (!self.heart_handle.isSet()) {
+                self.heart_handle.timedWait(@as(u64, delay) * std.time.ns_per_ms) catch {};
+                if (self.heart_handle.isSet()) break;
 
                 var arena = ArenaAllocator.init(self.gateway_client.allocator);
-                defer arena.deinit();
                 const allocator = arena.allocator();
 
-                log.debug("<3 THUMP", .{});
-                self.transmit(allocator, ?i64, self.sequence, 1) catch {
+                log.debug("<3 PING", .{});
+                if (@cmpxchgWeak(i128, &self.heart_last_beat, -1, std.time.nanoTimestamp(), .Monotonic, .Monotonic) != null) {
+                    log.debug("</3 double ping (no response since last ping)", .{});
+                    return;
+                }
+                self.transmit(allocator, ?i64, self.sequence, 1) catch |why| {
                     arena.deinit();
+                    log.debug("</3 ping error {!} (cardiac arresting)", .{why});
+                    @atomicStore(bool, &self.heart_started, false, .Monotonic);
+                    @atomicStore(i128, &self.heart_last_beat, -1, .Monotonic);
+                    return;
                 };
 
-                delay = interval;
+                arena.deinit();
+                delay = self.heart_interval;
             }
+
+            @atomicStore(bool, &self.heart_started, false, .Monotonic);
+            @atomicStore(i128, &self.heart_last_beat, -1, .Monotonic);
+            log.debug("</3 cardiac arrest", .{});
         }
 
-        fn transmit(self: @This(), allocator: Allocator, comptime T: type, data: T, op: u8) !void {
+        fn transmit(self: *@This(), allocator: Allocator, comptime T: type, data: T, op: u8) !void {
             const message = types.GatewayMessageOutgoing(T){ .op = op, .d = data, .s = self.sequence };
 
             var list = std.ArrayList(u8).init(allocator);
@@ -145,11 +158,10 @@ pub const GatewayClient = struct {
             try self.client.write(slice);
         }
 
-        pub fn close(self: @This()) void {
+        pub fn close(self: *@This()) void {
+            log.debug("stopping heart...", .{});
+            self.heart_handle.set();
             log.debug("R <- !! gateway closed connection !!", .{});
-            if (self.heart_handle) |heart_handle| {
-                heart_handle.set();
-            }
         }
     };
 
@@ -173,7 +185,6 @@ pub const GatewayClient = struct {
 
         log.debug("T -> !! opening gateway connection !!", .{});
         try client.handshake("/?v=10&encoding=json", .{
-            .timeout_ms = 5000,
             .headers = formattedHost,
         });
 
