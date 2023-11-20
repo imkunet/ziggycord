@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>buffer.zig - source view</title>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
+    <style>
+      body{
+        font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      pre > code {
+        display: block;
+        overflow: auto;
+        line-height: normal;
+        margin: 0em;
+      }
+      .tok-kw {
+          color: #333;
+          font-weight: bold;
+      }
+      .tok-str {
+          color: #d14;
+      }
+      .tok-builtin {
+          color: #005C7A;
+      }
+      .tok-comment {
+          color: #545454;
+          font-style: italic;
+      }
+      .tok-fn {
+          color: #900;
+          font-weight: bold;
+      }
+      .tok-null {
+          color: #005C5C;
+      }
+      .tok-number {
+          color: #005C5C;
+      }
+      .tok-type {
+          color: #458;
+          font-weight: bold;
+      }
+      pre {
+        counter-reset: line;
+      }
+      pre .line:before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        padding-right: 1em;
+        width: 2em;
+        text-align: right;
+        color: #999;
+      }
+      
+      .line {
+        width: 100%;
+        display: inline-block;
+      }
+      .line:target {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        background: #fafafa;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body{
+            background:#222;
+            color: #ccc;
+        }
+        pre > code {
+            color: #ccc;
+            background: #222;
+            border: unset;
+        }
+        .line:target {
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+            background: #333;
+        }
+        .tok-kw {
+            color: #eee;
+        }
+        .tok-str {
+            color: #2e5;
+        }
+        .tok-builtin {
+            color: #ff894c;
+        }
+        .tok-comment {
+            color: #aa7;
+        }
+        .tok-fn {
+            color: #B1A0F8;
+        }
+        .tok-null {
+            color: #ff8080;
+        }
+        .tok-number {
+            color: #ff8080;
+        }
+        .tok-type {
+            color: #68f;
+        }
+      }
+    </style>
+</head>
+<body>
+<pre><code><span class="line" id="L1"><span class="tok-kw">const</span> std = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std&quot;</span>);</span>
+<span class="line" id="L2"><span class="tok-kw">const</span> lib = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;lib.zig&quot;</span>);</span>
+<span class="line" id="L3"></span>
+<span class="line" id="L4"><span class="tok-kw">const</span> Allocator = std.mem.Allocator;</span>
+<span class="line" id="L5"></span>
+<span class="line" id="L6"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> Buffer = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L7">	data: []<span class="tok-type">u8</span>,</span>
+<span class="line" id="L8">	<span class="tok-type">type</span>: Type,</span>
+<span class="line" id="L9"></span>
+<span class="line" id="L10">	<span class="tok-kw">const</span> Type = <span class="tok-kw">enum</span>{</span>
+<span class="line" id="L11">		static,</span>
+<span class="line" id="L12">		pooled,</span>
+<span class="line" id="L13">		dynamic,</span>
+<span class="line" id="L14">	};</span>
+<span class="line" id="L15">};</span>
+<span class="line" id="L16"></span>
+<span class="line" id="L17"><span class="tok-comment">// Provider manages all buffer access and types. It's where code goes to ask</span>
+</span>
+<span class="line" id="L18"><span class="tok-comment">// for and release buffers. One of the main reasons this exists is to handle</span>
+</span>
+<span class="line" id="L19"><span class="tok-comment">// the case where no Pool is configured, which is the default with client</span>
+</span>
+<span class="line" id="L20"><span class="tok-comment">// connections (unless a Pool is passed in the client config). Our reader</span>
+</span>
+<span class="line" id="L21"><span class="tok-comment">// doesn't really have to deal with that, it just calls provider.acquire()</span>
+</span>
+<span class="line" id="L22"><span class="tok-comment">// and it gets a buffer from somewhere.</span>
+</span>
+<span class="line" id="L23"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> Provider = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L24">	pool: *Pool,</span>
+<span class="line" id="L25">	allocator: Allocator,</span>
+<span class="line" id="L26"></span>
+<span class="line" id="L27">	<span class="tok-comment">// If this is 0, pool is undefined. We need this field here anyways.</span>
+</span>
+<span class="line" id="L28">	pool_buffer_size: <span class="tok-type">usize</span>,</span>
+<span class="line" id="L29"></span>
+<span class="line" id="L30">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">initNoPool</span>(allocator: Allocator) Provider {</span>
+<span class="line" id="L31">		<span class="tok-kw">return</span> init(allocator, <span class="tok-null">undefined</span>, <span class="tok-number">0</span>);</span>
+<span class="line" id="L32">	}</span>
+<span class="line" id="L33"></span>
+<span class="line" id="L34">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">init</span>(allocator: Allocator, pool: *Pool, pool_buffer_size: <span class="tok-type">usize</span>) Provider {</span>
+<span class="line" id="L35">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L36">			.pool = pool,</span>
+<span class="line" id="L37">			.allocator = allocator,</span>
+<span class="line" id="L38">			.pool_buffer_size = pool_buffer_size,</span>
+<span class="line" id="L39">		};</span>
+<span class="line" id="L40">	}</span>
+<span class="line" id="L41"></span>
+<span class="line" id="L42">	<span class="tok-comment">// should only be called when created via websocket.bufferPool, which exists</span>
+</span>
+<span class="line" id="L43">	<span class="tok-comment">// to make it easier for applications to manage a buffer pool across multiple</span>
+</span>
+<span class="line" id="L44">	<span class="tok-comment">// clients.</span>
+</span>
+<span class="line" id="L45">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">deinit</span>(self: *Provider) <span class="tok-type">void</span> {</span>
+<span class="line" id="L46">		self.pool.deinit();</span>
+<span class="line" id="L47">		self.allocator.destroy(self.pool);</span>
+<span class="line" id="L48">		self.allocator.destroy(self);</span>
+<span class="line" id="L49">	}</span>
+<span class="line" id="L50"></span>
+<span class="line" id="L51">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">static</span>(self: Provider, size: <span class="tok-type">usize</span>) !Buffer {</span>
+<span class="line" id="L52">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L53">			.<span class="tok-type">type</span> = .static,</span>
+<span class="line" id="L54">			.data = <span class="tok-kw">try</span> self.allocator.alloc(<span class="tok-type">u8</span>, size),</span>
+<span class="line" id="L55">		};</span>
+<span class="line" id="L56">	}</span>
+<span class="line" id="L57"></span>
+<span class="line" id="L58">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">alloc</span>(self: *Provider, size: <span class="tok-type">usize</span>) !Buffer {</span>
+<span class="line" id="L59">		<span class="tok-comment">// remember: if self.pool_buffer_size == 0, then self.pool is undefined.</span>
+</span>
+<span class="line" id="L60">		<span class="tok-kw">if</span> (size &lt; self.pool_buffer_size) {</span>
+<span class="line" id="L61">			<span class="tok-kw">if</span> (self.pool.acquire()) |buffer| {</span>
+<span class="line" id="L62">				<span class="tok-kw">return</span> buffer;</span>
+<span class="line" id="L63">			}</span>
+<span class="line" id="L64">		}</span>
+<span class="line" id="L65">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L66">			.<span class="tok-type">type</span> = .dynamic,</span>
+<span class="line" id="L67">			.data = <span class="tok-kw">try</span> self.allocator.alloc(<span class="tok-type">u8</span>, size),</span>
+<span class="line" id="L68">		};</span>
+<span class="line" id="L69">	}</span>
+<span class="line" id="L70"></span>
+<span class="line" id="L71">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">free</span>(self: *Provider, buffer: Buffer) <span class="tok-type">void</span> {</span>
+<span class="line" id="L72">		<span class="tok-kw">switch</span> (buffer.<span class="tok-type">type</span>) {</span>
+<span class="line" id="L73">			.pooled =&gt; self.pool.release(buffer),</span>
+<span class="line" id="L74">			.static =&gt; self.allocator.free(buffer.data),</span>
+<span class="line" id="L75">			.dynamic =&gt; self.allocator.free(buffer.data),</span>
+<span class="line" id="L76">		}</span>
+<span class="line" id="L77">	}</span>
+<span class="line" id="L78"></span>
+<span class="line" id="L79">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">release</span>(self: *Provider, buffer: Buffer) <span class="tok-type">void</span> {</span>
+<span class="line" id="L80">		<span class="tok-kw">switch</span> (buffer.<span class="tok-type">type</span>) {</span>
+<span class="line" id="L81">			.static =&gt; {},</span>
+<span class="line" id="L82">			.pooled =&gt; self.pool.release(buffer),</span>
+<span class="line" id="L83">			.dynamic =&gt; self.allocator.free(buffer.data),</span>
+<span class="line" id="L84">		}</span>
+<span class="line" id="L85">	}</span>
+<span class="line" id="L86">};</span>
+<span class="line" id="L87"></span>
+<span class="line" id="L88"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> Pool = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L89">	available: <span class="tok-type">usize</span>,</span>
+<span class="line" id="L90">	buffers: []Buffer,</span>
+<span class="line" id="L91">	allocator: Allocator,</span>
+<span class="line" id="L92">	mutex: std.Thread.Mutex,</span>
+<span class="line" id="L93"></span>
+<span class="line" id="L94">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">init</span>(allocator: Allocator, count: <span class="tok-type">usize</span>, buffer_size: <span class="tok-type">usize</span>) !Pool {</span>
+<span class="line" id="L95">		<span class="tok-kw">const</span> buffers = <span class="tok-kw">try</span> allocator.alloc(Buffer, count);</span>
+<span class="line" id="L96"></span>
+<span class="line" id="L97">		<span class="tok-kw">for</span> (<span class="tok-number">0</span>..count) |i| {</span>
+<span class="line" id="L98">			buffers[i] = .{</span>
+<span class="line" id="L99">				.<span class="tok-type">type</span> = .pooled,</span>
+<span class="line" id="L100">				.data = <span class="tok-kw">try</span> allocator.alloc(<span class="tok-type">u8</span>, buffer_size),</span>
+<span class="line" id="L101">			};</span>
+<span class="line" id="L102">		}</span>
+<span class="line" id="L103"></span>
+<span class="line" id="L104">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L105">			.mutex = .{},</span>
+<span class="line" id="L106">			.buffers = buffers,</span>
+<span class="line" id="L107">			.available = count,</span>
+<span class="line" id="L108">			.allocator = allocator,</span>
+<span class="line" id="L109">		};</span>
+<span class="line" id="L110">	}</span>
+<span class="line" id="L111"></span>
+<span class="line" id="L112">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">deinit</span>(self: *Pool) <span class="tok-type">void</span> {</span>
+<span class="line" id="L113">		<span class="tok-kw">const</span> allocator = self.allocator;</span>
+<span class="line" id="L114">		<span class="tok-kw">for</span> (self.buffers) |buf| {</span>
+<span class="line" id="L115">			allocator.free(buf.data);</span>
+<span class="line" id="L116">		}</span>
+<span class="line" id="L117">		allocator.free(self.buffers);</span>
+<span class="line" id="L118">	}</span>
+<span class="line" id="L119"></span>
+<span class="line" id="L120">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">acquire</span>(self: *Pool) ?Buffer {</span>
+<span class="line" id="L121">		<span class="tok-kw">const</span> buffers = self.buffers;</span>
+<span class="line" id="L122"></span>
+<span class="line" id="L123">		self.mutex.lock();</span>
+<span class="line" id="L124">		<span class="tok-kw">const</span> available = self.available;</span>
+<span class="line" id="L125">		<span class="tok-kw">if</span> (available == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L126">			<span class="tok-comment">// dont hold the lock over factory</span>
+</span>
+<span class="line" id="L127">			self.mutex.unlock();</span>
+<span class="line" id="L128">			<span class="tok-kw">return</span> <span class="tok-null">null</span>;</span>
+<span class="line" id="L129">		}</span>
+<span class="line" id="L130">		<span class="tok-kw">const</span> index = available - <span class="tok-number">1</span>;</span>
+<span class="line" id="L131">		<span class="tok-kw">const</span> buffer = buffers[index];</span>
+<span class="line" id="L132">		self.available = index;</span>
+<span class="line" id="L133">		self.mutex.unlock();</span>
+<span class="line" id="L134"></span>
+<span class="line" id="L135">		<span class="tok-kw">return</span> buffer;</span>
+<span class="line" id="L136">	}</span>
+<span class="line" id="L137"></span>
+<span class="line" id="L138">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">release</span>(self: *Pool, buffer: Buffer) <span class="tok-type">void</span> {</span>
+<span class="line" id="L139">		self.mutex.lock();</span>
+<span class="line" id="L140">		<span class="tok-kw">defer</span> self.mutex.unlock();</span>
+<span class="line" id="L141">		<span class="tok-kw">const</span> available = self.available;</span>
+<span class="line" id="L142">		self.buffers[available] = buffer;</span>
+<span class="line" id="L143">		self.available = available + <span class="tok-number">1</span>;</span>
+<span class="line" id="L144">	}</span>
+<span class="line" id="L145">};</span>
+<span class="line" id="L146"></span>
+<span class="line" id="L147"><span class="tok-kw">const</span> t = lib.testing;</span>
+<span class="line" id="L148"><span class="tok-kw">test</span> <span class="tok-str">&quot;buffer provider: no pool&quot;</span> {</span>
+<span class="line" id="L149">	<span class="tok-kw">var</span> p = Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L150"></span>
+<span class="line" id="L151">	<span class="tok-kw">const</span> buffer = <span class="tok-kw">try</span> p.alloc(<span class="tok-number">100</span>);</span>
+<span class="line" id="L152">	<span class="tok-kw">defer</span> p.free(buffer);</span>
+<span class="line" id="L153">	<span class="tok-kw">try</span> t.expectEqual(.dynamic, buffer.<span class="tok-type">type</span>);</span>
+<span class="line" id="L154">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">100</span>, buffer.data.len);</span>
+<span class="line" id="L155">}</span>
+<span class="line" id="L156"></span>
+<span class="line" id="L157"><span class="tok-kw">test</span> <span class="tok-str">&quot;buffer provider: pool&quot;</span> {</span>
+<span class="line" id="L158">	<span class="tok-kw">var</span> pool = <span class="tok-kw">try</span> Pool.init(t.allocator, <span class="tok-number">2</span>, <span class="tok-number">10</span>);</span>
+<span class="line" id="L159">	<span class="tok-kw">defer</span> pool.deinit();</span>
+<span class="line" id="L160"></span>
+<span class="line" id="L161">	<span class="tok-kw">var</span> p = Provider.init(t.allocator, &amp;pool, <span class="tok-number">10</span>);</span>
+<span class="line" id="L162"></span>
+<span class="line" id="L163">	{</span>
+<span class="line" id="L164">		<span class="tok-comment">// bigger than our buffers in pool</span>
+</span>
+<span class="line" id="L165">		<span class="tok-kw">const</span> buffer = <span class="tok-kw">try</span> p.alloc(<span class="tok-number">11</span>);</span>
+<span class="line" id="L166">		<span class="tok-kw">defer</span> p.free(buffer);</span>
+<span class="line" id="L167">		<span class="tok-kw">try</span> t.expectEqual(.dynamic, buffer.<span class="tok-type">type</span>);</span>
+<span class="line" id="L168">		<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">11</span>, buffer.data.len);</span>
+<span class="line" id="L169">	}</span>
+<span class="line" id="L170"></span>
+<span class="line" id="L171">	{</span>
+<span class="line" id="L172">		<span class="tok-comment">// bigger than our buffers in pool</span>
+</span>
+<span class="line" id="L173">		<span class="tok-kw">const</span> buf1 = <span class="tok-kw">try</span> p.alloc(<span class="tok-number">4</span>);</span>
+<span class="line" id="L174">		<span class="tok-kw">try</span> t.expectEqual(.pooled, buf1.<span class="tok-type">type</span>);</span>
+<span class="line" id="L175">		<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">10</span>, buf1.data.len);</span>
+<span class="line" id="L176"></span>
+<span class="line" id="L177">		<span class="tok-kw">const</span> buf2 = <span class="tok-kw">try</span> p.alloc(<span class="tok-number">5</span>);</span>
+<span class="line" id="L178">		<span class="tok-kw">try</span> t.expectEqual(.pooled, buf2.<span class="tok-type">type</span>);</span>
+<span class="line" id="L179">		<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">10</span>, buf2.data.len);</span>
+<span class="line" id="L180"></span>
+<span class="line" id="L181">		<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">false</span>, &amp;buf1.data[<span class="tok-number">0</span>] == &amp;buf2.data[<span class="tok-number">0</span>]);</span>
+<span class="line" id="L182"></span>
+<span class="line" id="L183"></span>
+<span class="line" id="L184">		<span class="tok-comment">// no more buffers in the pool, creats a dynamic buffer</span>
+</span>
+<span class="line" id="L185">		<span class="tok-kw">const</span> buf3 = <span class="tok-kw">try</span> p.alloc(<span class="tok-number">6</span>);</span>
+<span class="line" id="L186">		<span class="tok-kw">try</span> t.expectEqual(.dynamic, buf3.<span class="tok-type">type</span>);</span>
+<span class="line" id="L187">		<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">6</span>, buf3.data.len);</span>
+<span class="line" id="L188"></span>
+<span class="line" id="L189">		p.release(buf1);</span>
+<span class="line" id="L190">		p.release(buf2);</span>
+<span class="line" id="L191">		p.release(buf3);</span>
+<span class="line" id="L192">	}</span>
+<span class="line" id="L193">}</span>
+<span class="line" id="L194"></span>
+<span class="line" id="L195"><span class="tok-kw">test</span> <span class="tok-str">&quot;buffer provider: static release &quot;</span> {</span>
+<span class="line" id="L196">	<span class="tok-kw">var</span> p = Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L197"></span>
+<span class="line" id="L198">	<span class="tok-kw">const</span> buffer = <span class="tok-kw">try</span> p.static(<span class="tok-number">20</span>);</span>
+<span class="line" id="L199">	<span class="tok-kw">defer</span> p.free(buffer);</span>
+<span class="line" id="L200"></span>
+<span class="line" id="L201">	<span class="tok-kw">try</span> t.expectEqual(.static, buffer.<span class="tok-type">type</span>);</span>
+<span class="line" id="L202">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">20</span>, buffer.data.len);</span>
+<span class="line" id="L203"></span>
+<span class="line" id="L204">	p.release(buffer); <span class="tok-comment">// noop for static</span>
+</span>
+<span class="line" id="L205">	buffer.data[<span class="tok-number">0</span>] = <span class="tok-str">'a'</span>;</span>
+<span class="line" id="L206">}</span>
+<span class="line" id="L207"></span>
+<span class="line" id="L208"><span class="tok-kw">test</span> <span class="tok-str">&quot;buffer pool&quot;</span> {</span>
+<span class="line" id="L209">	<span class="tok-kw">var</span> p = <span class="tok-kw">try</span> Pool.init(t.allocator, <span class="tok-number">2</span>, <span class="tok-number">10</span>);</span>
+<span class="line" id="L210">	<span class="tok-kw">defer</span> p.deinit();</span>
+<span class="line" id="L211"></span>
+<span class="line" id="L212">	<span class="tok-kw">const</span> buf1a = p.acquire() <span class="tok-kw">orelse</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L213">	<span class="tok-kw">try</span> t.expectEqual(.pooled, buf1a.<span class="tok-type">type</span>);</span>
+<span class="line" id="L214">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">10</span>, buf1a.data.len);</span>
+<span class="line" id="L215"></span>
+<span class="line" id="L216">	<span class="tok-kw">const</span> buf2a = p.acquire() <span class="tok-kw">orelse</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L217">	<span class="tok-kw">try</span> t.expectEqual(.pooled, buf2a.<span class="tok-type">type</span>);</span>
+<span class="line" id="L218">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">10</span>, buf2a.data.len);</span>
+<span class="line" id="L219"></span>
+<span class="line" id="L220">	<span class="tok-comment">// different buffers</span>
+</span>
+<span class="line" id="L221">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">false</span>, &amp;buf1a.data[<span class="tok-number">0</span>] == &amp;buf2a.data[<span class="tok-number">0</span>]);</span>
+<span class="line" id="L222"></span>
+<span class="line" id="L223">	<span class="tok-comment">// pool is empty</span>
+</span>
+<span class="line" id="L224">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">null</span>, p.acquire());</span>
+<span class="line" id="L225"></span>
+<span class="line" id="L226">	<span class="tok-comment">// pool now has a spare buffer</span>
+</span>
+<span class="line" id="L227">	p.release(buf2a);</span>
+<span class="line" id="L228">	<span class="tok-kw">const</span> buf2b = p.acquire() <span class="tok-kw">orelse</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L229"></span>
+<span class="line" id="L230">	<span class="tok-kw">try</span> t.expectEqual(.pooled, buf2b.<span class="tok-type">type</span>);</span>
+<span class="line" id="L231">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">10</span>, buf2b.data.len);</span>
+<span class="line" id="L232">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, &amp;buf2a.data[<span class="tok-number">0</span>] == &amp;buf2b.data[<span class="tok-number">0</span>]);</span>
+<span class="line" id="L233">}</span>
+<span class="line" id="L234"></span>
+</code></pre></body>
+</html>

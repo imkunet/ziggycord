@@ -1,0 +1,1 @@
+var modules =[{"name":"ziggycord","file":0,"main":66,"table":{"websocket":3,"ziggycord":0,"builtin":2,"std":1}},{"name":"std","file":0,"main":67,"table":{}},{"name":"builtin","file":0,"main":32169,"table":{}},{"name":"websocket","file":0,"main":32178,"table":{}}];

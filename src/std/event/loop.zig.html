@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>event/loop.zig - source view</title>
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPNJREFUeNpi/P//PwMlgOXHUjly9E0G4hwgZmQiQZMqEK8H4v9QzUEgQSaoADK+zhH9iAGL+C0gDoAaNg9mGLoLfgA1awK9hS9gzgJxA9RQBmQDrgMxJzRMGKE4HYj/Ial5A8QmQLwCJoBsgBYW2+TR1ChDaWt4LOBxKsi/VUh8XiD+gq4IVyzwQAMJBoKwacZlAB8Qf0bi96IZhtOAe1D6LpqaEiz6rmEzQAeIzwGxCJpieFqApo/vQKyJboAaEBsAsSEupwI1MwKjGBTVHOhegMX5UajYRqiBjMgYmj400cVh0XgTiKdC0zhJgJHS7AwQYABm9EAdCKrEfAAAAABJRU5ErkJggg=="/>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
     <style>
       body{
         font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
@@ -1116,21 +1117,21 @@
 <span class="line" id="L969">        <span class="tok-comment">/// This argument is a socket that has been created with `socket`, bound to a local address</span></span>
 <span class="line" id="L970">        <span class="tok-comment">/// with `bind`, and is listening for connections after a `listen`.</span></span>
 <span class="line" id="L971">        sockfd: os.socket_t,</span>
-<span class="line" id="L972">        <span class="tok-comment">/// This argument is a pointer to a sockaddr structure.  This structure is filled in with  the</span></span>
-<span class="line" id="L973">        <span class="tok-comment">/// address  of  the  peer  socket, as known to the communications layer.  The exact format of the</span></span>
-<span class="line" id="L974">        <span class="tok-comment">/// address returned addr is determined by the socket's address  family  (see  `socket`  and  the</span></span>
-<span class="line" id="L975">        <span class="tok-comment">/// respective  protocol  man  pages).</span></span>
+<span class="line" id="L972">        <span class="tok-comment">/// This argument is a pointer to a sockaddr structure.  This structure is filled in with the</span></span>
+<span class="line" id="L973">        <span class="tok-comment">/// address of the peer socket, as known to the communications layer.  The exact format of the</span></span>
+<span class="line" id="L974">        <span class="tok-comment">/// address returned addr is determined by the socket's address family (see `socket` and the</span></span>
+<span class="line" id="L975">        <span class="tok-comment">/// respective protocol man pages).</span></span>
 <span class="line" id="L976">        addr: *os.sockaddr,</span>
-<span class="line" id="L977">        <span class="tok-comment">/// This argument is a value-result argument: the caller must initialize it to contain  the</span></span>
+<span class="line" id="L977">        <span class="tok-comment">/// This argument is a value-result argument: the caller must initialize it to contain the</span></span>
 <span class="line" id="L978">        <span class="tok-comment">/// size (in bytes) of the structure pointed to by addr; on return it will contain the actual size</span></span>
 <span class="line" id="L979">        <span class="tok-comment">/// of the peer address.</span></span>
 <span class="line" id="L980">        <span class="tok-comment">///</span></span>
-<span class="line" id="L981">        <span class="tok-comment">/// The returned address is truncated if the buffer provided is too small; in this  case,  `addr_size`</span></span>
+<span class="line" id="L981">        <span class="tok-comment">/// The returned address is truncated if the buffer provided is too small; in this case, `addr_size`</span></span>
 <span class="line" id="L982">        <span class="tok-comment">/// will return a value greater than was supplied to the call.</span></span>
 <span class="line" id="L983">        addr_size: *os.socklen_t,</span>
 <span class="line" id="L984">        <span class="tok-comment">/// The following values can be bitwise ORed in flags to obtain different behavior:</span></span>
-<span class="line" id="L985">        <span class="tok-comment">/// * `SOCK.CLOEXEC`  - Set the close-on-exec (`FD_CLOEXEC`) flag on the new file descriptor.   See  the</span></span>
-<span class="line" id="L986">        <span class="tok-comment">///   description  of the `O.CLOEXEC` flag in `open` for reasons why this may be useful.</span></span>
+<span class="line" id="L985">        <span class="tok-comment">/// * `SOCK.CLOEXEC` - Set the close-on-exec (`FD_CLOEXEC`) flag on the new file descriptor. See the</span></span>
+<span class="line" id="L986">        <span class="tok-comment">///   description of the `O.CLOEXEC` flag in `open` for reasons why this may be useful.</span></span>
 <span class="line" id="L987">        flags: <span class="tok-type">u32</span>,</span>
 <span class="line" id="L988">    ) os.AcceptError!os.socket_t {</span>
 <span class="line" id="L989">        <span class="tok-kw">while</span> (<span class="tok-null">true</span>) {</span>

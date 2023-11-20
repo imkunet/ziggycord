@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>client.zig - source view</title>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
+    <style>
+      body{
+        font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      pre > code {
+        display: block;
+        overflow: auto;
+        line-height: normal;
+        margin: 0em;
+      }
+      .tok-kw {
+          color: #333;
+          font-weight: bold;
+      }
+      .tok-str {
+          color: #d14;
+      }
+      .tok-builtin {
+          color: #005C7A;
+      }
+      .tok-comment {
+          color: #545454;
+          font-style: italic;
+      }
+      .tok-fn {
+          color: #900;
+          font-weight: bold;
+      }
+      .tok-null {
+          color: #005C5C;
+      }
+      .tok-number {
+          color: #005C5C;
+      }
+      .tok-type {
+          color: #458;
+          font-weight: bold;
+      }
+      pre {
+        counter-reset: line;
+      }
+      pre .line:before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        padding-right: 1em;
+        width: 2em;
+        text-align: right;
+        color: #999;
+      }
+      
+      .line {
+        width: 100%;
+        display: inline-block;
+      }
+      .line:target {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        background: #fafafa;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body{
+            background:#222;
+            color: #ccc;
+        }
+        pre > code {
+            color: #ccc;
+            background: #222;
+            border: unset;
+        }
+        .line:target {
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+            background: #333;
+        }
+        .tok-kw {
+            color: #eee;
+        }
+        .tok-str {
+            color: #2e5;
+        }
+        .tok-builtin {
+            color: #ff894c;
+        }
+        .tok-comment {
+            color: #aa7;
+        }
+        .tok-fn {
+            color: #B1A0F8;
+        }
+        .tok-null {
+            color: #ff8080;
+        }
+        .tok-number {
+            color: #ff8080;
+        }
+        .tok-type {
+            color: #68f;
+        }
+      }
+    </style>
+</head>
+<body>
+<pre><code><span class="line" id="L1"><span class="tok-kw">const</span> std = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std&quot;</span>);</span>
+<span class="line" id="L2"><span class="tok-kw">const</span> lib = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;lib.zig&quot;</span>);</span>
+<span class="line" id="L3"></span>
+<span class="line" id="L4"><span class="tok-kw">const</span> buffer = lib.buffer;</span>
+<span class="line" id="L5"><span class="tok-kw">const</span> framing = lib.framing;</span>
+<span class="line" id="L6"><span class="tok-kw">const</span> Reader = lib.Reader;</span>
+<span class="line" id="L7"><span class="tok-kw">const</span> Message = lib.Message;</span>
+<span class="line" id="L8"><span class="tok-kw">const</span> OpCode = framing.OpCode;</span>
+<span class="line" id="L9"></span>
+<span class="line" id="L10"><span class="tok-kw">const</span> os = std.os;</span>
+<span class="line" id="L11"><span class="tok-kw">const</span> net = std.net;</span>
+<span class="line" id="L12"><span class="tok-kw">const</span> tls = std.crypto.tls;</span>
+<span class="line" id="L13"><span class="tok-kw">const</span> Allocator = std.mem.Allocator;</span>
+<span class="line" id="L14"><span class="tok-kw">const</span> Bundle = std.crypto.Certificate.Bundle;</span>
+<span class="line" id="L15"></span>
+<span class="line" id="L16"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> Config = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L17">	max_size: <span class="tok-type">usize</span> = <span class="tok-number">65536</span>,</span>
+<span class="line" id="L18">	buffer_size: <span class="tok-type">usize</span> = <span class="tok-number">4096</span>,</span>
+<span class="line" id="L19">	mask_fn: *<span class="tok-kw">const</span> <span class="tok-kw">fn</span>() [<span class="tok-number">4</span>]<span class="tok-type">u8</span> = generateMask,</span>
+<span class="line" id="L20">	tls: <span class="tok-type">bool</span> = <span class="tok-null">false</span>,</span>
+<span class="line" id="L21">	ca_bundle: ?Bundle = <span class="tok-null">null</span>,</span>
+<span class="line" id="L22">	handle_ping: <span class="tok-type">bool</span> = <span class="tok-null">false</span>,</span>
+<span class="line" id="L23">	handle_pong: <span class="tok-type">bool</span> = <span class="tok-null">false</span>,</span>
+<span class="line" id="L24">	handle_close: <span class="tok-type">bool</span> = <span class="tok-null">false</span>,</span>
+<span class="line" id="L25">	buffer_provider: ?*buffer.Provider = <span class="tok-null">null</span>,</span>
+<span class="line" id="L26">};</span>
+<span class="line" id="L27"></span>
+<span class="line" id="L28"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> HandshakeOpts = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L29">	timeout_ms: <span class="tok-type">u32</span> = <span class="tok-number">10000</span>,</span>
+<span class="line" id="L30">	headers: ?[]<span class="tok-kw">const</span> <span class="tok-type">u8</span> = <span class="tok-null">null</span>,</span>
+<span class="line" id="L31">};</span>
+<span class="line" id="L32"></span>
+<span class="line" id="L33"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">connect</span>(allocator: Allocator, host: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, port: <span class="tok-type">u16</span>, config: Config) !Client(Stream) {</span>
+<span class="line" id="L34">	<span class="tok-kw">var</span> tls_client: ?tls.Client = <span class="tok-null">null</span>;</span>
+<span class="line" id="L35">	<span class="tok-kw">const</span> net_stream = <span class="tok-kw">try</span> net.tcpConnectToHost(allocator, host, port);</span>
+<span class="line" id="L36"></span>
+<span class="line" id="L37">	<span class="tok-kw">if</span> (config.tls) {</span>
+<span class="line" id="L38">		<span class="tok-kw">var</span> own_bundle = <span class="tok-null">false</span>;</span>
+<span class="line" id="L39">		<span class="tok-kw">var</span> bundle = config.ca_bundle <span class="tok-kw">orelse</span> blk: {</span>
+<span class="line" id="L40">			own_bundle = <span class="tok-null">true</span>;</span>
+<span class="line" id="L41">			<span class="tok-kw">var</span> b = Bundle{};</span>
+<span class="line" id="L42">			<span class="tok-kw">try</span> b.rescan(allocator);</span>
+<span class="line" id="L43">			<span class="tok-kw">break</span> :blk b;</span>
+<span class="line" id="L44">		};</span>
+<span class="line" id="L45">		tls_client = <span class="tok-kw">try</span> tls.Client.init(net_stream, bundle, host);</span>
+<span class="line" id="L46"></span>
+<span class="line" id="L47">		<span class="tok-kw">if</span> (own_bundle) {</span>
+<span class="line" id="L48">			bundle.deinit(allocator);</span>
+<span class="line" id="L49">		}</span>
+<span class="line" id="L50">	}</span>
+<span class="line" id="L51">	<span class="tok-kw">const</span> stream = Stream.init(net_stream, tls_client);</span>
+<span class="line" id="L52">	<span class="tok-kw">return</span> Client(Stream).init(allocator, stream, config);</span>
+<span class="line" id="L53">}</span>
+<span class="line" id="L54"></span>
+<span class="line" id="L55"><span class="tok-comment">// var default_buffer_provider_loaded = false;</span>
+</span>
+<span class="line" id="L56"><span class="tok-comment">// var default_buffer_provider_lock = std.Thread.Mutex{};</span>
+</span>
+<span class="line" id="L57"><span class="tok-comment">// const default_buffer_provider: *buffer.Provider = undefined;</span>
+</span>
+<span class="line" id="L58"></span>
+<span class="line" id="L59"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">Client</span>(<span class="tok-kw">comptime</span> T: <span class="tok-type">type</span>) <span class="tok-type">type</span> {</span>
+<span class="line" id="L60">	<span class="tok-kw">return</span> <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L61">		stream: T,</span>
+<span class="line" id="L62">		_reader: Reader,</span>
+<span class="line" id="L63">		_closed: <span class="tok-type">bool</span>,</span>
+<span class="line" id="L64">		_handle_ping: <span class="tok-type">bool</span>,</span>
+<span class="line" id="L65">		_handle_pong: <span class="tok-type">bool</span>,</span>
+<span class="line" id="L66">		_handle_close: <span class="tok-type">bool</span>,</span>
+<span class="line" id="L67">		_bp: ?*buffer.Provider,</span>
+<span class="line" id="L68">		_mask_fn: *<span class="tok-kw">const</span> <span class="tok-kw">fn</span>() [<span class="tok-number">4</span>]<span class="tok-type">u8</span>,</span>
+<span class="line" id="L69"></span>
+<span class="line" id="L70">		<span class="tok-kw">const</span> Self = <span class="tok-builtin">@This</span>();</span>
+<span class="line" id="L71"></span>
+<span class="line" id="L72">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">init</span>(allocator: Allocator, stream: T, config: Config) !Self {</span>
+<span class="line" id="L73">			<span class="tok-kw">var</span> bp: *buffer.Provider = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L74">			<span class="tok-kw">var</span> owned_bp: ?*buffer.Provider = <span class="tok-null">null</span>;</span>
+<span class="line" id="L75"></span>
+<span class="line" id="L76">			<span class="tok-comment">// If a buffer_provider is provided, we'll use that.</span>
+</span>
+<span class="line" id="L77">			<span class="tok-comment">// If it isn't, we need to create one which also means we now &quot;own&quot; it</span>
+</span>
+<span class="line" id="L78">			<span class="tok-comment">// and we're responsible for cleaning it up</span>
+</span>
+<span class="line" id="L79">			<span class="tok-kw">if</span> (config.buffer_provider) |shared_bp| {</span>
+<span class="line" id="L80">				bp = shared_bp;</span>
+<span class="line" id="L81">			} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L82">				bp = <span class="tok-kw">try</span> allocator.create(buffer.Provider);</span>
+<span class="line" id="L83">				bp.* = buffer.Provider.initNoPool(allocator);</span>
+<span class="line" id="L84">				owned_bp = bp;</span>
+<span class="line" id="L85">			}</span>
+<span class="line" id="L86"></span>
+<span class="line" id="L87">			<span class="tok-kw">errdefer</span> {</span>
+<span class="line" id="L88">				<span class="tok-kw">if</span> (owned_bp) |obp| {</span>
+<span class="line" id="L89">					allocator.destroy(obp);</span>
+<span class="line" id="L90">				}</span>
+<span class="line" id="L91">			}</span>
+<span class="line" id="L92"></span>
+<span class="line" id="L93">			<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L94">				.stream = stream,</span>
+<span class="line" id="L95">				._bp = owned_bp,</span>
+<span class="line" id="L96">				._closed = <span class="tok-null">false</span>,</span>
+<span class="line" id="L97">				._mask_fn = config.mask_fn,</span>
+<span class="line" id="L98">				._handle_ping = config.handle_ping,</span>
+<span class="line" id="L99">				._handle_pong = config.handle_pong,</span>
+<span class="line" id="L100">				._handle_close = config.handle_close,</span>
+<span class="line" id="L101">				._reader = <span class="tok-kw">try</span> Reader.init(config.buffer_size, config.max_size, bp),</span>
+<span class="line" id="L102">			};</span>
+<span class="line" id="L103">		}</span>
+<span class="line" id="L104"></span>
+<span class="line" id="L105">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">deinit</span>(self: *Self) <span class="tok-type">void</span> {</span>
+<span class="line" id="L106">			self._reader.deinit();</span>
+<span class="line" id="L107">			<span class="tok-kw">if</span> (self._bp) |bp| {</span>
+<span class="line" id="L108">				bp.allocator.destroy(bp);</span>
+<span class="line" id="L109">			}</span>
+<span class="line" id="L110">			self.close();</span>
+<span class="line" id="L111">		}</span>
+<span class="line" id="L112"></span>
+<span class="line" id="L113">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">handshake</span>(self: *Self, path: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, opts: HandshakeOpts) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L114">			<span class="tok-kw">var</span> stream = &amp;self.stream;</span>
+<span class="line" id="L115">			<span class="tok-kw">errdefer</span> self.closeWithCode(<span class="tok-number">1002</span>);</span>
+<span class="line" id="L116"></span>
+<span class="line" id="L117">			<span class="tok-comment">// we've already setup our reader, and the reader has a static buffer</span>
+</span>
+<span class="line" id="L118">			<span class="tok-comment">// we might as well use it!</span>
+</span>
+<span class="line" id="L119">			<span class="tok-kw">var</span> buf = self._reader.static.data;</span>
+<span class="line" id="L120"></span>
+<span class="line" id="L121">			<span class="tok-kw">const</span> key = blk: {</span>
+<span class="line" id="L122">				<span class="tok-kw">const</span> bin_key = generateKey();</span>
+<span class="line" id="L123">				<span class="tok-kw">var</span> encoded_key: [<span class="tok-number">24</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L124">				<span class="tok-kw">break</span> :blk std.base64.standard.Encoder.encode(&amp;encoded_key, &amp;bin_key);</span>
+<span class="line" id="L125">			};</span>
+<span class="line" id="L126"></span>
+<span class="line" id="L127">			<span class="tok-kw">try</span> sendHandshake(path, key, buf, &amp;opts, stream);</span>
+<span class="line" id="L128"></span>
+<span class="line" id="L129">			<span class="tok-kw">const</span> over_read = <span class="tok-kw">try</span> readHandshakeReply(buf, key, &amp;opts, stream);</span>
+<span class="line" id="L130">			<span class="tok-comment">// We might have read more than handshake response. If so, readHandshakeReply</span>
+</span>
+<span class="line" id="L131">			<span class="tok-comment">// has positioned the extra data at the start of the buffer, but we need</span>
+</span>
+<span class="line" id="L132">			<span class="tok-comment">// to set the length.</span>
+</span>
+<span class="line" id="L133">			self._reader.len = over_read;</span>
+<span class="line" id="L134">		}</span>
+<span class="line" id="L135"></span>
+<span class="line" id="L136">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">readLoop</span>(self: *Self, h: <span class="tok-kw">anytype</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L137">			<span class="tok-kw">var</span> reader = &amp;self._reader;</span>
+<span class="line" id="L138">			<span class="tok-kw">var</span> stream = &amp;self.stream;</span>
+<span class="line" id="L139">			<span class="tok-kw">defer</span> h.close();</span>
+<span class="line" id="L140"></span>
+<span class="line" id="L141">			<span class="tok-kw">const</span> handle_ping = self._handle_ping;</span>
+<span class="line" id="L142">			<span class="tok-kw">const</span> handle_pong = self._handle_pong;</span>
+<span class="line" id="L143">			<span class="tok-kw">const</span> handle_close = self._handle_close;</span>
+<span class="line" id="L144"></span>
+<span class="line" id="L145">			<span class="tok-kw">while</span> (<span class="tok-null">true</span>) {</span>
+<span class="line" id="L146">				<span class="tok-kw">const</span> message = reader.readMessage(stream) <span class="tok-kw">catch</span> |err| <span class="tok-kw">switch</span> (err) {</span>
+<span class="line" id="L147">					<span class="tok-kw">error</span>.Closed, <span class="tok-kw">error</span>.ConnectionResetByPeer, <span class="tok-kw">error</span>.BrokenPipe =&gt; {</span>
+<span class="line" id="L148">						_ = <span class="tok-builtin">@cmpxchgStrong</span>(<span class="tok-type">bool</span>, &amp;self._closed, <span class="tok-null">false</span>, <span class="tok-null">true</span>, .Monotonic, .Monotonic);</span>
+<span class="line" id="L149">						<span class="tok-kw">return</span>;</span>
+<span class="line" id="L150">					},</span>
+<span class="line" id="L151">					<span class="tok-kw">else</span> =&gt; {</span>
+<span class="line" id="L152">						self.closeWithCode(<span class="tok-number">1002</span>);</span>
+<span class="line" id="L153">						<span class="tok-kw">return</span>;</span>
+<span class="line" id="L154">					},</span>
+<span class="line" id="L155">				};</span>
+<span class="line" id="L156"></span>
+<span class="line" id="L157">				<span class="tok-kw">switch</span> (message.<span class="tok-type">type</span>) {</span>
+<span class="line" id="L158">					.text, .binary =&gt; {</span>
+<span class="line" id="L159">						<span class="tok-kw">try</span> h.handle(message);</span>
+<span class="line" id="L160">						reader.handled();</span>
+<span class="line" id="L161">					},</span>
+<span class="line" id="L162">					.ping =&gt; {</span>
+<span class="line" id="L163">						<span class="tok-kw">if</span> (handle_ping) {</span>
+<span class="line" id="L164">							<span class="tok-kw">try</span> h.handle(message);</span>
+<span class="line" id="L165">						} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L166">							<span class="tok-comment">// @constCast is safe because we know message.data points to</span>
+</span>
+<span class="line" id="L167">							<span class="tok-comment">// reader.buffer.buf, which we own and which can be mutated</span>
+</span>
+<span class="line" id="L168">							<span class="tok-kw">try</span> self.writeFrame(.pong, <span class="tok-builtin">@constCast</span>(message.data));</span>
+<span class="line" id="L169">						}</span>
+<span class="line" id="L170">					},</span>
+<span class="line" id="L171">					.close =&gt; {</span>
+<span class="line" id="L172">						<span class="tok-kw">if</span> (handle_close) {</span>
+<span class="line" id="L173">							<span class="tok-kw">try</span> h.handle(message);</span>
+<span class="line" id="L174">						} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L175">							self.close();</span>
+<span class="line" id="L176">						}</span>
+<span class="line" id="L177">						<span class="tok-kw">return</span>;</span>
+<span class="line" id="L178">					},</span>
+<span class="line" id="L179">					.pong =&gt; {</span>
+<span class="line" id="L180">						<span class="tok-kw">if</span> (handle_pong) {</span>
+<span class="line" id="L181">							<span class="tok-kw">try</span> h.handle(message);</span>
+<span class="line" id="L182">						}</span>
+<span class="line" id="L183">					},</span>
+<span class="line" id="L184">				}</span>
+<span class="line" id="L185">			}</span>
+<span class="line" id="L186">		}</span>
+<span class="line" id="L187"></span>
+<span class="line" id="L188">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">readLoopInNewThread</span>(self: *Self, h: <span class="tok-kw">anytype</span>) !std.Thread {</span>
+<span class="line" id="L189">			<span class="tok-kw">return</span> std.Thread.spawn(.{}, readLoopOwnedThread, .{self, h});</span>
+<span class="line" id="L190">		}</span>
+<span class="line" id="L191"></span>
+<span class="line" id="L192">		<span class="tok-kw">fn</span> <span class="tok-fn">readLoopOwnedThread</span>(self: *Self, h: <span class="tok-kw">anytype</span>) <span class="tok-type">void</span> {</span>
+<span class="line" id="L193">			std.os.maybeIgnoreSigpipe();</span>
+<span class="line" id="L194">			self.readLoop(h) <span class="tok-kw">catch</span> {};</span>
+<span class="line" id="L195">		}</span>
+<span class="line" id="L196"></span>
+<span class="line" id="L197">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">write</span>(self: *Self, data: []<span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L198">			<span class="tok-kw">return</span> self.writeFrame(.text, data);</span>
+<span class="line" id="L199">		}</span>
+<span class="line" id="L200"></span>
+<span class="line" id="L201">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writeText</span>(self: *Self, data: []<span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L202">			<span class="tok-kw">return</span> self.writeFrame(.text, data);</span>
+<span class="line" id="L203">		}</span>
+<span class="line" id="L204"></span>
+<span class="line" id="L205">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writeBin</span>(self: *Self, data: []<span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L206">			<span class="tok-kw">return</span> self.writeFrame(.binary, data);</span>
+<span class="line" id="L207">		}</span>
+<span class="line" id="L208"></span>
+<span class="line" id="L209">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writePing</span>(self: *Self, data: []<span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L210">			<span class="tok-kw">return</span> self.writeFrame(.ping, data);</span>
+<span class="line" id="L211">		}</span>
+<span class="line" id="L212"></span>
+<span class="line" id="L213">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writePong</span>(self: *Self, data: []<span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L214">			<span class="tok-kw">return</span> self.writeFrame(.pong, data);</span>
+<span class="line" id="L215">		}</span>
+<span class="line" id="L216"></span>
+<span class="line" id="L217">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writeFrame</span>(self: *Self, op_code: OpCode, data: []<span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L218">			<span class="tok-kw">const</span> l = data.len;</span>
+<span class="line" id="L219">			<span class="tok-kw">const</span> mask = self._mask_fn();</span>
+<span class="line" id="L220">			<span class="tok-kw">var</span> stream = &amp;self.stream;</span>
+<span class="line" id="L221"></span>
+<span class="line" id="L222">			<span class="tok-comment">// maximum possible prefix length. op_code + length_type + 8byte length + 4 byte mask</span>
+</span>
+<span class="line" id="L223">			<span class="tok-kw">var</span> buf: [<span class="tok-number">14</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L224">			buf[<span class="tok-number">0</span>] = <span class="tok-builtin">@intFromEnum</span>(op_code);</span>
+<span class="line" id="L225"></span>
+<span class="line" id="L226">			<span class="tok-kw">if</span> (l &lt;= <span class="tok-number">125</span>) {</span>
+<span class="line" id="L227">				buf[<span class="tok-number">1</span>] = <span class="tok-builtin">@as</span>(<span class="tok-type">u8</span>, <span class="tok-builtin">@intCast</span>(l)) | <span class="tok-number">128</span>;</span>
+<span class="line" id="L228">				<span class="tok-builtin">@memcpy</span>(buf[<span class="tok-number">2</span>..<span class="tok-number">6</span>], &amp;mask);</span>
+<span class="line" id="L229">				<span class="tok-kw">try</span> stream.writeAll(buf[<span class="tok-number">0</span>..<span class="tok-number">6</span>]);</span>
+<span class="line" id="L230">			} <span class="tok-kw">else</span> <span class="tok-kw">if</span> (l &lt; <span class="tok-number">65536</span>) {</span>
+<span class="line" id="L231">				buf[<span class="tok-number">1</span>] = <span class="tok-number">254</span>; <span class="tok-comment">// 126 | 128</span>
+</span>
+<span class="line" id="L232">				buf[<span class="tok-number">2</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">8</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L233">				buf[<span class="tok-number">3</span>] = <span class="tok-builtin">@intCast</span>(l &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L234">				<span class="tok-builtin">@memcpy</span>(buf[<span class="tok-number">4</span>..<span class="tok-number">8</span>], &amp;mask);</span>
+<span class="line" id="L235">				<span class="tok-kw">try</span> stream.writeAll(buf[<span class="tok-number">0</span>..<span class="tok-number">8</span>]);</span>
+<span class="line" id="L236">			} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L237">				buf[<span class="tok-number">1</span>] = <span class="tok-number">255</span>; <span class="tok-comment">// 127 | 128</span>
+</span>
+<span class="line" id="L238">				buf[<span class="tok-number">2</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">56</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L239">				buf[<span class="tok-number">3</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">48</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L240">				buf[<span class="tok-number">4</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">40</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L241">				buf[<span class="tok-number">5</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">32</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L242">				buf[<span class="tok-number">6</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">24</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L243">				buf[<span class="tok-number">7</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">16</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L244">				buf[<span class="tok-number">8</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">8</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L245">				buf[<span class="tok-number">9</span>] = <span class="tok-builtin">@intCast</span>(l &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L246">				<span class="tok-builtin">@memcpy</span>(buf[<span class="tok-number">10</span>..], &amp;mask);</span>
+<span class="line" id="L247">				<span class="tok-kw">try</span> stream.writeAll(buf[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L248">			}</span>
+<span class="line" id="L249">			<span class="tok-kw">if</span> (l &gt; <span class="tok-number">0</span>) {</span>
+<span class="line" id="L250">				framing.mask(&amp;mask, data);</span>
+<span class="line" id="L251">				<span class="tok-kw">try</span> stream.writeAll(data);</span>
+<span class="line" id="L252">			}</span>
+<span class="line" id="L253">		}</span>
+<span class="line" id="L254"></span>
+<span class="line" id="L255">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">close</span>(self: *Self) <span class="tok-type">void</span> {</span>
+<span class="line" id="L256">			<span class="tok-kw">if</span> (<span class="tok-builtin">@cmpxchgStrong</span>(<span class="tok-type">bool</span>, &amp;self._closed, <span class="tok-null">false</span>, <span class="tok-null">true</span>, .Monotonic, .Monotonic) == <span class="tok-null">null</span>) {</span>
+<span class="line" id="L257">				self.writeFrame(.close, <span class="tok-str">&quot;&quot;</span>) <span class="tok-kw">catch</span> {};</span>
+<span class="line" id="L258">				self.stream.close();</span>
+<span class="line" id="L259">			}</span>
+<span class="line" id="L260">		}</span>
+<span class="line" id="L261"></span>
+<span class="line" id="L262">		<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">closeWithCode</span>(self: *Self, code: <span class="tok-type">u16</span>) <span class="tok-type">void</span> {</span>
+<span class="line" id="L263">			<span class="tok-kw">if</span> (<span class="tok-builtin">@cmpxchgStrong</span>(<span class="tok-type">bool</span>, &amp;self._closed, <span class="tok-null">false</span>, <span class="tok-null">true</span>, .Monotonic, .Monotonic) == <span class="tok-null">null</span>) {</span>
+<span class="line" id="L264">				<span class="tok-kw">var</span> buf: [<span class="tok-number">2</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L265">				buf[<span class="tok-number">0</span>] = <span class="tok-builtin">@intCast</span>((code &gt;&gt; <span class="tok-number">8</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L266">				buf[<span class="tok-number">1</span>] = <span class="tok-builtin">@intCast</span>(code &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L267">				self.writeFrame(.close, &amp;buf) <span class="tok-kw">catch</span> {};</span>
+<span class="line" id="L268">				self.stream.close();</span>
+<span class="line" id="L269">			}</span>
+<span class="line" id="L270">		}</span>
+<span class="line" id="L271">	};</span>
+<span class="line" id="L272">}</span>
+<span class="line" id="L273"></span>
+<span class="line" id="L274"><span class="tok-comment">// wraps a net.Stream and optional a tls.Client</span>
+</span>
+<span class="line" id="L275"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> Stream = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L276">	stream: net.Stream,</span>
+<span class="line" id="L277">	tls_client: ?tls.Client,</span>
+<span class="line" id="L278"></span>
+<span class="line" id="L279">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">init</span>(stream: net.Stream, tls_client: ?tls.Client) Stream {</span>
+<span class="line" id="L280">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L281">			.stream = stream,</span>
+<span class="line" id="L282">			.tls_client = tls_client,</span>
+<span class="line" id="L283">		};</span>
+<span class="line" id="L284">	}</span>
+<span class="line" id="L285"></span>
+<span class="line" id="L286">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">close</span>(self: *Stream) <span class="tok-type">void</span> {</span>
+<span class="line" id="L287">		<span class="tok-kw">if</span> (self.tls_client) |*tls_client| {</span>
+<span class="line" id="L288">			_ = tls_client.writeEnd(self.stream, <span class="tok-str">&quot;&quot;</span>, <span class="tok-null">true</span>) <span class="tok-kw">catch</span> {};</span>
+<span class="line" id="L289">		}</span>
+<span class="line" id="L290">		self.stream.close();</span>
+<span class="line" id="L291">	}</span>
+<span class="line" id="L292"></span>
+<span class="line" id="L293"></span>
+<span class="line" id="L294">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">read</span>(self: *Stream, buf: []<span class="tok-type">u8</span>) !<span class="tok-type">usize</span> {</span>
+<span class="line" id="L295">		<span class="tok-kw">if</span> (self.tls_client) |*tls_client| {</span>
+<span class="line" id="L296">			<span class="tok-kw">return</span> tls_client.read(self.stream, buf);</span>
+<span class="line" id="L297">		}</span>
+<span class="line" id="L298">		<span class="tok-kw">return</span> self.stream.read(buf);</span>
+<span class="line" id="L299">	}</span>
+<span class="line" id="L300"></span>
+<span class="line" id="L301">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writeAll</span>(self: *Stream, data: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L302">		<span class="tok-kw">if</span> (self.tls_client) |*tls_client| {</span>
+<span class="line" id="L303">			<span class="tok-kw">return</span> tls_client.writeAll(self.stream, data);</span>
+<span class="line" id="L304">		}</span>
+<span class="line" id="L305">		<span class="tok-kw">return</span> self.stream.writeAll(data);</span>
+<span class="line" id="L306">	}</span>
+<span class="line" id="L307"></span>
+<span class="line" id="L308">	<span class="tok-kw">const</span> zero_timeout = std.mem.toBytes(os.timeval{.tv_sec = <span class="tok-number">0</span>, .tv_usec = <span class="tok-number">0</span>});</span>
+<span class="line" id="L309">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writeTimeout</span>(self: *<span class="tok-kw">const</span> Stream, ms: <span class="tok-type">u32</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L310">		<span class="tok-kw">if</span> (ms == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L311">			<span class="tok-kw">return</span> self.setsockopt(os.SO.SNDTIMEO, &amp;zero_timeout);</span>
+<span class="line" id="L312">		}</span>
+<span class="line" id="L313"></span>
+<span class="line" id="L314">		<span class="tok-kw">const</span> timeout = std.mem.toBytes(os.timeval{</span>
+<span class="line" id="L315">			.tv_sec = <span class="tok-builtin">@intCast</span>(<span class="tok-builtin">@divTrunc</span>(ms, <span class="tok-number">1000</span>)),</span>
+<span class="line" id="L316">			.tv_usec = <span class="tok-builtin">@intCast</span>(<span class="tok-builtin">@mod</span>(ms, <span class="tok-number">1000</span>) * <span class="tok-number">1000</span>),</span>
+<span class="line" id="L317">		});</span>
+<span class="line" id="L318">		<span class="tok-kw">return</span> self.setsockopt(os.SO.SNDTIMEO, &amp;timeout);</span>
+<span class="line" id="L319">	}</span>
+<span class="line" id="L320"></span>
+<span class="line" id="L321">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">receiveTimeout</span>(self: *<span class="tok-kw">const</span> Stream, ms: <span class="tok-type">u32</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L322">		<span class="tok-kw">if</span> (ms == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L323">			<span class="tok-kw">return</span> self.setsockopt(os.SO.RCVTIMEO, &amp;zero_timeout);</span>
+<span class="line" id="L324">		}</span>
+<span class="line" id="L325"></span>
+<span class="line" id="L326">		<span class="tok-kw">const</span> timeout = std.mem.toBytes(os.timeval{</span>
+<span class="line" id="L327">			.tv_sec = <span class="tok-builtin">@intCast</span>(<span class="tok-builtin">@divTrunc</span>(ms, <span class="tok-number">1000</span>)),</span>
+<span class="line" id="L328">			.tv_usec = <span class="tok-builtin">@intCast</span>(<span class="tok-builtin">@mod</span>(ms, <span class="tok-number">1000</span>) * <span class="tok-number">1000</span>),</span>
+<span class="line" id="L329">		});</span>
+<span class="line" id="L330">		<span class="tok-kw">return</span> self.setsockopt(os.SO.RCVTIMEO, &amp;timeout);</span>
+<span class="line" id="L331">	}</span>
+<span class="line" id="L332"></span>
+<span class="line" id="L333">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">setsockopt</span>(self: *<span class="tok-kw">const</span> Stream, optname: <span class="tok-type">u32</span>, value: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L334">		<span class="tok-kw">return</span> os.setsockopt(self.stream.handle, os.SOL.SOCKET, optname, value);</span>
+<span class="line" id="L335">	}</span>
+<span class="line" id="L336">};</span>
+<span class="line" id="L337"></span>
+<span class="line" id="L338"><span class="tok-kw">fn</span> <span class="tok-fn">generateKey</span>() [<span class="tok-number">16</span>]<span class="tok-type">u8</span> {</span>
+<span class="line" id="L339">	<span class="tok-kw">if</span> (<span class="tok-kw">comptime</span> lib.is_test) {</span>
+<span class="line" id="L340">		<span class="tok-kw">return</span> [<span class="tok-number">16</span>]<span class="tok-type">u8</span>{<span class="tok-number">1</span>, <span class="tok-number">2</span>, <span class="tok-number">3</span>, <span class="tok-number">4</span>, <span class="tok-number">5</span>, <span class="tok-number">6</span>, <span class="tok-number">7</span>, <span class="tok-number">8</span>, <span class="tok-number">9</span>, <span class="tok-number">10</span>, <span class="tok-number">11</span>, <span class="tok-number">12</span>, <span class="tok-number">13</span>, <span class="tok-number">14</span>, <span class="tok-number">15</span>, <span class="tok-number">16</span>};</span>
+<span class="line" id="L341">	}</span>
+<span class="line" id="L342">	<span class="tok-kw">var</span> key: [<span class="tok-number">16</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L343">	std.crypto.random.bytes(&amp;key);</span>
+<span class="line" id="L344">	<span class="tok-kw">return</span> key;</span>
+<span class="line" id="L345">}</span>
+<span class="line" id="L346"></span>
+<span class="line" id="L347"><span class="tok-kw">fn</span> <span class="tok-fn">generateMask</span>() [<span class="tok-number">4</span>]<span class="tok-type">u8</span> {</span>
+<span class="line" id="L348">	<span class="tok-kw">var</span> m: [<span class="tok-number">4</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L349">	std.crypto.random.bytes(&amp;m);</span>
+<span class="line" id="L350">	<span class="tok-kw">return</span> m;</span>
+<span class="line" id="L351">}</span>
+<span class="line" id="L352"></span>
+<span class="line" id="L353"><span class="tok-kw">fn</span> <span class="tok-fn">sendHandshake</span>(path: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, key: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, buf: []<span class="tok-type">u8</span>, opts: *<span class="tok-kw">const</span> HandshakeOpts, stream: <span class="tok-kw">anytype</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L354">	<span class="tok-builtin">@memcpy</span>(buf[<span class="tok-number">0</span>..<span class="tok-number">4</span>], <span class="tok-str">&quot;GET &quot;</span>);</span>
+<span class="line" id="L355">	<span class="tok-kw">var</span> pos: <span class="tok-type">usize</span> = <span class="tok-number">4</span>;</span>
+<span class="line" id="L356">	<span class="tok-kw">var</span> end = pos + path.len;</span>
+<span class="line" id="L357"></span>
+<span class="line" id="L358">	{</span>
+<span class="line" id="L359">		<span class="tok-builtin">@memcpy</span>(buf[pos..end], path);</span>
+<span class="line" id="L360">		pos = end;</span>
+<span class="line" id="L361">	}</span>
+<span class="line" id="L362"></span>
+<span class="line" id="L363">	{</span>
+<span class="line" id="L364">		<span class="tok-kw">const</span> headers = <span class="tok-str">&quot; HTTP/1.1\r\ncontent-length: 0\r\nupgrade: websocket\r\nsec-websocket-version: 13\r\nconnection: upgrade\r\nsec-websocket-key: &quot;</span>;</span>
+<span class="line" id="L365">		end = pos + headers.len;</span>
+<span class="line" id="L366">		<span class="tok-builtin">@memcpy</span>(buf[pos..end], headers);</span>
+<span class="line" id="L367"></span>
+<span class="line" id="L368">		pos = end;</span>
+<span class="line" id="L369">		end = pos + key.len;</span>
+<span class="line" id="L370">		<span class="tok-builtin">@memcpy</span>(buf[pos..end], key);</span>
+<span class="line" id="L371"></span>
+<span class="line" id="L372">		pos = end;</span>
+<span class="line" id="L373">		end = pos + <span class="tok-number">2</span>;</span>
+<span class="line" id="L374">		<span class="tok-builtin">@memcpy</span>(buf[pos..end], <span class="tok-str">&quot;\r\n&quot;</span>);</span>
+<span class="line" id="L375">		pos = end;</span>
+<span class="line" id="L376">	}</span>
+<span class="line" id="L377"></span>
+<span class="line" id="L378">	<span class="tok-kw">if</span> (opts.headers) |extra_headers| {</span>
+<span class="line" id="L379">		end = pos + extra_headers.len;</span>
+<span class="line" id="L380">		<span class="tok-builtin">@memcpy</span>(buf[pos..end], extra_headers);</span>
+<span class="line" id="L381">		pos = end;</span>
+<span class="line" id="L382">		<span class="tok-kw">if</span> (!std.mem.endsWith(<span class="tok-type">u8</span>, extra_headers, <span class="tok-str">&quot;\r\n&quot;</span>)) {</span>
+<span class="line" id="L383">			buf[pos] = <span class="tok-str">'\r'</span>;</span>
+<span class="line" id="L384">			buf[pos+<span class="tok-number">1</span>] = <span class="tok-str">'\n'</span>;</span>
+<span class="line" id="L385">			pos += <span class="tok-number">2</span>;</span>
+<span class="line" id="L386">		}</span>
+<span class="line" id="L387">	}</span>
+<span class="line" id="L388">	buf[pos] = <span class="tok-str">'\r'</span>;</span>
+<span class="line" id="L389">	buf[pos+<span class="tok-number">1</span>] = <span class="tok-str">'\n'</span>;</span>
+<span class="line" id="L390"></span>
+<span class="line" id="L391">	<span class="tok-kw">try</span> stream.writeTimeout(opts.timeout_ms);</span>
+<span class="line" id="L392">	<span class="tok-kw">try</span> stream.writeAll(buf[<span class="tok-number">0</span>..pos + <span class="tok-number">2</span>]);</span>
+<span class="line" id="L393">	<span class="tok-kw">try</span> stream.writeTimeout(<span class="tok-number">0</span>);</span>
+<span class="line" id="L394">}</span>
+<span class="line" id="L395"></span>
+<span class="line" id="L396"><span class="tok-kw">fn</span> <span class="tok-fn">readHandshakeReply</span>(buf: []<span class="tok-type">u8</span>, key: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, opts: *<span class="tok-kw">const</span> HandshakeOpts, stream: <span class="tok-kw">anytype</span>) !<span class="tok-type">usize</span> {</span>
+<span class="line" id="L397">	<span class="tok-kw">const</span> mem = std.mem;</span>
+<span class="line" id="L398">	<span class="tok-kw">const</span> ascii = std.ascii;</span>
+<span class="line" id="L399"></span>
+<span class="line" id="L400">	<span class="tok-kw">const</span> timeout_ms = opts.timeout_ms;</span>
+<span class="line" id="L401">	<span class="tok-kw">const</span> deadline = std.time.milliTimestamp() + timeout_ms;</span>
+<span class="line" id="L402">	<span class="tok-kw">try</span> stream.receiveTimeout(timeout_ms);</span>
+<span class="line" id="L403"></span>
+<span class="line" id="L404">	<span class="tok-kw">var</span> pos: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L405">	<span class="tok-kw">var</span> line_start: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L406">	<span class="tok-kw">var</span> complete_response: <span class="tok-type">u8</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L407">	<span class="tok-kw">while</span> (<span class="tok-null">true</span>) {</span>
+<span class="line" id="L408">		<span class="tok-kw">var</span> n = <span class="tok-kw">try</span> stream.read(buf[pos..]);</span>
+<span class="line" id="L409">		<span class="tok-kw">if</span> (n == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L410">			<span class="tok-kw">return</span> <span class="tok-kw">error</span>.ConnectionClosed;</span>
+<span class="line" id="L411">		}</span>
+<span class="line" id="L412"></span>
+<span class="line" id="L413">		pos += n;</span>
+<span class="line" id="L414">		<span class="tok-kw">while</span> (findCarriageReturnIndex(buf[line_start..pos])) |relative_end| {</span>
+<span class="line" id="L415">			<span class="tok-kw">if</span> (relative_end == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L416">				<span class="tok-kw">if</span> (complete_response != <span class="tok-number">15</span>) {</span>
+<span class="line" id="L417">					<span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidHandshakeResponse;</span>
+<span class="line" id="L418">				}</span>
+<span class="line" id="L419">				<span class="tok-kw">const</span> over_read = pos - (line_start + <span class="tok-number">2</span>);</span>
+<span class="line" id="L420">				std.mem.copyForwards(<span class="tok-type">u8</span>, buf[<span class="tok-number">0</span>..over_read], buf[line_start+<span class="tok-number">2</span>..pos]);</span>
+<span class="line" id="L421">				<span class="tok-kw">try</span> stream.receiveTimeout(<span class="tok-number">0</span>);</span>
+<span class="line" id="L422">				<span class="tok-kw">return</span> over_read;</span>
+<span class="line" id="L423">			}</span>
+<span class="line" id="L424"></span>
+<span class="line" id="L425">			<span class="tok-kw">const</span> line_end = line_start + relative_end;</span>
+<span class="line" id="L426">			<span class="tok-kw">const</span> line = buf[line_start..line_end];</span>
+<span class="line" id="L427"></span>
+<span class="line" id="L428">			<span class="tok-comment">// the next line starts where this line ends, skip over the \r\n</span>
+</span>
+<span class="line" id="L429">			line_start = line_end + <span class="tok-number">2</span>;</span>
+<span class="line" id="L430"></span>
+<span class="line" id="L431">			<span class="tok-kw">if</span> (complete_response == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L432">				<span class="tok-kw">if</span> (!ascii.startsWithIgnoreCase(line, <span class="tok-str">&quot;HTTP/1.1 101 &quot;</span>)) {</span>
+<span class="line" id="L433">					<span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidHandshakeResponse;</span>
+<span class="line" id="L434">				}</span>
+<span class="line" id="L435">				complete_response |= <span class="tok-number">1</span>;</span>
+<span class="line" id="L436">				<span class="tok-kw">continue</span>;</span>
+<span class="line" id="L437">			}</span>
+<span class="line" id="L438"></span>
+<span class="line" id="L439">			<span class="tok-kw">for</span> (line, <span class="tok-number">0</span>..) |b, i| {</span>
+<span class="line" id="L440">				<span class="tok-comment">// find the colon and lowercase the header while we're iterating</span>
+</span>
+<span class="line" id="L441">				<span class="tok-kw">if</span> (<span class="tok-str">'A'</span> &lt;= b <span class="tok-kw">and</span> b &lt;= <span class="tok-str">'Z'</span>) {</span>
+<span class="line" id="L442">					line[i] = b + <span class="tok-number">32</span>;</span>
+<span class="line" id="L443">					<span class="tok-kw">continue</span>;</span>
+<span class="line" id="L444">				}</span>
+<span class="line" id="L445">				<span class="tok-kw">if</span> (b != <span class="tok-str">':'</span>) {</span>
+<span class="line" id="L446">					<span class="tok-kw">continue</span>;</span>
+<span class="line" id="L447">				}</span>
+<span class="line" id="L448"></span>
+<span class="line" id="L449">				<span class="tok-kw">const</span> name = line[<span class="tok-number">0</span>..i];</span>
+<span class="line" id="L450">				<span class="tok-kw">const</span> value = line[i+<span class="tok-number">1</span>..];</span>
+<span class="line" id="L451">				<span class="tok-kw">if</span> (mem.eql(<span class="tok-type">u8</span>, name, <span class="tok-str">&quot;upgrade&quot;</span>)) {</span>
+<span class="line" id="L452">					<span class="tok-kw">if</span> (!ascii.eqlIgnoreCase(mem.trim(<span class="tok-type">u8</span>, value, &amp;ascii.whitespace), <span class="tok-str">&quot;websocket&quot;</span>)) {</span>
+<span class="line" id="L453">						<span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidUpgradeHeader;</span>
+<span class="line" id="L454">					}</span>
+<span class="line" id="L455">					complete_response |= <span class="tok-number">2</span>;</span>
+<span class="line" id="L456">				} <span class="tok-kw">else</span> <span class="tok-kw">if</span> (mem.eql(<span class="tok-type">u8</span>, name, <span class="tok-str">&quot;connection&quot;</span>)) {</span>
+<span class="line" id="L457">					<span class="tok-kw">if</span> (!ascii.eqlIgnoreCase(mem.trim(<span class="tok-type">u8</span>, value, &amp;ascii.whitespace), <span class="tok-str">&quot;upgrade&quot;</span>)) {</span>
+<span class="line" id="L458">						<span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidConnectionHeader;</span>
+<span class="line" id="L459">					}</span>
+<span class="line" id="L460">					complete_response |= <span class="tok-number">4</span>;</span>
+<span class="line" id="L461">				} <span class="tok-kw">else</span> <span class="tok-kw">if</span> (mem.eql(<span class="tok-type">u8</span>, name, <span class="tok-str">&quot;sec-websocket-accept&quot;</span>)) {</span>
+<span class="line" id="L462"></span>
+<span class="line" id="L463">					<span class="tok-kw">var</span> h: [<span class="tok-number">20</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L464">					{</span>
+<span class="line" id="L465">						<span class="tok-kw">var</span> hasher = std.crypto.hash.Sha1.init(.{});</span>
+<span class="line" id="L466">						hasher.update(key);</span>
+<span class="line" id="L467">						hasher.update(<span class="tok-str">&quot;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&quot;</span>);</span>
+<span class="line" id="L468">						hasher.final(&amp;h);</span>
+<span class="line" id="L469">					}</span>
+<span class="line" id="L470"></span>
+<span class="line" id="L471">					<span class="tok-kw">var</span> encoded_buf: [<span class="tok-number">28</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L472">					<span class="tok-kw">const</span> sec_hash = std.base64.standard.Encoder.encode(&amp;encoded_buf, &amp;h);</span>
+<span class="line" id="L473">					<span class="tok-kw">const</span> header_value = mem.trim(<span class="tok-type">u8</span>, value, &amp;ascii.whitespace);</span>
+<span class="line" id="L474"></span>
+<span class="line" id="L475">					<span class="tok-kw">if</span> (!mem.eql(<span class="tok-type">u8</span>, header_value, sec_hash)) {</span>
+<span class="line" id="L476">						<span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidWebsocketAcceptHeader;</span>
+<span class="line" id="L477">					}</span>
+<span class="line" id="L478">					complete_response |= <span class="tok-number">8</span>;</span>
+<span class="line" id="L479">				}</span>
+<span class="line" id="L480">			}</span>
+<span class="line" id="L481">		}</span>
+<span class="line" id="L482"></span>
+<span class="line" id="L483">		<span class="tok-kw">if</span> (std.time.milliTimestamp() &gt; deadline) {</span>
+<span class="line" id="L484">			<span class="tok-kw">return</span> <span class="tok-kw">error</span>.Timeout;</span>
+<span class="line" id="L485">		}</span>
+<span class="line" id="L486"></span>
+<span class="line" id="L487">		<span class="tok-kw">if</span> (pos == buf.len) {</span>
+<span class="line" id="L488">			<span class="tok-kw">return</span> <span class="tok-kw">error</span>.ResponseTooLarge;</span>
+<span class="line" id="L489">		}</span>
+<span class="line" id="L490">	}</span>
+<span class="line" id="L491">}</span>
+<span class="line" id="L492"></span>
+<span class="line" id="L493"><span class="tok-kw">const</span> CR = <span class="tok-str">'\r'</span>;</span>
+<span class="line" id="L494"><span class="tok-kw">const</span> VECTOR_8_LEN = <span class="tok-kw">if</span> (std.simd.suggestVectorSize(<span class="tok-type">u8</span>) == <span class="tok-null">null</span>) <span class="tok-number">0</span> <span class="tok-kw">else</span> <span class="tok-number">8</span>;</span>
+<span class="line" id="L495"><span class="tok-kw">const</span> VECTOR_8_CR: <span class="tok-builtin">@Vector</span>(<span class="tok-number">8</span>, <span class="tok-type">u8</span>) = <span class="tok-builtin">@splat</span>(<span class="tok-builtin">@as</span>(<span class="tok-type">u8</span>, CR));</span>
+<span class="line" id="L496"><span class="tok-kw">const</span> VECTOR_8_IOTA = std.simd.iota(<span class="tok-type">u8</span>, VECTOR_8_LEN);</span>
+<span class="line" id="L497"><span class="tok-kw">const</span> VECTOR_8_NULLS: <span class="tok-builtin">@Vector</span>(<span class="tok-number">8</span>, <span class="tok-type">u8</span>) = <span class="tok-builtin">@splat</span>(<span class="tok-builtin">@as</span>(<span class="tok-type">u8</span>, <span class="tok-number">255</span>));</span>
+<span class="line" id="L498"></span>
+<span class="line" id="L499"><span class="tok-kw">const</span> VECTOR_16_LEN = <span class="tok-kw">if</span> (std.simd.suggestVectorSize(<span class="tok-type">u8</span>) == <span class="tok-null">null</span>) <span class="tok-number">0</span> <span class="tok-kw">else</span> <span class="tok-number">16</span>;</span>
+<span class="line" id="L500"><span class="tok-kw">const</span> VECTOR_16_CR: <span class="tok-builtin">@Vector</span>(<span class="tok-number">16</span>, <span class="tok-type">u8</span>) = <span class="tok-builtin">@splat</span>(<span class="tok-builtin">@as</span>(<span class="tok-type">u8</span>, CR));</span>
+<span class="line" id="L501"><span class="tok-kw">const</span> VECTOR_16_IOTA = std.simd.iota(<span class="tok-type">u8</span>, VECTOR_16_LEN);</span>
+<span class="line" id="L502"><span class="tok-kw">const</span> VECTOR_16_NULLS: <span class="tok-builtin">@Vector</span>(<span class="tok-number">16</span>, <span class="tok-type">u8</span>) = <span class="tok-builtin">@splat</span>(<span class="tok-builtin">@as</span>(<span class="tok-type">u8</span>, <span class="tok-number">255</span>));</span>
+<span class="line" id="L503"></span>
+<span class="line" id="L504"><span class="tok-kw">const</span> VECTOR_32_LEN = <span class="tok-kw">if</span> (std.simd.suggestVectorSize(<span class="tok-type">u8</span>) == <span class="tok-null">null</span>) <span class="tok-number">0</span> <span class="tok-kw">else</span> <span class="tok-number">32</span>;</span>
+<span class="line" id="L505"><span class="tok-kw">const</span> VECTOR_32_CR: <span class="tok-builtin">@Vector</span>(<span class="tok-number">32</span>, <span class="tok-type">u8</span>) = <span class="tok-builtin">@splat</span>(<span class="tok-builtin">@as</span>(<span class="tok-type">u8</span>, CR));</span>
+<span class="line" id="L506"><span class="tok-kw">const</span> VECTOR_32_IOTA = std.simd.iota(<span class="tok-type">u8</span>, VECTOR_32_LEN);</span>
+<span class="line" id="L507"><span class="tok-kw">const</span> VECTOR_32_NULLS: <span class="tok-builtin">@Vector</span>(<span class="tok-number">32</span>, <span class="tok-type">u8</span>) = <span class="tok-builtin">@splat</span>(<span class="tok-builtin">@as</span>(<span class="tok-type">u8</span>, <span class="tok-number">255</span>));</span>
+<span class="line" id="L508"></span>
+<span class="line" id="L509"><span class="tok-kw">const</span> VECTOR_64_LEN = <span class="tok-kw">if</span> (std.simd.suggestVectorSize(<span class="tok-type">u8</span>) == <span class="tok-null">null</span>) <span class="tok-number">0</span> <span class="tok-kw">else</span> <span class="tok-number">64</span>;</span>
+<span class="line" id="L510"><span class="tok-kw">const</span> VECTOR_64_CR: <span class="tok-builtin">@Vector</span>(<span class="tok-number">64</span>, <span class="tok-type">u8</span>) = <span class="tok-builtin">@splat</span>(<span class="tok-builtin">@as</span>(<span class="tok-type">u8</span>, CR));</span>
+<span class="line" id="L511"><span class="tok-kw">const</span> VECTOR_64_IOTA = std.simd.iota(<span class="tok-type">u8</span>, VECTOR_64_LEN);</span>
+<span class="line" id="L512"><span class="tok-kw">const</span> VECTOR_64_NULLS: <span class="tok-builtin">@Vector</span>(<span class="tok-number">64</span>, <span class="tok-type">u8</span>) = <span class="tok-builtin">@splat</span>(<span class="tok-builtin">@as</span>(<span class="tok-type">u8</span>, <span class="tok-number">255</span>));</span>
+<span class="line" id="L513"></span>
+<span class="line" id="L514"><span class="tok-kw">fn</span> <span class="tok-fn">findCarriageReturnIndex</span>(buf: []<span class="tok-type">u8</span>) ?<span class="tok-type">usize</span> {</span>
+<span class="line" id="L515">	<span class="tok-kw">if</span> (VECTOR_32_LEN == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L516">		<span class="tok-kw">return</span> std.mem.indexOfScalar(<span class="tok-type">u8</span>, buf, CR);</span>
+<span class="line" id="L517">	}</span>
+<span class="line" id="L518"></span>
+<span class="line" id="L519">	<span class="tok-kw">var</span> pos: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L520">	<span class="tok-kw">var</span> left = buf.len;</span>
+<span class="line" id="L521">	<span class="tok-kw">while</span> (left &gt; <span class="tok-number">0</span>) {</span>
+<span class="line" id="L522">		<span class="tok-kw">if</span> (left &lt; VECTOR_8_LEN) {</span>
+<span class="line" id="L523">			<span class="tok-kw">if</span> (std.mem.indexOfScalar(<span class="tok-type">u8</span>, buf[pos..], CR)) |n| {</span>
+<span class="line" id="L524">				<span class="tok-kw">return</span> pos + n;</span>
+<span class="line" id="L525">			}</span>
+<span class="line" id="L526">			<span class="tok-kw">return</span> <span class="tok-null">null</span>;</span>
+<span class="line" id="L527">		}</span>
+<span class="line" id="L528">		<span class="tok-kw">var</span> index: <span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L529">		<span class="tok-kw">var</span> vector_len: <span class="tok-type">usize</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L530">		<span class="tok-kw">if</span> (left &lt; VECTOR_16_LEN) {</span>
+<span class="line" id="L531">			vector_len = VECTOR_8_LEN;</span>
+<span class="line" id="L532">			<span class="tok-kw">const</span> vec: <span class="tok-builtin">@Vector</span>(VECTOR_8_LEN, <span class="tok-type">u8</span>) = buf[pos..][<span class="tok-number">0</span>..VECTOR_8_LEN].*;</span>
+<span class="line" id="L533">			<span class="tok-kw">const</span> matches = vec == VECTOR_8_CR;</span>
+<span class="line" id="L534">			<span class="tok-kw">const</span> indices = <span class="tok-builtin">@select</span>(<span class="tok-type">u8</span>, matches, VECTOR_8_IOTA, VECTOR_8_NULLS);</span>
+<span class="line" id="L535">			index = <span class="tok-builtin">@reduce</span>(.Min, indices);</span>
+<span class="line" id="L536">		} <span class="tok-kw">else</span> <span class="tok-kw">if</span> (left &lt; VECTOR_32_LEN) {</span>
+<span class="line" id="L537">			vector_len = VECTOR_16_LEN;</span>
+<span class="line" id="L538">			<span class="tok-kw">const</span> vec: <span class="tok-builtin">@Vector</span>(VECTOR_16_LEN, <span class="tok-type">u8</span>) = buf[pos..][<span class="tok-number">0</span>..VECTOR_16_LEN].*;</span>
+<span class="line" id="L539">			<span class="tok-kw">const</span> matches = vec == VECTOR_16_CR;</span>
+<span class="line" id="L540">			<span class="tok-kw">const</span> indices = <span class="tok-builtin">@select</span>(<span class="tok-type">u8</span>, matches, VECTOR_16_IOTA, VECTOR_16_NULLS);</span>
+<span class="line" id="L541">			index = <span class="tok-builtin">@reduce</span>(.Min, indices);</span>
+<span class="line" id="L542">		} <span class="tok-kw">else</span> <span class="tok-kw">if</span> (left &lt; VECTOR_64_LEN) {</span>
+<span class="line" id="L543">			vector_len = VECTOR_32_LEN;</span>
+<span class="line" id="L544">			<span class="tok-kw">const</span> vec: <span class="tok-builtin">@Vector</span>(VECTOR_32_LEN, <span class="tok-type">u8</span>) = buf[pos..][<span class="tok-number">0</span>..VECTOR_32_LEN].*;</span>
+<span class="line" id="L545">			<span class="tok-kw">const</span> matches = vec == VECTOR_32_CR;</span>
+<span class="line" id="L546">			<span class="tok-kw">const</span> indices = <span class="tok-builtin">@select</span>(<span class="tok-type">u8</span>, matches, VECTOR_32_IOTA, VECTOR_32_NULLS);</span>
+<span class="line" id="L547">			index = <span class="tok-builtin">@reduce</span>(.Min, indices);</span>
+<span class="line" id="L548">		} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L549">			vector_len = VECTOR_64_LEN;</span>
+<span class="line" id="L550">			<span class="tok-kw">const</span> vec: <span class="tok-builtin">@Vector</span>(VECTOR_64_LEN, <span class="tok-type">u8</span>) = buf[pos..][<span class="tok-number">0</span>..VECTOR_64_LEN].*;</span>
+<span class="line" id="L551">			<span class="tok-kw">const</span> matches = vec == VECTOR_64_CR;</span>
+<span class="line" id="L552">			<span class="tok-kw">const</span> indices = <span class="tok-builtin">@select</span>(<span class="tok-type">u8</span>, matches, VECTOR_64_IOTA, VECTOR_64_NULLS);</span>
+<span class="line" id="L553">			index = <span class="tok-builtin">@reduce</span>(.Min, indices);</span>
+<span class="line" id="L554">		}</span>
+<span class="line" id="L555"></span>
+<span class="line" id="L556">		<span class="tok-kw">if</span> (index != <span class="tok-number">255</span>) {</span>
+<span class="line" id="L557">			<span class="tok-kw">return</span> pos + index;</span>
+<span class="line" id="L558">		}</span>
+<span class="line" id="L559">		pos += vector_len;</span>
+<span class="line" id="L560">		left -= vector_len;</span>
+<span class="line" id="L561">	}</span>
+<span class="line" id="L562">	<span class="tok-kw">return</span> <span class="tok-null">null</span>;</span>
+<span class="line" id="L563">}</span>
+<span class="line" id="L564"></span>
+<span class="line" id="L565"><span class="tok-kw">const</span> t = lib.testing;</span>
+<span class="line" id="L566"><span class="tok-kw">const</span> TestClient = Client(t.StreamWrap);</span>
+<span class="line" id="L567"><span class="tok-kw">test</span> <span class="tok-str">&quot;client: handshake&quot;</span> {</span>
+<span class="line" id="L568">	{</span>
+<span class="line" id="L569">		<span class="tok-comment">// closed connection</span>
+</span>
+<span class="line" id="L570">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L571">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L572">		<span class="tok-kw">var</span> client = <span class="tok-kw">try</span> TestClient.init(t.allocator, t.wrap(&amp;stream), .{});</span>
+<span class="line" id="L573">		<span class="tok-kw">defer</span> client.deinit();</span>
+<span class="line" id="L574">		<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.ConnectionClosed, client.handshake(<span class="tok-str">&quot;/&quot;</span>, .{}));</span>
+<span class="line" id="L575">	}</span>
+<span class="line" id="L576"></span>
+<span class="line" id="L577">	{</span>
+<span class="line" id="L578">		<span class="tok-comment">// empty reponse</span>
+</span>
+<span class="line" id="L579">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L580">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L581">		_ = stream.add(<span class="tok-str">&quot;\r\n\r\n&quot;</span>);</span>
+<span class="line" id="L582">		<span class="tok-kw">var</span> client = <span class="tok-kw">try</span> TestClient.init(t.allocator, t.wrap(&amp;stream), .{});</span>
+<span class="line" id="L583">		<span class="tok-kw">defer</span> client.deinit();</span>
+<span class="line" id="L584">		<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.InvalidHandshakeResponse, client.handshake(<span class="tok-str">&quot;/&quot;</span>, .{}));</span>
+<span class="line" id="L585">	}</span>
+<span class="line" id="L586"></span>
+<span class="line" id="L587">	{</span>
+<span class="line" id="L588">		<span class="tok-comment">// invalid websocket response</span>
+</span>
+<span class="line" id="L589">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L590">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L591">		_ = stream.add(<span class="tok-str">&quot;HTTP/1.1 200 OK\r\n\r\n&quot;</span>);</span>
+<span class="line" id="L592">		<span class="tok-kw">var</span> client = <span class="tok-kw">try</span> TestClient.init(t.allocator, t.wrap(&amp;stream), .{});</span>
+<span class="line" id="L593">		<span class="tok-kw">defer</span> client.deinit();</span>
+<span class="line" id="L594">		<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.InvalidHandshakeResponse, client.handshake(<span class="tok-str">&quot;/&quot;</span>, .{}));</span>
+<span class="line" id="L595">	}</span>
+<span class="line" id="L596"></span>
+<span class="line" id="L597">	{</span>
+<span class="line" id="L598">		<span class="tok-comment">// missing upgrade header</span>
+</span>
+<span class="line" id="L599">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L600">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L601">		_ = stream.add(<span class="tok-str">&quot;HTTP/1.1 101 Switching Protocol\r\n\r\n&quot;</span>);</span>
+<span class="line" id="L602">		<span class="tok-kw">var</span> client = <span class="tok-kw">try</span> TestClient.init(t.allocator, t.wrap(&amp;stream), .{});</span>
+<span class="line" id="L603">		<span class="tok-kw">defer</span> client.deinit();</span>
+<span class="line" id="L604">		<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.InvalidHandshakeResponse, client.handshake(<span class="tok-str">&quot;/&quot;</span>, .{}));</span>
+<span class="line" id="L605">	}</span>
+<span class="line" id="L606"></span>
+<span class="line" id="L607"></span>
+<span class="line" id="L608">	{</span>
+<span class="line" id="L609">		<span class="tok-comment">// wrong upgrade header</span>
+</span>
+<span class="line" id="L610">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L611">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L612">		_ = stream.add(<span class="tok-str">&quot;HTTP/1.1 101 Switching Protocol\r\nUpgrade: nope\r\n\r\n&quot;</span>);</span>
+<span class="line" id="L613">		<span class="tok-kw">var</span> client = <span class="tok-kw">try</span> TestClient.init(t.allocator, t.wrap(&amp;stream), .{});</span>
+<span class="line" id="L614">		<span class="tok-kw">defer</span> client.deinit();</span>
+<span class="line" id="L615">		<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.InvalidUpgradeHeader, client.handshake(<span class="tok-str">&quot;/&quot;</span>, .{}));</span>
+<span class="line" id="L616">	}</span>
+<span class="line" id="L617"></span>
+<span class="line" id="L618">	{</span>
+<span class="line" id="L619">		<span class="tok-comment">// missing connection header</span>
+</span>
+<span class="line" id="L620">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L621">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L622">		_ = stream.add(<span class="tok-str">&quot;HTTP/1.1 101 Switching Protocol\r\nUpgrade: websocket\r\n\r\n&quot;</span>);</span>
+<span class="line" id="L623">		<span class="tok-kw">var</span> client = <span class="tok-kw">try</span> TestClient.init(t.allocator, t.wrap(&amp;stream), .{});</span>
+<span class="line" id="L624">		<span class="tok-kw">defer</span> client.deinit();</span>
+<span class="line" id="L625">		<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.InvalidHandshakeResponse, client.handshake(<span class="tok-str">&quot;/&quot;</span>, .{}));</span>
+<span class="line" id="L626">	}</span>
+<span class="line" id="L627"></span>
+<span class="line" id="L628">	{</span>
+<span class="line" id="L629">		<span class="tok-comment">// wrong connection header</span>
+</span>
+<span class="line" id="L630">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L631">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L632">		_ = stream.add(<span class="tok-str">&quot;HTTP/1.1 101 Switching Protocol\r\nupgrade: WebSocket\r\nConnection: something\r\n\r\n&quot;</span>);</span>
+<span class="line" id="L633">		<span class="tok-kw">var</span> client = <span class="tok-kw">try</span> TestClient.init(t.allocator, t.wrap(&amp;stream), .{});</span>
+<span class="line" id="L634">		<span class="tok-kw">defer</span> client.deinit();</span>
+<span class="line" id="L635">		<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.InvalidConnectionHeader, client.handshake(<span class="tok-str">&quot;/&quot;</span>, .{}));</span>
+<span class="line" id="L636">	}</span>
+<span class="line" id="L637"></span>
+<span class="line" id="L638">	{</span>
+<span class="line" id="L639">		<span class="tok-comment">// missing Sec-Websocket-Accept header</span>
+</span>
+<span class="line" id="L640">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L641">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L642">		_ = stream.add(<span class="tok-str">&quot;HTTP/1.1 101 Switching Protocol\r\nUpgrade: websocket\r\nConnection: upgrade\r\n\r\n&quot;</span>);</span>
+<span class="line" id="L643">		<span class="tok-kw">var</span> client = <span class="tok-kw">try</span> TestClient.init(t.allocator, t.wrap(&amp;stream), .{});</span>
+<span class="line" id="L644">		<span class="tok-kw">defer</span> client.deinit();</span>
+<span class="line" id="L645">		<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.InvalidHandshakeResponse, client.handshake(<span class="tok-str">&quot;/&quot;</span>, .{}));</span>
+<span class="line" id="L646">	}</span>
+<span class="line" id="L647"></span>
+<span class="line" id="L648">	{</span>
+<span class="line" id="L649">		<span class="tok-comment">// wrong Sec-Websocket-Accept header</span>
+</span>
+<span class="line" id="L650">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L651">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L652">		_ = stream.add(<span class="tok-str">&quot;HTTP/1.1 101 Switching Protocol\r\nupgrade: WebSocket\r\nConnection: UPGRADE\r\nSec-Websocket-Accept: hack\r\n\r\n&quot;</span>);</span>
+<span class="line" id="L653">		<span class="tok-kw">var</span> client = <span class="tok-kw">try</span> TestClient.init(t.allocator, t.wrap(&amp;stream), .{});</span>
+<span class="line" id="L654">		<span class="tok-kw">defer</span> client.deinit();</span>
+<span class="line" id="L655">		<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.InvalidWebsocketAcceptHeader, client.handshake(<span class="tok-str">&quot;/&quot;</span>, .{}));</span>
+<span class="line" id="L656">	}</span>
+<span class="line" id="L657"></span>
+<span class="line" id="L658">	{</span>
+<span class="line" id="L659">		<span class="tok-comment">// ok for successful</span>
+</span>
+<span class="line" id="L660">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L661">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L662">		_ = stream.add(<span class="tok-str">&quot;HTTP/1.1 101 Switching Protocol\r\nupgrade: WebSocket\r\nConnection: UPGRADE\r\nSec-Websocket-Accept: C/0nmHhBztSRGR1CwL6Tf4ZjwpY=\r\n\r\n&quot;</span>);</span>
+<span class="line" id="L663">		<span class="tok-kw">var</span> client = <span class="tok-kw">try</span> TestClient.init(t.allocator, t.wrap(&amp;stream), .{});</span>
+<span class="line" id="L664">		<span class="tok-kw">defer</span> client.deinit();</span>
+<span class="line" id="L665">		<span class="tok-kw">try</span> client.handshake(<span class="tok-str">&quot;/&quot;</span>, .{});</span>
+<span class="line" id="L666">		<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">0</span>, client._reader.len);</span>
+<span class="line" id="L667">	}</span>
+<span class="line" id="L668"></span>
+<span class="line" id="L669">	{</span>
+<span class="line" id="L670">		<span class="tok-comment">// ok for successful, with overread</span>
+</span>
+<span class="line" id="L671">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L672">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L673">		_ = stream.add(<span class="tok-str">&quot;HTTP/1.1 101 Switching Protocol\r\nupgrade: WebSocket\r\nConnection: UPGRADE\r\nSec-Websocket-Accept: C/0nmHhBztSRGR1CwL6Tf4ZjwpY=\r\n\r\nSome Random Data Which is Part Of the Next Message&quot;</span>);</span>
+<span class="line" id="L674">		<span class="tok-kw">var</span> client = <span class="tok-kw">try</span> TestClient.init(t.allocator, t.wrap(&amp;stream), .{});</span>
+<span class="line" id="L675">		<span class="tok-kw">defer</span> client.deinit();</span>
+<span class="line" id="L676">		<span class="tok-kw">try</span> client.handshake(<span class="tok-str">&quot;/&quot;</span>, .{});</span>
+<span class="line" id="L677">		<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">50</span>, client._reader.len);</span>
+<span class="line" id="L678">	}</span>
+<span class="line" id="L679">}</span>
+<span class="line" id="L680"></span>
+<span class="line" id="L681"><span class="tok-kw">test</span> <span class="tok-str">&quot;client: findCarriageReturnIndex&quot;</span> {</span>
+<span class="line" id="L682">	<span class="tok-kw">var</span> input = (<span class="tok-str">&quot;z&quot;</span> ** <span class="tok-number">128</span>).*;</span>
+<span class="line" id="L683">	<span class="tok-kw">for</span> (<span class="tok-number">1</span>..input.len) |i| {</span>
+<span class="line" id="L684">		<span class="tok-kw">var</span> buf = input[<span class="tok-number">0</span>..i];</span>
+<span class="line" id="L685">		<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">null</span>, findCarriageReturnIndex(buf));</span>
+<span class="line" id="L686"></span>
+<span class="line" id="L687">		<span class="tok-kw">for</span> (<span class="tok-number">0</span>..i) |j| {</span>
+<span class="line" id="L688">			buf[j] = CR;</span>
+<span class="line" id="L689">			<span class="tok-kw">if</span> (j &gt; <span class="tok-number">0</span>) {</span>
+<span class="line" id="L690">				buf[j-<span class="tok-number">1</span>] = <span class="tok-str">'z'</span>;</span>
+<span class="line" id="L691">			}</span>
+<span class="line" id="L692">			<span class="tok-kw">try</span> t.expectEqual(j, findCarriageReturnIndex(buf).?);</span>
+<span class="line" id="L693">		}</span>
+<span class="line" id="L694">		buf[i-<span class="tok-number">1</span>] = <span class="tok-str">'z'</span>;</span>
+<span class="line" id="L695">	}</span>
+<span class="line" id="L696">}</span>
+<span class="line" id="L697"></span>
+</code></pre></body>
+</html>

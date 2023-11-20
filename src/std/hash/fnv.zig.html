@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>hash/fnv.zig - source view</title>
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPNJREFUeNpi/P//PwMlgOXHUjly9E0G4hwgZmQiQZMqEK8H4v9QzUEgQSaoADK+zhH9iAGL+C0gDoAaNg9mGLoLfgA1awK9hS9gzgJxA9RQBmQDrgMxJzRMGKE4HYj/Ial5A8QmQLwCJoBsgBYW2+TR1ChDaWt4LOBxKsi/VUh8XiD+gq4IVyzwQAMJBoKwacZlAB8Qf0bi96IZhtOAe1D6LpqaEiz6rmEzQAeIzwGxCJpieFqApo/vQKyJboAaEBsAsSEupwI1MwKjGBTVHOhegMX5UajYRqiBjMgYmj400cVh0XgTiKdC0zhJgJHS7AwQYABm9EAdCKrEfAAAAABJRU5ErkJggg=="/>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
     <style>
       body{
         font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
@@ -122,7 +123,7 @@
 <span class="line" id="L5"><span class="tok-comment">// https://tools.ietf.org/html/draft-eastlake-fnv-14</span>
 </span>
 <span class="line" id="L6"></span>
-<span class="line" id="L7"><span class="tok-kw">const</span> std = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;../std.zig&quot;</span>);</span>
+<span class="line" id="L7"><span class="tok-kw">const</span> std = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std&quot;</span>);</span>
 <span class="line" id="L8"><span class="tok-kw">const</span> testing = std.testing;</span>
 <span class="line" id="L9"></span>
 <span class="line" id="L10"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> Fnv1a_32 = Fnv1a(<span class="tok-type">u32</span>, <span class="tok-number">0x01000193</span>, <span class="tok-number">0x811c9dc5</span>);</span>
@@ -158,22 +159,27 @@
 <span class="line" id="L40">    };</span>
 <span class="line" id="L41">}</span>
 <span class="line" id="L42"></span>
-<span class="line" id="L43"><span class="tok-kw">test</span> <span class="tok-str">&quot;fnv1a-32&quot;</span> {</span>
-<span class="line" id="L44">    <span class="tok-kw">try</span> testing.expect(Fnv1a_32.hash(<span class="tok-str">&quot;&quot;</span>) == <span class="tok-number">0x811c9dc5</span>);</span>
-<span class="line" id="L45">    <span class="tok-kw">try</span> testing.expect(Fnv1a_32.hash(<span class="tok-str">&quot;a&quot;</span>) == <span class="tok-number">0xe40c292c</span>);</span>
-<span class="line" id="L46">    <span class="tok-kw">try</span> testing.expect(Fnv1a_32.hash(<span class="tok-str">&quot;foobar&quot;</span>) == <span class="tok-number">0xbf9cf968</span>);</span>
-<span class="line" id="L47">}</span>
-<span class="line" id="L48"></span>
-<span class="line" id="L49"><span class="tok-kw">test</span> <span class="tok-str">&quot;fnv1a-64&quot;</span> {</span>
-<span class="line" id="L50">    <span class="tok-kw">try</span> testing.expect(Fnv1a_64.hash(<span class="tok-str">&quot;&quot;</span>) == <span class="tok-number">0xcbf29ce484222325</span>);</span>
-<span class="line" id="L51">    <span class="tok-kw">try</span> testing.expect(Fnv1a_64.hash(<span class="tok-str">&quot;a&quot;</span>) == <span class="tok-number">0xaf63dc4c8601ec8c</span>);</span>
-<span class="line" id="L52">    <span class="tok-kw">try</span> testing.expect(Fnv1a_64.hash(<span class="tok-str">&quot;foobar&quot;</span>) == <span class="tok-number">0x85944171f73967e8</span>);</span>
-<span class="line" id="L53">}</span>
-<span class="line" id="L54"></span>
-<span class="line" id="L55"><span class="tok-kw">test</span> <span class="tok-str">&quot;fnv1a-128&quot;</span> {</span>
-<span class="line" id="L56">    <span class="tok-kw">try</span> testing.expect(Fnv1a_128.hash(<span class="tok-str">&quot;&quot;</span>) == <span class="tok-number">0x6c62272e07bb014262b821756295c58d</span>);</span>
-<span class="line" id="L57">    <span class="tok-kw">try</span> testing.expect(Fnv1a_128.hash(<span class="tok-str">&quot;a&quot;</span>) == <span class="tok-number">0xd228cb696f1a8caf78912b704e4a8964</span>);</span>
-<span class="line" id="L58">}</span>
-<span class="line" id="L59"></span>
+<span class="line" id="L43"><span class="tok-kw">const</span> verify = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;verify.zig&quot;</span>);</span>
+<span class="line" id="L44"></span>
+<span class="line" id="L45"><span class="tok-kw">test</span> <span class="tok-str">&quot;fnv1a-32&quot;</span> {</span>
+<span class="line" id="L46">    <span class="tok-kw">try</span> testing.expect(Fnv1a_32.hash(<span class="tok-str">&quot;&quot;</span>) == <span class="tok-number">0x811c9dc5</span>);</span>
+<span class="line" id="L47">    <span class="tok-kw">try</span> testing.expect(Fnv1a_32.hash(<span class="tok-str">&quot;a&quot;</span>) == <span class="tok-number">0xe40c292c</span>);</span>
+<span class="line" id="L48">    <span class="tok-kw">try</span> testing.expect(Fnv1a_32.hash(<span class="tok-str">&quot;foobar&quot;</span>) == <span class="tok-number">0xbf9cf968</span>);</span>
+<span class="line" id="L49">    <span class="tok-kw">try</span> verify.iterativeApi(Fnv1a_32);</span>
+<span class="line" id="L50">}</span>
+<span class="line" id="L51"></span>
+<span class="line" id="L52"><span class="tok-kw">test</span> <span class="tok-str">&quot;fnv1a-64&quot;</span> {</span>
+<span class="line" id="L53">    <span class="tok-kw">try</span> testing.expect(Fnv1a_64.hash(<span class="tok-str">&quot;&quot;</span>) == <span class="tok-number">0xcbf29ce484222325</span>);</span>
+<span class="line" id="L54">    <span class="tok-kw">try</span> testing.expect(Fnv1a_64.hash(<span class="tok-str">&quot;a&quot;</span>) == <span class="tok-number">0xaf63dc4c8601ec8c</span>);</span>
+<span class="line" id="L55">    <span class="tok-kw">try</span> testing.expect(Fnv1a_64.hash(<span class="tok-str">&quot;foobar&quot;</span>) == <span class="tok-number">0x85944171f73967e8</span>);</span>
+<span class="line" id="L56">    <span class="tok-kw">try</span> verify.iterativeApi(Fnv1a_64);</span>
+<span class="line" id="L57">}</span>
+<span class="line" id="L58"></span>
+<span class="line" id="L59"><span class="tok-kw">test</span> <span class="tok-str">&quot;fnv1a-128&quot;</span> {</span>
+<span class="line" id="L60">    <span class="tok-kw">try</span> testing.expect(Fnv1a_128.hash(<span class="tok-str">&quot;&quot;</span>) == <span class="tok-number">0x6c62272e07bb014262b821756295c58d</span>);</span>
+<span class="line" id="L61">    <span class="tok-kw">try</span> testing.expect(Fnv1a_128.hash(<span class="tok-str">&quot;a&quot;</span>) == <span class="tok-number">0xd228cb696f1a8caf78912b704e4a8964</span>);</span>
+<span class="line" id="L62">    <span class="tok-kw">try</span> verify.iterativeApi(Fnv1a_128);</span>
+<span class="line" id="L63">}</span>
+<span class="line" id="L64"></span>
 </code></pre></body>
 </html>

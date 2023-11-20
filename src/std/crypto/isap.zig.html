@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>crypto/isap.zig - source view</title>
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPNJREFUeNpi/P//PwMlgOXHUjly9E0G4hwgZmQiQZMqEK8H4v9QzUEgQSaoADK+zhH9iAGL+C0gDoAaNg9mGLoLfgA1awK9hS9gzgJxA9RQBmQDrgMxJzRMGKE4HYj/Ial5A8QmQLwCJoBsgBYW2+TR1ChDaWt4LOBxKsi/VUh8XiD+gq4IVyzwQAMJBoKwacZlAB8Qf0bi96IZhtOAe1D6LpqaEiz6rmEzQAeIzwGxCJpieFqApo/vQKyJboAaEBsAsSEupwI1MwKjGBTVHOhegMX5UajYRqiBjMgYmj400cVh0XgTiKdC0zhJgJHS7AwQYABm9EAdCKrEfAAAAABJRU5ErkJggg=="/>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
     <style>
       body{
         font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
@@ -117,7 +118,7 @@
 <span class="line" id="L4"><span class="tok-kw">const</span> mem = std.mem;</span>
 <span class="line" id="L5"><span class="tok-kw">const</span> math = std.math;</span>
 <span class="line" id="L6"><span class="tok-kw">const</span> testing = std.testing;</span>
-<span class="line" id="L7"><span class="tok-kw">const</span> Ascon = crypto.core.Ascon(.Big);</span>
+<span class="line" id="L7"><span class="tok-kw">const</span> Ascon = crypto.core.Ascon(.big);</span>
 <span class="line" id="L8"><span class="tok-kw">const</span> AuthenticationError = crypto.errors.AuthenticationError;</span>
 <span class="line" id="L9"></span>
 <span class="line" id="L10"><span class="tok-comment">/// ISAPv2 is an authenticated encryption system hardened against side channels and fault attacks.</span></span>
@@ -168,9 +169,9 @@
 <span class="line" id="L55">    <span class="tok-kw">fn</span> <span class="tok-fn">trickle</span>(k: [<span class="tok-number">16</span>]<span class="tok-type">u8</span>, iv: [<span class="tok-number">8</span>]<span class="tok-type">u8</span>, y: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, <span class="tok-kw">comptime</span> out_len: <span class="tok-type">usize</span>) [out_len]<span class="tok-type">u8</span> {</span>
 <span class="line" id="L56">        <span class="tok-kw">var</span> isap = IsapA128A{</span>
 <span class="line" id="L57">            .st = Ascon.initFromWords(.{</span>
-<span class="line" id="L58">                mem.readIntBig(<span class="tok-type">u64</span>, k[<span class="tok-number">0</span>..<span class="tok-number">8</span>]),</span>
-<span class="line" id="L59">                mem.readIntBig(<span class="tok-type">u64</span>, k[<span class="tok-number">8</span>..<span class="tok-number">16</span>]),</span>
-<span class="line" id="L60">                mem.readIntBig(<span class="tok-type">u64</span>, iv[<span class="tok-number">0</span>..<span class="tok-number">8</span>]),</span>
+<span class="line" id="L58">                mem.readInt(<span class="tok-type">u64</span>, k[<span class="tok-number">0</span>..<span class="tok-number">8</span>], .big),</span>
+<span class="line" id="L59">                mem.readInt(<span class="tok-type">u64</span>, k[<span class="tok-number">8</span>..<span class="tok-number">16</span>], .big),</span>
+<span class="line" id="L60">                mem.readInt(<span class="tok-type">u64</span>, iv[<span class="tok-number">0</span>..<span class="tok-number">8</span>], .big),</span>
 <span class="line" id="L61">                <span class="tok-number">0</span>,</span>
 <span class="line" id="L62">                <span class="tok-number">0</span>,</span>
 <span class="line" id="L63">            }),</span>
@@ -198,9 +199,9 @@
 <span class="line" id="L85">    <span class="tok-kw">fn</span> <span class="tok-fn">mac</span>(c: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, ad: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, npub: [<span class="tok-number">16</span>]<span class="tok-type">u8</span>, key: [<span class="tok-number">16</span>]<span class="tok-type">u8</span>) [<span class="tok-number">16</span>]<span class="tok-type">u8</span> {</span>
 <span class="line" id="L86">        <span class="tok-kw">var</span> isap = IsapA128A{</span>
 <span class="line" id="L87">            .st = Ascon.initFromWords(.{</span>
-<span class="line" id="L88">                mem.readIntBig(<span class="tok-type">u64</span>, npub[<span class="tok-number">0</span>..<span class="tok-number">8</span>]),</span>
-<span class="line" id="L89">                mem.readIntBig(<span class="tok-type">u64</span>, npub[<span class="tok-number">8</span>..<span class="tok-number">16</span>]),</span>
-<span class="line" id="L90">                mem.readIntBig(<span class="tok-type">u64</span>, iv1[<span class="tok-number">0</span>..]),</span>
+<span class="line" id="L88">                mem.readInt(<span class="tok-type">u64</span>, npub[<span class="tok-number">0</span>..<span class="tok-number">8</span>], .big),</span>
+<span class="line" id="L89">                mem.readInt(<span class="tok-type">u64</span>, npub[<span class="tok-number">8</span>..<span class="tok-number">16</span>], .big),</span>
+<span class="line" id="L90">                mem.readInt(<span class="tok-type">u64</span>, iv1[<span class="tok-number">0</span>..], .big),</span>
 <span class="line" id="L91">                <span class="tok-number">0</span>,</span>
 <span class="line" id="L92">                <span class="tok-number">0</span>,</span>
 <span class="line" id="L93">            }),</span>
@@ -229,11 +230,11 @@
 <span class="line" id="L116">        <span class="tok-kw">const</span> nb = trickle(key, iv3, npub[<span class="tok-number">0</span>..], <span class="tok-number">24</span>);</span>
 <span class="line" id="L117">        <span class="tok-kw">var</span> isap = IsapA128A{</span>
 <span class="line" id="L118">            .st = Ascon.initFromWords(.{</span>
-<span class="line" id="L119">                mem.readIntBig(<span class="tok-type">u64</span>, nb[<span class="tok-number">0</span>..<span class="tok-number">8</span>]),</span>
-<span class="line" id="L120">                mem.readIntBig(<span class="tok-type">u64</span>, nb[<span class="tok-number">8</span>..<span class="tok-number">16</span>]),</span>
-<span class="line" id="L121">                mem.readIntBig(<span class="tok-type">u64</span>, nb[<span class="tok-number">16</span>..<span class="tok-number">24</span>]),</span>
-<span class="line" id="L122">                mem.readIntBig(<span class="tok-type">u64</span>, npub[<span class="tok-number">0</span>..<span class="tok-number">8</span>]),</span>
-<span class="line" id="L123">                mem.readIntBig(<span class="tok-type">u64</span>, npub[<span class="tok-number">8</span>..<span class="tok-number">16</span>]),</span>
+<span class="line" id="L119">                mem.readInt(<span class="tok-type">u64</span>, nb[<span class="tok-number">0</span>..<span class="tok-number">8</span>], .big),</span>
+<span class="line" id="L120">                mem.readInt(<span class="tok-type">u64</span>, nb[<span class="tok-number">8</span>..<span class="tok-number">16</span>], .big),</span>
+<span class="line" id="L121">                mem.readInt(<span class="tok-type">u64</span>, nb[<span class="tok-number">16</span>..<span class="tok-number">24</span>], .big),</span>
+<span class="line" id="L122">                mem.readInt(<span class="tok-type">u64</span>, npub[<span class="tok-number">0</span>..<span class="tok-number">8</span>], .big),</span>
+<span class="line" id="L123">                mem.readInt(<span class="tok-type">u64</span>, npub[<span class="tok-number">8</span>..<span class="tok-number">16</span>], .big),</span>
 <span class="line" id="L124">            }),</span>
 <span class="line" id="L125">        };</span>
 <span class="line" id="L126">        isap.st.permuteR(<span class="tok-number">6</span>);</span>
@@ -260,30 +261,40 @@
 <span class="line" id="L147">        tag.* = mac(c, ad, npub, key);</span>
 <span class="line" id="L148">    }</span>
 <span class="line" id="L149"></span>
-<span class="line" id="L150">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">decrypt</span>(m: []<span class="tok-type">u8</span>, c: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, tag: [tag_length]<span class="tok-type">u8</span>, ad: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, npub: [nonce_length]<span class="tok-type">u8</span>, key: [key_length]<span class="tok-type">u8</span>) AuthenticationError!<span class="tok-type">void</span> {</span>
-<span class="line" id="L151">        <span class="tok-kw">var</span> computed_tag = mac(c, ad, npub, key);</span>
-<span class="line" id="L152">        <span class="tok-kw">const</span> res = crypto.utils.timingSafeEql([tag_length]<span class="tok-type">u8</span>, computed_tag, tag);</span>
-<span class="line" id="L153">        crypto.utils.secureZero(<span class="tok-type">u8</span>, &amp;computed_tag);</span>
-<span class="line" id="L154">        <span class="tok-kw">if</span> (!res) {</span>
-<span class="line" id="L155">            <span class="tok-kw">return</span> <span class="tok-kw">error</span>.AuthenticationFailed;</span>
-<span class="line" id="L156">        }</span>
-<span class="line" id="L157">        xor(m, c, npub, key);</span>
-<span class="line" id="L158">    }</span>
-<span class="line" id="L159">};</span>
-<span class="line" id="L160"></span>
-<span class="line" id="L161"><span class="tok-kw">test</span> <span class="tok-str">&quot;ISAP&quot;</span> {</span>
-<span class="line" id="L162">    <span class="tok-kw">const</span> k = [_]<span class="tok-type">u8</span>{<span class="tok-number">1</span>} ** <span class="tok-number">16</span>;</span>
-<span class="line" id="L163">    <span class="tok-kw">const</span> n = [_]<span class="tok-type">u8</span>{<span class="tok-number">2</span>} ** <span class="tok-number">16</span>;</span>
-<span class="line" id="L164">    <span class="tok-kw">var</span> tag: [<span class="tok-number">16</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
-<span class="line" id="L165">    <span class="tok-kw">const</span> ad = <span class="tok-str">&quot;ad&quot;</span>;</span>
-<span class="line" id="L166">    <span class="tok-kw">var</span> msg = <span class="tok-str">&quot;test&quot;</span>;</span>
-<span class="line" id="L167">    <span class="tok-kw">var</span> c: [msg.len]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
-<span class="line" id="L168">    IsapA128A.encrypt(c[<span class="tok-number">0</span>..], &amp;tag, msg[<span class="tok-number">0</span>..], ad, n, k);</span>
-<span class="line" id="L169">    <span class="tok-kw">try</span> testing.expect(mem.eql(<span class="tok-type">u8</span>, &amp;[_]<span class="tok-type">u8</span>{ <span class="tok-number">0x8f</span>, <span class="tok-number">0x68</span>, <span class="tok-number">0x03</span>, <span class="tok-number">0x8d</span> }, c[<span class="tok-number">0</span>..]));</span>
-<span class="line" id="L170">    <span class="tok-kw">try</span> testing.expect(mem.eql(<span class="tok-type">u8</span>, &amp;[_]<span class="tok-type">u8</span>{ <span class="tok-number">0x6c</span>, <span class="tok-number">0x25</span>, <span class="tok-number">0xe8</span>, <span class="tok-number">0xe2</span>, <span class="tok-number">0xe1</span>, <span class="tok-number">0x1f</span>, <span class="tok-number">0x38</span>, <span class="tok-number">0xe9</span>, <span class="tok-number">0x80</span>, <span class="tok-number">0x75</span>, <span class="tok-number">0xde</span>, <span class="tok-number">0xd5</span>, <span class="tok-number">0x2d</span>, <span class="tok-number">0xb2</span>, <span class="tok-number">0x31</span>, <span class="tok-number">0x82</span> }, tag[<span class="tok-number">0</span>..]));</span>
-<span class="line" id="L171">    <span class="tok-kw">try</span> IsapA128A.decrypt(c[<span class="tok-number">0</span>..], c[<span class="tok-number">0</span>..], tag, ad, n, k);</span>
-<span class="line" id="L172">    <span class="tok-kw">try</span> testing.expect(mem.eql(<span class="tok-type">u8</span>, msg, c[<span class="tok-number">0</span>..]));</span>
-<span class="line" id="L173">}</span>
-<span class="line" id="L174"></span>
+<span class="line" id="L150">    <span class="tok-comment">/// `m`: Message</span></span>
+<span class="line" id="L151">    <span class="tok-comment">/// `c`: Ciphertext</span></span>
+<span class="line" id="L152">    <span class="tok-comment">/// `tag`: Authentication tag</span></span>
+<span class="line" id="L153">    <span class="tok-comment">/// `ad`: Associated data</span></span>
+<span class="line" id="L154">    <span class="tok-comment">/// `npub`: Public nonce</span></span>
+<span class="line" id="L155">    <span class="tok-comment">/// `k`: Private key</span></span>
+<span class="line" id="L156">    <span class="tok-comment">/// Asserts `c.len == m.len`.</span></span>
+<span class="line" id="L157">    <span class="tok-comment">///</span></span>
+<span class="line" id="L158">    <span class="tok-comment">/// Contents of `m` are undefined if an error is returned.</span></span>
+<span class="line" id="L159">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">decrypt</span>(m: []<span class="tok-type">u8</span>, c: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, tag: [tag_length]<span class="tok-type">u8</span>, ad: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, npub: [nonce_length]<span class="tok-type">u8</span>, key: [key_length]<span class="tok-type">u8</span>) AuthenticationError!<span class="tok-type">void</span> {</span>
+<span class="line" id="L160">        <span class="tok-kw">var</span> computed_tag = mac(c, ad, npub, key);</span>
+<span class="line" id="L161">        <span class="tok-kw">const</span> verify = crypto.utils.timingSafeEql([tag_length]<span class="tok-type">u8</span>, computed_tag, tag);</span>
+<span class="line" id="L162">        <span class="tok-kw">if</span> (!verify) {</span>
+<span class="line" id="L163">            crypto.utils.secureZero(<span class="tok-type">u8</span>, &amp;computed_tag);</span>
+<span class="line" id="L164">            <span class="tok-builtin">@memset</span>(m, <span class="tok-null">undefined</span>);</span>
+<span class="line" id="L165">            <span class="tok-kw">return</span> <span class="tok-kw">error</span>.AuthenticationFailed;</span>
+<span class="line" id="L166">        }</span>
+<span class="line" id="L167">        xor(m, c, npub, key);</span>
+<span class="line" id="L168">    }</span>
+<span class="line" id="L169">};</span>
+<span class="line" id="L170"></span>
+<span class="line" id="L171"><span class="tok-kw">test</span> <span class="tok-str">&quot;ISAP&quot;</span> {</span>
+<span class="line" id="L172">    <span class="tok-kw">const</span> k = [_]<span class="tok-type">u8</span>{<span class="tok-number">1</span>} ** <span class="tok-number">16</span>;</span>
+<span class="line" id="L173">    <span class="tok-kw">const</span> n = [_]<span class="tok-type">u8</span>{<span class="tok-number">2</span>} ** <span class="tok-number">16</span>;</span>
+<span class="line" id="L174">    <span class="tok-kw">var</span> tag: [<span class="tok-number">16</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L175">    <span class="tok-kw">const</span> ad = <span class="tok-str">&quot;ad&quot;</span>;</span>
+<span class="line" id="L176">    <span class="tok-kw">var</span> msg = <span class="tok-str">&quot;test&quot;</span>;</span>
+<span class="line" id="L177">    <span class="tok-kw">var</span> c: [msg.len]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L178">    IsapA128A.encrypt(c[<span class="tok-number">0</span>..], &amp;tag, msg[<span class="tok-number">0</span>..], ad, n, k);</span>
+<span class="line" id="L179">    <span class="tok-kw">try</span> testing.expect(mem.eql(<span class="tok-type">u8</span>, &amp;[_]<span class="tok-type">u8</span>{ <span class="tok-number">0x8f</span>, <span class="tok-number">0x68</span>, <span class="tok-number">0x03</span>, <span class="tok-number">0x8d</span> }, c[<span class="tok-number">0</span>..]));</span>
+<span class="line" id="L180">    <span class="tok-kw">try</span> testing.expect(mem.eql(<span class="tok-type">u8</span>, &amp;[_]<span class="tok-type">u8</span>{ <span class="tok-number">0x6c</span>, <span class="tok-number">0x25</span>, <span class="tok-number">0xe8</span>, <span class="tok-number">0xe2</span>, <span class="tok-number">0xe1</span>, <span class="tok-number">0x1f</span>, <span class="tok-number">0x38</span>, <span class="tok-number">0xe9</span>, <span class="tok-number">0x80</span>, <span class="tok-number">0x75</span>, <span class="tok-number">0xde</span>, <span class="tok-number">0xd5</span>, <span class="tok-number">0x2d</span>, <span class="tok-number">0xb2</span>, <span class="tok-number">0x31</span>, <span class="tok-number">0x82</span> }, tag[<span class="tok-number">0</span>..]));</span>
+<span class="line" id="L181">    <span class="tok-kw">try</span> IsapA128A.decrypt(c[<span class="tok-number">0</span>..], c[<span class="tok-number">0</span>..], tag, ad, n, k);</span>
+<span class="line" id="L182">    <span class="tok-kw">try</span> testing.expect(mem.eql(<span class="tok-type">u8</span>, msg, c[<span class="tok-number">0</span>..]));</span>
+<span class="line" id="L183">}</span>
+<span class="line" id="L184"></span>
 </code></pre></body>
 </html>

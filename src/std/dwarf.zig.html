@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>dwarf.zig - source view</title>
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPNJREFUeNpi/P//PwMlgOXHUjly9E0G4hwgZmQiQZMqEK8H4v9QzUEgQSaoADK+zhH9iAGL+C0gDoAaNg9mGLoLfgA1awK9hS9gzgJxA9RQBmQDrgMxJzRMGKE4HYj/Ial5A8QmQLwCJoBsgBYW2+TR1ChDaWt4LOBxKsi/VUh8XiD+gq4IVyzwQAMJBoKwacZlAB8Qf0bi96IZhtOAe1D6LpqaEiz6rmEzQAeIzwGxCJpieFqApo/vQKyJboAaEBsAsSEupwI1MwKjGBTVHOhegMX5UajYRqiBjMgYmj400cVh0XgTiKdC0zhJgJHS7AwQYABm9EAdCKrEfAAAAABJRU5ErkJggg=="/>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
     <style>
       body{
         font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
@@ -116,11 +117,11 @@
 <span class="line" id="L3"><span class="tok-kw">const</span> debug = std.debug;</span>
 <span class="line" id="L4"><span class="tok-kw">const</span> fs = std.fs;</span>
 <span class="line" id="L5"><span class="tok-kw">const</span> io = std.io;</span>
-<span class="line" id="L6"><span class="tok-kw">const</span> os = std.os;</span>
-<span class="line" id="L7"><span class="tok-kw">const</span> mem = std.mem;</span>
-<span class="line" id="L8"><span class="tok-kw">const</span> math = std.math;</span>
-<span class="line" id="L9"><span class="tok-kw">const</span> leb = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;leb128.zig&quot;</span>);</span>
-<span class="line" id="L10"><span class="tok-kw">const</span> assert = std.debug.assert;</span>
+<span class="line" id="L6"><span class="tok-kw">const</span> mem = std.mem;</span>
+<span class="line" id="L7"><span class="tok-kw">const</span> math = std.math;</span>
+<span class="line" id="L8"><span class="tok-kw">const</span> leb = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;leb128.zig&quot;</span>);</span>
+<span class="line" id="L9"><span class="tok-kw">const</span> assert = std.debug.assert;</span>
+<span class="line" id="L10"><span class="tok-kw">const</span> native_endian = builtin.cpu.arch.endian();</span>
 <span class="line" id="L11"></span>
 <span class="line" id="L12"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> TAG = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;dwarf/TAG.zig&quot;</span>);</span>
 <span class="line" id="L13"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> AT = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;dwarf/AT.zig&quot;</span>);</span>
@@ -1901,7 +1902,7 @@
 <span class="line" id="L1742">        context.cfa = <span class="tok-kw">switch</span> (row.cfa.rule) {</span>
 <span class="line" id="L1743">            .val_offset =&gt; |offset| blk: {</span>
 <span class="line" id="L1744">                <span class="tok-kw">const</span> register = row.cfa.register <span class="tok-kw">orelse</span> <span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidCFARule;</span>
-<span class="line" id="L1745">                <span class="tok-kw">const</span> value = mem.readIntSliceNative(<span class="tok-type">usize</span>, <span class="tok-kw">try</span> abi.regBytes(context.thread_context, register, context.reg_context));</span>
+<span class="line" id="L1745">                <span class="tok-kw">const</span> value = mem.readInt(<span class="tok-type">usize</span>, (<span class="tok-kw">try</span> abi.regBytes(context.thread_context, register, context.reg_context))[<span class="tok-number">0</span>..<span class="tok-builtin">@sizeOf</span>(<span class="tok-type">usize</span>)], native_endian);</span>
 <span class="line" id="L1746">                <span class="tok-kw">break</span> :blk <span class="tok-kw">try</span> call_frame.applyOffset(value, offset);</span>
 <span class="line" id="L1747">            },</span>
 <span class="line" id="L1748">            .expression =&gt; |expression| blk: {</span>
@@ -1979,11 +1980,11 @@
 <span class="line" id="L1815">        }</span>
 <span class="line" id="L1816"></span>
 <span class="line" id="L1817">        <span class="tok-kw">if</span> (has_return_address) {</span>
-<span class="line" id="L1818">            context.pc = abi.stripInstructionPtrAuthCode(mem.readIntSliceNative(<span class="tok-type">usize</span>, <span class="tok-kw">try</span> abi.regBytes(</span>
+<span class="line" id="L1818">            context.pc = abi.stripInstructionPtrAuthCode(mem.readInt(<span class="tok-type">usize</span>, (<span class="tok-kw">try</span> abi.regBytes(</span>
 <span class="line" id="L1819">                context.thread_context,</span>
 <span class="line" id="L1820">                cie.return_address_register,</span>
 <span class="line" id="L1821">                context.reg_context,</span>
-<span class="line" id="L1822">            )));</span>
+<span class="line" id="L1822">            ))[<span class="tok-number">0</span>..<span class="tok-builtin">@sizeOf</span>(<span class="tok-type">usize</span>)], native_endian));</span>
 <span class="line" id="L1823">        } <span class="tok-kw">else</span> {</span>
 <span class="line" id="L1824">            context.pc = <span class="tok-number">0</span>;</span>
 <span class="line" id="L1825">        }</span>

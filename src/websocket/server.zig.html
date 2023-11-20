@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>server.zig - source view</title>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
+    <style>
+      body{
+        font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      pre > code {
+        display: block;
+        overflow: auto;
+        line-height: normal;
+        margin: 0em;
+      }
+      .tok-kw {
+          color: #333;
+          font-weight: bold;
+      }
+      .tok-str {
+          color: #d14;
+      }
+      .tok-builtin {
+          color: #005C7A;
+      }
+      .tok-comment {
+          color: #545454;
+          font-style: italic;
+      }
+      .tok-fn {
+          color: #900;
+          font-weight: bold;
+      }
+      .tok-null {
+          color: #005C5C;
+      }
+      .tok-number {
+          color: #005C5C;
+      }
+      .tok-type {
+          color: #458;
+          font-weight: bold;
+      }
+      pre {
+        counter-reset: line;
+      }
+      pre .line:before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        padding-right: 1em;
+        width: 2em;
+        text-align: right;
+        color: #999;
+      }
+      
+      .line {
+        width: 100%;
+        display: inline-block;
+      }
+      .line:target {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        background: #fafafa;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body{
+            background:#222;
+            color: #ccc;
+        }
+        pre > code {
+            color: #ccc;
+            background: #222;
+            border: unset;
+        }
+        .line:target {
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+            background: #333;
+        }
+        .tok-kw {
+            color: #eee;
+        }
+        .tok-str {
+            color: #2e5;
+        }
+        .tok-builtin {
+            color: #ff894c;
+        }
+        .tok-comment {
+            color: #aa7;
+        }
+        .tok-fn {
+            color: #B1A0F8;
+        }
+        .tok-null {
+            color: #ff8080;
+        }
+        .tok-number {
+            color: #ff8080;
+        }
+        .tok-type {
+            color: #68f;
+        }
+      }
+    </style>
+</head>
+<body>
+<pre><code><span class="line" id="L1"><span class="tok-kw">const</span> std = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std&quot;</span>);</span>
+<span class="line" id="L2"><span class="tok-kw">const</span> lib = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;lib.zig&quot;</span>);</span>
+<span class="line" id="L3"></span>
+<span class="line" id="L4"><span class="tok-kw">const</span> HandshakePool = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;handshake.zig&quot;</span>).Pool;</span>
+<span class="line" id="L5"></span>
+<span class="line" id="L6"><span class="tok-kw">const</span> buffer = lib.buffer;</span>
+<span class="line" id="L7"><span class="tok-kw">const</span> framing = lib.framing;</span>
+<span class="line" id="L8"><span class="tok-kw">const</span> Reader = lib.Reader;</span>
+<span class="line" id="L9"><span class="tok-kw">const</span> NetConn = lib.NetConn;</span>
+<span class="line" id="L10"><span class="tok-kw">const</span> OpCode = framing.OpCode;</span>
+<span class="line" id="L11"></span>
+<span class="line" id="L12"><span class="tok-kw">const</span> os = std.os;</span>
+<span class="line" id="L13"><span class="tok-kw">const</span> net = std.net;</span>
+<span class="line" id="L14"><span class="tok-kw">const</span> Loop = std.event.Loop;</span>
+<span class="line" id="L15"><span class="tok-kw">const</span> log = std.log.scoped(.websocket);</span>
+<span class="line" id="L16"></span>
+<span class="line" id="L17"><span class="tok-kw">const</span> Allocator = std.mem.Allocator;</span>
+<span class="line" id="L18"></span>
+<span class="line" id="L19"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> Config = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L20">	port: <span class="tok-type">u16</span> = <span class="tok-number">9223</span>,</span>
+<span class="line" id="L21">	max_size: <span class="tok-type">usize</span> = <span class="tok-number">65536</span>,</span>
+<span class="line" id="L22">	max_headers: <span class="tok-type">usize</span> = <span class="tok-number">0</span>,</span>
+<span class="line" id="L23">	buffer_size: <span class="tok-type">usize</span> = <span class="tok-number">4096</span>,</span>
+<span class="line" id="L24">	address: []<span class="tok-kw">const</span> <span class="tok-type">u8</span> = <span class="tok-str">&quot;127.0.0.1&quot;</span>,</span>
+<span class="line" id="L25">	handshake_max_size: <span class="tok-type">usize</span> = <span class="tok-number">1024</span>,</span>
+<span class="line" id="L26">	handshake_pool_count: <span class="tok-type">usize</span> = <span class="tok-number">50</span>,</span>
+<span class="line" id="L27">	handshake_timeout_ms: ?<span class="tok-type">u32</span> = <span class="tok-number">10_000</span>,</span>
+<span class="line" id="L28">	handle_ping: <span class="tok-type">bool</span> = <span class="tok-null">false</span>,</span>
+<span class="line" id="L29">	handle_pong: <span class="tok-type">bool</span> = <span class="tok-null">false</span>,</span>
+<span class="line" id="L30">	handle_close: <span class="tok-type">bool</span> = <span class="tok-null">false</span>,</span>
+<span class="line" id="L31">	large_buffer_pool_count: <span class="tok-type">u16</span> = <span class="tok-number">32</span>,</span>
+<span class="line" id="L32">	large_buffer_size: <span class="tok-type">usize</span> = <span class="tok-number">32768</span>,</span>
+<span class="line" id="L33">};</span>
+<span class="line" id="L34"></span>
+<span class="line" id="L35"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">listen</span>(<span class="tok-kw">comptime</span> H: <span class="tok-type">type</span>, allocator: Allocator, context: <span class="tok-kw">anytype</span>, config: Config) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L36">	<span class="tok-kw">var</span> server = net.StreamServer.init(.{ .reuse_address = <span class="tok-null">true</span> });</span>
+<span class="line" id="L37">	<span class="tok-kw">defer</span> server.deinit();</span>
+<span class="line" id="L38"></span>
+<span class="line" id="L39">	<span class="tok-kw">var</span> buffer_pool = <span class="tok-kw">try</span> buffer.Pool.init(allocator, config.large_buffer_pool_count, config.large_buffer_size);</span>
+<span class="line" id="L40">	<span class="tok-kw">defer</span> buffer_pool.deinit();</span>
+<span class="line" id="L41"></span>
+<span class="line" id="L42">	<span class="tok-kw">var</span> bp = buffer.Provider.init(allocator, &amp;buffer_pool, config.large_buffer_size);</span>
+<span class="line" id="L43"></span>
+<span class="line" id="L44">	<span class="tok-kw">var</span> hp = <span class="tok-kw">try</span> HandshakePool.init(allocator, config.handshake_pool_count, config.handshake_max_size, config.max_headers);</span>
+<span class="line" id="L45">	<span class="tok-kw">defer</span> hp.deinit();</span>
+<span class="line" id="L46"></span>
+<span class="line" id="L47">	<span class="tok-kw">try</span> server.listen(net.Address.parseIp(config.address, config.port) <span class="tok-kw">catch</span> <span class="tok-kw">unreachable</span>);</span>
+<span class="line" id="L48"></span>
+<span class="line" id="L49">	<span class="tok-comment">// TODO: Broken on darwin:</span>
+</span>
+<span class="line" id="L50">	<span class="tok-comment">// https://github.com/ziglang/zig/issues/17260</span>
+</span>
+<span class="line" id="L51">	<span class="tok-comment">// if (@hasDecl(os.TCP, &quot;NODELAY&quot;)) {</span>
+</span>
+<span class="line" id="L52">	<span class="tok-comment">// 	try os.setsockopt(socket.sockfd.?, os.IPPROTO.TCP, os.TCP.NODELAY, &amp;std.mem.toBytes(@as(c_int, 1)));</span>
+</span>
+<span class="line" id="L53">	<span class="tok-comment">// }</span>
+</span>
+<span class="line" id="L54">	<span class="tok-kw">try</span> os.setsockopt(server.sockfd.?, os.IPPROTO.TCP, <span class="tok-number">1</span>, &amp;std.mem.toBytes(<span class="tok-builtin">@as</span>(<span class="tok-type">c_int</span>, <span class="tok-number">1</span>)));</span>
+<span class="line" id="L55"></span>
+<span class="line" id="L56">	<span class="tok-kw">while</span> (<span class="tok-null">true</span>) {</span>
+<span class="line" id="L57">		<span class="tok-kw">if</span> (server.accept()) |conn| {</span>
+<span class="line" id="L58">			<span class="tok-kw">const</span> args = .{H, context, conn, &amp;config, &amp;hp, &amp;bp};</span>
+<span class="line" id="L59">			<span class="tok-kw">if</span> (<span class="tok-kw">comptime</span> std.io.is_async) {</span>
+<span class="line" id="L60">				<span class="tok-kw">try</span> Loop.instance.?.runDetached(allocator, clientLoop, args);</span>
+<span class="line" id="L61">			} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L62">				<span class="tok-kw">const</span> thread = <span class="tok-kw">try</span> std.Thread.spawn(.{}, clientLoop, args);</span>
+<span class="line" id="L63">				thread.detach();</span>
+<span class="line" id="L64">			}</span>
+<span class="line" id="L65">		} <span class="tok-kw">else</span> |err| {</span>
+<span class="line" id="L66">			log.err(<span class="tok-str">&quot;failed to accept connection {}&quot;</span>, .{err});</span>
+<span class="line" id="L67">		}</span>
+<span class="line" id="L68">	}</span>
+<span class="line" id="L69">}</span>
+<span class="line" id="L70"></span>
+<span class="line" id="L71"><span class="tok-kw">fn</span> <span class="tok-fn">clientLoop</span>(<span class="tok-kw">comptime</span> H: <span class="tok-type">type</span>, context: <span class="tok-kw">anytype</span>, net_conn: NetConn, config: *<span class="tok-kw">const</span> Config, hp: *HandshakePool, bp: *buffer.Provider) <span class="tok-type">void</span> {</span>
+<span class="line" id="L72">	std.os.maybeIgnoreSigpipe();</span>
+<span class="line" id="L73"></span>
+<span class="line" id="L74">	<span class="tok-kw">const</span> Handshake = lib.Handshake;</span>
+<span class="line" id="L75">	<span class="tok-kw">const</span> stream = net_conn.stream;</span>
+<span class="line" id="L76">	<span class="tok-kw">defer</span> stream.close();</span>
+<span class="line" id="L77"></span>
+<span class="line" id="L78">	<span class="tok-kw">var</span> handler: H = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L79">	<span class="tok-kw">var</span> conn = Conn{</span>
+<span class="line" id="L80">		.stream = stream,</span>
+<span class="line" id="L81">		._handle_ping = config.handle_ping,</span>
+<span class="line" id="L82">		._handle_pong = config.handle_pong,</span>
+<span class="line" id="L83">		._handle_close = config.handle_close,</span>
+<span class="line" id="L84">	};</span>
+<span class="line" id="L85"></span>
+<span class="line" id="L86">	{</span>
+<span class="line" id="L87">		<span class="tok-comment">// This block represents handshake_state's lifetime</span>
+</span>
+<span class="line" id="L88">		<span class="tok-kw">var</span> handshake_state = hp.acquire() <span class="tok-kw">catch</span> |err| {</span>
+<span class="line" id="L89">			log.err(<span class="tok-str">&quot;Failed to get a handshake state from the handshake pool, connection is being closed. The error was: {}&quot;</span>, .{err});</span>
+<span class="line" id="L90">			<span class="tok-kw">return</span>;</span>
+<span class="line" id="L91">		};</span>
+<span class="line" id="L92">		<span class="tok-kw">defer</span> hp.release(handshake_state);</span>
+<span class="line" id="L93"></span>
+<span class="line" id="L94">		<span class="tok-kw">const</span> request = readRequest(stream, handshake_state.buffer, config.handshake_timeout_ms) <span class="tok-kw">catch</span> |err| {</span>
+<span class="line" id="L95">			<span class="tok-kw">const</span> s = <span class="tok-kw">switch</span> (err) {</span>
+<span class="line" id="L96">				<span class="tok-kw">error</span>.Invalid =&gt; <span class="tok-str">&quot;HTTP/1.1 400 Invalid\r\nerror: invalid\r\ncontent-length: 0\r\n\r\n&quot;</span>,</span>
+<span class="line" id="L97">				<span class="tok-kw">error</span>.TooLarge =&gt; <span class="tok-str">&quot;HTTP/1.1 400 Invalid\r\nerror: too large\r\ncontent-length: 0\r\n\r\n&quot;</span>,</span>
+<span class="line" id="L98">				<span class="tok-kw">error</span>.Timeout, <span class="tok-kw">error</span>.WouldBlock =&gt; <span class="tok-str">&quot;HTTP/1.1 400 Invalid\r\nerror: timeout\r\ncontent-length: 0\r\n\r\n&quot;</span>,</span>
+<span class="line" id="L99">				<span class="tok-kw">else</span> =&gt; <span class="tok-str">&quot;HTTP/1.1 400 Invalid\r\nerror: unknown\r\ncontent-length: 0\r\n\r\n&quot;</span>,</span>
+<span class="line" id="L100">			};</span>
+<span class="line" id="L101">			stream.writeAll(s) <span class="tok-kw">catch</span> {};</span>
+<span class="line" id="L102">			<span class="tok-kw">return</span>;</span>
+<span class="line" id="L103">		};</span>
+<span class="line" id="L104"></span>
+<span class="line" id="L105">		<span class="tok-kw">const</span> h = Handshake.parse(request, &amp;handshake_state.headers) <span class="tok-kw">catch</span> |err| {</span>
+<span class="line" id="L106">			Handshake.close(stream, err) <span class="tok-kw">catch</span> {};</span>
+<span class="line" id="L107">			<span class="tok-kw">return</span>;</span>
+<span class="line" id="L108">		};</span>
+<span class="line" id="L109"></span>
+<span class="line" id="L110">		handler = H.init(h, &amp;conn, context) <span class="tok-kw">catch</span> |err| {</span>
+<span class="line" id="L111">			Handshake.close(stream, err) <span class="tok-kw">catch</span> {};</span>
+<span class="line" id="L112">			<span class="tok-kw">return</span>;</span>
+<span class="line" id="L113">		};</span>
+<span class="line" id="L114"></span>
+<span class="line" id="L115">		<span class="tok-comment">// handshake_buffer (via `h` which references it), must be valid up until</span>
+</span>
+<span class="line" id="L116">		<span class="tok-comment">// this call to reply</span>
+</span>
+<span class="line" id="L117">		h.reply(stream) <span class="tok-kw">catch</span> {</span>
+<span class="line" id="L118">			handler.close();</span>
+<span class="line" id="L119">			<span class="tok-kw">return</span>;</span>
+<span class="line" id="L120">		};</span>
+<span class="line" id="L121">	}</span>
+<span class="line" id="L122"></span>
+<span class="line" id="L123">	<span class="tok-kw">defer</span> handler.close();</span>
+<span class="line" id="L124">	<span class="tok-kw">if</span> (<span class="tok-kw">comptime</span> std.meta.trait.hasFn(<span class="tok-str">&quot;afterInit&quot;</span>)(H)) {</span>
+<span class="line" id="L125">		handler.afterInit() <span class="tok-kw">catch</span> <span class="tok-kw">return</span>;</span>
+<span class="line" id="L126">	}</span>
+<span class="line" id="L127"></span>
+<span class="line" id="L128">	<span class="tok-kw">var</span> reader = Reader.init(config.buffer_size, config.max_size, bp) <span class="tok-kw">catch</span> |err| {</span>
+<span class="line" id="L129">		log.err(<span class="tok-str">&quot;Failed to create a Reader, connection is being closed. The error was: {}&quot;</span>, .{err});</span>
+<span class="line" id="L130">		<span class="tok-kw">return</span>;</span>
+<span class="line" id="L131">	};</span>
+<span class="line" id="L132">	<span class="tok-kw">defer</span> reader.deinit();</span>
+<span class="line" id="L133">	conn.readLoop(*H, &amp;handler, &amp;reader) <span class="tok-kw">catch</span> {};</span>
+<span class="line" id="L134">}</span>
+<span class="line" id="L135"></span>
+<span class="line" id="L136"><span class="tok-kw">const</span> EMPTY_PONG = ([<span class="tok-number">2</span>]<span class="tok-type">u8</span>{ <span class="tok-builtin">@intFromEnum</span>(OpCode.pong), <span class="tok-number">0</span> })[<span class="tok-number">0</span>..];</span>
+<span class="line" id="L137"><span class="tok-comment">// CLOSE, 2 length, code</span>
+</span>
+<span class="line" id="L138"><span class="tok-kw">const</span> CLOSE_NORMAL = ([_]<span class="tok-type">u8</span>{ <span class="tok-builtin">@intFromEnum</span>(OpCode.close), <span class="tok-number">2</span>, <span class="tok-number">3</span>, <span class="tok-number">232</span> })[<span class="tok-number">0</span>..]; <span class="tok-comment">// code: 1000</span>
+</span>
+<span class="line" id="L139"><span class="tok-kw">const</span> CLOSE_PROTOCOL_ERROR = ([_]<span class="tok-type">u8</span>{ <span class="tok-builtin">@intFromEnum</span>(OpCode.close), <span class="tok-number">2</span>, <span class="tok-number">3</span>, <span class="tok-number">234</span> })[<span class="tok-number">0</span>..]; <span class="tok-comment">//code: 1002</span>
+</span>
+<span class="line" id="L140"></span>
+<span class="line" id="L141"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> Conn = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L142">	stream: lib.Stream,</span>
+<span class="line" id="L143">	closed: <span class="tok-type">bool</span> = <span class="tok-null">false</span>,</span>
+<span class="line" id="L144">	_handle_pong: <span class="tok-type">bool</span> = <span class="tok-null">false</span>,</span>
+<span class="line" id="L145">	_handle_ping: <span class="tok-type">bool</span> = <span class="tok-null">false</span>,</span>
+<span class="line" id="L146">	_handle_close: <span class="tok-type">bool</span> = <span class="tok-null">false</span>,</span>
+<span class="line" id="L147"></span>
+<span class="line" id="L148">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writeBin</span>(self: Conn, data: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L149">		<span class="tok-kw">return</span> self.writeFrame(.binary, data);</span>
+<span class="line" id="L150">	}</span>
+<span class="line" id="L151"></span>
+<span class="line" id="L152">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writeText</span>(self: Conn, data: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L153">		<span class="tok-kw">return</span> self.writeFrame(.text, data);</span>
+<span class="line" id="L154">	}</span>
+<span class="line" id="L155"></span>
+<span class="line" id="L156">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">write</span>(self: Conn, data: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L157">		<span class="tok-kw">return</span> self.writeFrame(.text, data);</span>
+<span class="line" id="L158">	}</span>
+<span class="line" id="L159"></span>
+<span class="line" id="L160">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writePing</span>(self: *Conn, data: []<span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L161">		<span class="tok-kw">return</span> self.writeFrame(.ping, data);</span>
+<span class="line" id="L162">	}</span>
+<span class="line" id="L163"></span>
+<span class="line" id="L164">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writePong</span>(self: *Conn, data: []<span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L165">		<span class="tok-kw">return</span> self.writeFrame(.pong, data);</span>
+<span class="line" id="L166">	}</span>
+<span class="line" id="L167"></span>
+<span class="line" id="L168">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writeClose</span>(self: *Conn) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L169">		<span class="tok-kw">return</span> self.stream.writeAll(CLOSE_NORMAL);</span>
+<span class="line" id="L170">	}</span>
+<span class="line" id="L171"></span>
+<span class="line" id="L172">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writeCloseWithCode</span>(self: *Conn, code: <span class="tok-type">u16</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L173">		<span class="tok-kw">var</span> buf: [<span class="tok-number">2</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L174">		std.mem.writeInt(<span class="tok-type">u16</span>, &amp;buf, code, .Big);</span>
+<span class="line" id="L175">		<span class="tok-kw">return</span> self.writeFrame(.close, &amp;buf);</span>
+<span class="line" id="L176">	}</span>
+<span class="line" id="L177"></span>
+<span class="line" id="L178">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writeFrame</span>(self: Conn, op_code: OpCode, data: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L179">		<span class="tok-kw">const</span> stream = self.stream;</span>
+<span class="line" id="L180">		<span class="tok-kw">const</span> l = data.len;</span>
+<span class="line" id="L181"></span>
+<span class="line" id="L182">		<span class="tok-comment">// maximum possible prefix length. op_code + length_type + 8byte length</span>
+</span>
+<span class="line" id="L183">		<span class="tok-kw">var</span> buf: [<span class="tok-number">10</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L184">		buf[<span class="tok-number">0</span>] = <span class="tok-builtin">@intFromEnum</span>(op_code);</span>
+<span class="line" id="L185"></span>
+<span class="line" id="L186">		<span class="tok-kw">if</span> (l &lt;= <span class="tok-number">125</span>) {</span>
+<span class="line" id="L187">			buf[<span class="tok-number">1</span>] = <span class="tok-builtin">@intCast</span>(l);</span>
+<span class="line" id="L188">			<span class="tok-kw">try</span> stream.writeAll(buf[<span class="tok-number">0</span>..<span class="tok-number">2</span>]);</span>
+<span class="line" id="L189">		} <span class="tok-kw">else</span> <span class="tok-kw">if</span> (l &lt; <span class="tok-number">65536</span>) {</span>
+<span class="line" id="L190">			buf[<span class="tok-number">1</span>] = <span class="tok-number">126</span>;</span>
+<span class="line" id="L191">			buf[<span class="tok-number">2</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">8</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L192">			buf[<span class="tok-number">3</span>] = <span class="tok-builtin">@intCast</span>(l &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L193">			<span class="tok-kw">try</span> stream.writeAll(buf[<span class="tok-number">0</span>..<span class="tok-number">4</span>]);</span>
+<span class="line" id="L194">		} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L195">			buf[<span class="tok-number">1</span>] = <span class="tok-number">127</span>;</span>
+<span class="line" id="L196">			buf[<span class="tok-number">2</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">56</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L197">			buf[<span class="tok-number">3</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">48</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L198">			buf[<span class="tok-number">4</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">40</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L199">			buf[<span class="tok-number">5</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">32</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L200">			buf[<span class="tok-number">6</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">24</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L201">			buf[<span class="tok-number">7</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">16</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L202">			buf[<span class="tok-number">8</span>] = <span class="tok-builtin">@intCast</span>((l &gt;&gt; <span class="tok-number">8</span>) &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L203">			buf[<span class="tok-number">9</span>] = <span class="tok-builtin">@intCast</span>(l &amp; <span class="tok-number">0xFF</span>);</span>
+<span class="line" id="L204">			<span class="tok-kw">try</span> stream.writeAll(buf[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L205">		}</span>
+<span class="line" id="L206">		<span class="tok-kw">if</span> (l &gt; <span class="tok-number">0</span>) {</span>
+<span class="line" id="L207">			<span class="tok-kw">try</span> stream.writeAll(data);</span>
+<span class="line" id="L208">		}</span>
+<span class="line" id="L209">	}</span>
+<span class="line" id="L210"></span>
+<span class="line" id="L211">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">writeFramed</span>(self: Conn, data: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L212">		<span class="tok-kw">try</span> self.steam.writeAll(data);</span>
+<span class="line" id="L213">	}</span>
+<span class="line" id="L214"></span>
+<span class="line" id="L215">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">close</span>(self: *Conn) <span class="tok-type">void</span> {</span>
+<span class="line" id="L216">		self.closed = <span class="tok-null">true</span>;</span>
+<span class="line" id="L217">	}</span>
+<span class="line" id="L218"></span>
+<span class="line" id="L219">	<span class="tok-kw">fn</span> <span class="tok-fn">readLoop</span>(self: *Conn, <span class="tok-kw">comptime</span> H: <span class="tok-type">type</span>, handler: H, reader: *Reader) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L220">		<span class="tok-kw">var</span> h = handler;</span>
+<span class="line" id="L221">		<span class="tok-kw">const</span> stream = self.stream;</span>
+<span class="line" id="L222">		<span class="tok-kw">const</span> handle_ping = self._handle_ping;</span>
+<span class="line" id="L223">		<span class="tok-kw">const</span> handle_pong = self._handle_pong;</span>
+<span class="line" id="L224">		<span class="tok-kw">const</span> handle_close = self._handle_close;</span>
+<span class="line" id="L225"></span>
+<span class="line" id="L226">		<span class="tok-kw">while</span> (<span class="tok-null">true</span>) {</span>
+<span class="line" id="L227">			<span class="tok-kw">const</span> message = reader.readMessage(stream) <span class="tok-kw">catch</span> |err| {</span>
+<span class="line" id="L228">				<span class="tok-kw">switch</span> (err) {</span>
+<span class="line" id="L229">					<span class="tok-kw">error</span>.LargeControl =&gt; <span class="tok-kw">try</span> stream.writeAll(CLOSE_PROTOCOL_ERROR),</span>
+<span class="line" id="L230">					<span class="tok-kw">error</span>.ReservedFlags =&gt; <span class="tok-kw">try</span> stream.writeAll(CLOSE_PROTOCOL_ERROR),</span>
+<span class="line" id="L231">					<span class="tok-kw">else</span> =&gt; {},</span>
+<span class="line" id="L232">				}</span>
+<span class="line" id="L233">				<span class="tok-kw">return</span>;</span>
+<span class="line" id="L234">			};</span>
+<span class="line" id="L235"></span>
+<span class="line" id="L236">			<span class="tok-kw">switch</span> (message.<span class="tok-type">type</span>) {</span>
+<span class="line" id="L237">				.text, .binary =&gt; {</span>
+<span class="line" id="L238">					<span class="tok-kw">try</span> h.handle(message);</span>
+<span class="line" id="L239">					reader.handled();</span>
+<span class="line" id="L240">					<span class="tok-kw">if</span> (self.closed) {</span>
+<span class="line" id="L241">						<span class="tok-kw">return</span>;</span>
+<span class="line" id="L242">					}</span>
+<span class="line" id="L243">				},</span>
+<span class="line" id="L244">				.pong =&gt; {</span>
+<span class="line" id="L245">					<span class="tok-kw">if</span> (handle_pong) {</span>
+<span class="line" id="L246">						<span class="tok-kw">try</span> h.handle(message);</span>
+<span class="line" id="L247">					}</span>
+<span class="line" id="L248">				},</span>
+<span class="line" id="L249">				.ping =&gt; {</span>
+<span class="line" id="L250">					<span class="tok-kw">if</span> (handle_ping) {</span>
+<span class="line" id="L251">						<span class="tok-kw">try</span> h.handle(message);</span>
+<span class="line" id="L252">					} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L253">						<span class="tok-kw">const</span> data = message.data;</span>
+<span class="line" id="L254">						<span class="tok-kw">if</span> (data.len == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L255">							<span class="tok-kw">try</span> stream.writeAll(EMPTY_PONG);</span>
+<span class="line" id="L256">						} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L257">							<span class="tok-kw">try</span> self.writeFrame(.pong, data);</span>
+<span class="line" id="L258">						}</span>
+<span class="line" id="L259">					}</span>
+<span class="line" id="L260">				},</span>
+<span class="line" id="L261">				.close =&gt; {</span>
+<span class="line" id="L262">					<span class="tok-kw">if</span> (handle_close) {</span>
+<span class="line" id="L263">						<span class="tok-kw">return</span> h.handle(message);</span>
+<span class="line" id="L264">					}</span>
+<span class="line" id="L265"></span>
+<span class="line" id="L266">					<span class="tok-kw">const</span> data = message.data;</span>
+<span class="line" id="L267">					<span class="tok-kw">const</span> l = data.len;</span>
+<span class="line" id="L268"></span>
+<span class="line" id="L269">					<span class="tok-kw">if</span> (l == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L270">						<span class="tok-kw">return</span> self.writeClose();</span>
+<span class="line" id="L271">					}</span>
+<span class="line" id="L272"></span>
+<span class="line" id="L273">					<span class="tok-kw">if</span> (l == <span class="tok-number">1</span>) {</span>
+<span class="line" id="L274">						<span class="tok-comment">// close with a payload always has to have at least a 2-byte payload,</span>
+</span>
+<span class="line" id="L275">						<span class="tok-comment">// since a 2-byte code is required</span>
+</span>
+<span class="line" id="L276">						<span class="tok-kw">return</span> stream.writeAll(CLOSE_PROTOCOL_ERROR);</span>
+<span class="line" id="L277">					}</span>
+<span class="line" id="L278"></span>
+<span class="line" id="L279">					<span class="tok-kw">const</span> code = <span class="tok-builtin">@as</span>(<span class="tok-type">u16</span>, <span class="tok-builtin">@intCast</span>(data[<span class="tok-number">1</span>])) | (<span class="tok-builtin">@as</span>(<span class="tok-type">u16</span>, <span class="tok-builtin">@intCast</span>(data[<span class="tok-number">0</span>])) &lt;&lt; <span class="tok-number">8</span>);</span>
+<span class="line" id="L280">					<span class="tok-kw">if</span> (code &lt; <span class="tok-number">1000</span> <span class="tok-kw">or</span> code == <span class="tok-number">1004</span> <span class="tok-kw">or</span> code == <span class="tok-number">1005</span> <span class="tok-kw">or</span> code == <span class="tok-number">1006</span> <span class="tok-kw">or</span> (code &gt; <span class="tok-number">1013</span> <span class="tok-kw">and</span> code &lt; <span class="tok-number">3000</span>)) {</span>
+<span class="line" id="L281">						<span class="tok-kw">return</span> stream.writeAll(CLOSE_PROTOCOL_ERROR);</span>
+<span class="line" id="L282">					}</span>
+<span class="line" id="L283"></span>
+<span class="line" id="L284">					<span class="tok-kw">if</span> (l == <span class="tok-number">2</span>) {</span>
+<span class="line" id="L285">						<span class="tok-kw">return</span> <span class="tok-kw">try</span> stream.writeAll(CLOSE_NORMAL);</span>
+<span class="line" id="L286">					}</span>
+<span class="line" id="L287"></span>
+<span class="line" id="L288">					<span class="tok-kw">const</span> payload = data[<span class="tok-number">2</span>..];</span>
+<span class="line" id="L289">					<span class="tok-kw">if</span> (!std.unicode.utf8ValidateSlice(payload)) {</span>
+<span class="line" id="L290">						<span class="tok-comment">// if we have a payload, it must be UTF8 (why?!)</span>
+</span>
+<span class="line" id="L291">						<span class="tok-kw">return</span> <span class="tok-kw">try</span> stream.writeAll(CLOSE_PROTOCOL_ERROR);</span>
+<span class="line" id="L292">					}</span>
+<span class="line" id="L293">					<span class="tok-kw">return</span> self.writeClose();</span>
+<span class="line" id="L294">				},</span>
+<span class="line" id="L295">			}</span>
+<span class="line" id="L296">		}</span>
+<span class="line" id="L297">	}</span>
+<span class="line" id="L298">};</span>
+<span class="line" id="L299"></span>
+<span class="line" id="L300"><span class="tok-kw">const</span> read_no_timeout = std.mem.toBytes(os.timeval{</span>
+<span class="line" id="L301">	.tv_sec = <span class="tok-number">0</span>,</span>
+<span class="line" id="L302">	.tv_usec = <span class="tok-number">0</span>,</span>
+<span class="line" id="L303">});</span>
+<span class="line" id="L304"></span>
+<span class="line" id="L305"><span class="tok-comment">// used in handshake tests</span>
+</span>
+<span class="line" id="L306"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">readRequest</span>(stream: <span class="tok-kw">anytype</span>, buf: []<span class="tok-type">u8</span>, timeout: ?<span class="tok-type">u32</span>) ![]<span class="tok-type">u8</span> {</span>
+<span class="line" id="L307">	<span class="tok-kw">var</span> deadline: ?<span class="tok-type">i64</span> = <span class="tok-null">null</span>;</span>
+<span class="line" id="L308">	<span class="tok-kw">var</span> read_timeout: ?[<span class="tok-builtin">@sizeOf</span>(os.timeval)]<span class="tok-type">u8</span> = <span class="tok-null">null</span>;</span>
+<span class="line" id="L309">	<span class="tok-kw">if</span> (timeout) |ms| {</span>
+<span class="line" id="L310">		<span class="tok-comment">// our timeout for each individual read</span>
+</span>
+<span class="line" id="L311">		read_timeout = std.mem.toBytes(os.timeval{</span>
+<span class="line" id="L312">			.tv_sec = <span class="tok-builtin">@intCast</span>(<span class="tok-builtin">@divTrunc</span>(ms, <span class="tok-number">1000</span>)),</span>
+<span class="line" id="L313">			.tv_usec = <span class="tok-builtin">@intCast</span>(<span class="tok-builtin">@mod</span>(ms, <span class="tok-number">1000</span>) * <span class="tok-number">1000</span>),</span>
+<span class="line" id="L314">		});</span>
+<span class="line" id="L315">		<span class="tok-comment">// our absolute deadline for reading the header</span>
+</span>
+<span class="line" id="L316">		deadline = std.time.milliTimestamp() + ms;</span>
+<span class="line" id="L317">	}</span>
+<span class="line" id="L318"></span>
+<span class="line" id="L319">	<span class="tok-kw">var</span> total: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L320">	<span class="tok-kw">while</span> (<span class="tok-null">true</span>) {</span>
+<span class="line" id="L321">		<span class="tok-kw">if</span> (total == buf.len) {</span>
+<span class="line" id="L322">			<span class="tok-kw">return</span> <span class="tok-kw">error</span>.TooLarge;</span>
+<span class="line" id="L323">		}</span>
+<span class="line" id="L324"></span>
+<span class="line" id="L325">		<span class="tok-kw">if</span> (read_timeout) |to| {</span>
+<span class="line" id="L326">			<span class="tok-kw">try</span> os.setsockopt(stream.handle, os.SOL.SOCKET, os.SO.RCVTIMEO, &amp;to);</span>
+<span class="line" id="L327">		}</span>
+<span class="line" id="L328"></span>
+<span class="line" id="L329">		<span class="tok-kw">var</span> n = <span class="tok-kw">try</span> stream.read(buf[total..]);</span>
+<span class="line" id="L330">		<span class="tok-kw">if</span> (n == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L331">			<span class="tok-kw">return</span> <span class="tok-kw">error</span>.Invalid;</span>
+<span class="line" id="L332">		}</span>
+<span class="line" id="L333">		total += n;</span>
+<span class="line" id="L334">		<span class="tok-kw">const</span> request = buf[<span class="tok-number">0</span>..total];</span>
+<span class="line" id="L335">		<span class="tok-kw">if</span> (std.mem.endsWith(<span class="tok-type">u8</span>, request, <span class="tok-str">&quot;\r\n\r\n&quot;</span>)) {</span>
+<span class="line" id="L336">			<span class="tok-kw">if</span> (read_timeout != <span class="tok-null">null</span>) {</span>
+<span class="line" id="L337">				<span class="tok-kw">try</span> os.setsockopt(stream.handle, os.SOL.SOCKET, os.SO.RCVTIMEO, &amp;read_no_timeout);</span>
+<span class="line" id="L338">			}</span>
+<span class="line" id="L339">			<span class="tok-kw">return</span> request;</span>
+<span class="line" id="L340">		}</span>
+<span class="line" id="L341"></span>
+<span class="line" id="L342">		<span class="tok-kw">if</span> (deadline) |dl| {</span>
+<span class="line" id="L343">			<span class="tok-kw">if</span> (std.time.milliTimestamp() &gt; dl) {</span>
+<span class="line" id="L344">				<span class="tok-kw">return</span> <span class="tok-kw">error</span>.Timeout;</span>
+<span class="line" id="L345">			}</span>
+<span class="line" id="L346">		}</span>
+<span class="line" id="L347">	}</span>
+<span class="line" id="L348">}</span>
+<span class="line" id="L349"></span>
+<span class="line" id="L350"><span class="tok-kw">const</span> t = lib.testing;</span>
+<span class="line" id="L351"><span class="tok-kw">test</span> <span class="tok-str">&quot;clientLoop&quot;</span> {</span>
+<span class="line" id="L352">	<span class="tok-comment">// we don't currently use this</span>
+</span>
+<span class="line" id="L353">	<span class="tok-kw">var</span> context = TestContext{};</span>
+<span class="line" id="L354">	<span class="tok-kw">const</span> config = Config{</span>
+<span class="line" id="L355">		.handshake_timeout_ms = <span class="tok-null">null</span>,</span>
+<span class="line" id="L356">	};</span>
+<span class="line" id="L357"></span>
+<span class="line" id="L358">	<span class="tok-kw">var</span> hp = <span class="tok-kw">try</span> HandshakePool.init(t.allocator, <span class="tok-number">1</span>, <span class="tok-number">512</span>, <span class="tok-number">5</span>);</span>
+<span class="line" id="L359">	<span class="tok-kw">defer</span> hp.deinit();</span>
+<span class="line" id="L360"></span>
+<span class="line" id="L361">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L362"></span>
+<span class="line" id="L363">	{</span>
+<span class="line" id="L364">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L365">		<span class="tok-kw">defer</span> stream.deinit();</span>
+<span class="line" id="L366">		_ = stream.textFrame(<span class="tok-null">true</span>, &amp;.{<span class="tok-number">0</span>}).textFrame(<span class="tok-null">true</span>, &amp;.{<span class="tok-number">0</span>});</span>
+<span class="line" id="L367">		clientLoop(TestHandler, context, NetConn{.stream = &amp;stream}, &amp;config, &amp;hp, &amp;bp);</span>
+<span class="line" id="L368">		<span class="tok-kw">try</span> t.expectEqual(stream.closed, <span class="tok-null">true</span>);</span>
+<span class="line" id="L369"></span>
+<span class="line" id="L370">		<span class="tok-kw">const</span> r = stream.asReceived(<span class="tok-null">true</span>);</span>
+<span class="line" id="L371">		<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L372">		<span class="tok-kw">try</span> t.expectSlice(<span class="tok-type">u8</span>, &amp;.{<span class="tok-number">2</span>, <span class="tok-number">0</span>, <span class="tok-number">0</span>, <span class="tok-number">0</span>}, r.messages[<span class="tok-number">0</span>].data);</span>
+<span class="line" id="L373">		<span class="tok-kw">try</span> t.expectSlice(<span class="tok-type">u8</span>, &amp;.{<span class="tok-number">3</span>, <span class="tok-number">0</span>, <span class="tok-number">0</span>, <span class="tok-number">0</span>}, r.messages[<span class="tok-number">1</span>].data);</span>
+<span class="line" id="L374">	}</span>
+<span class="line" id="L375">}</span>
+<span class="line" id="L376"></span>
+<span class="line" id="L377"><span class="tok-kw">test</span> <span class="tok-str">&quot;read messages&quot;</span> {</span>
+<span class="line" id="L378">	{</span>
+<span class="line" id="L379">		<span class="tok-comment">// simple small message</span>
+</span>
+<span class="line" id="L380">		<span class="tok-kw">var</span> expected = [_]Expect{Expect.text(<span class="tok-str">&quot;over 9000!&quot;</span>)};</span>
+<span class="line" id="L381">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L382">		<span class="tok-kw">try</span> testReadFrames(stream.textFrame(<span class="tok-null">true</span>, <span class="tok-str">&quot;over 9000!&quot;</span>), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L383">	}</span>
+<span class="line" id="L384"></span>
+<span class="line" id="L385">	{</span>
+<span class="line" id="L386">		<span class="tok-comment">// single message exactly TEST_BUFFER_SIZE</span>
+</span>
+<span class="line" id="L387">		<span class="tok-comment">// header will be 8 bytes, so we make the messae TEST_BUFFER_SIZE - 8 bytes</span>
+</span>
+<span class="line" id="L388">		<span class="tok-kw">const</span> msg = [_]<span class="tok-type">u8</span>{<span class="tok-str">'a'</span>} ** (TEST_BUFFER_SIZE - <span class="tok-number">8</span>);</span>
+<span class="line" id="L389">		<span class="tok-kw">var</span> expected = [_]Expect{Expect.text(msg[<span class="tok-number">0</span>..])};</span>
+<span class="line" id="L390">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L391">		<span class="tok-kw">try</span> testReadFrames(stream.textFrame(<span class="tok-null">true</span>, msg[<span class="tok-number">0</span>..]), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L392">	}</span>
+<span class="line" id="L393"></span>
+<span class="line" id="L394">	{</span>
+<span class="line" id="L395">		<span class="tok-comment">// single message that is bigger than TEST_BUFFER_SIZE</span>
+</span>
+<span class="line" id="L396">		<span class="tok-comment">// header is 8 bytes, so if we make our message TEST_BUFFER_SIZE - 7, we'll</span>
+</span>
+<span class="line" id="L397">		<span class="tok-comment">// end up with a message which is exactly 1 byte larger than TEST_BUFFER_SIZE</span>
+</span>
+<span class="line" id="L398">		<span class="tok-kw">const</span> msg = [_]<span class="tok-type">u8</span>{<span class="tok-str">'a'</span>} ** (TEST_BUFFER_SIZE - <span class="tok-number">7</span>);</span>
+<span class="line" id="L399">		<span class="tok-kw">var</span> expected = [_]Expect{Expect.text(msg[<span class="tok-number">0</span>..])};</span>
+<span class="line" id="L400">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L401">		<span class="tok-kw">try</span> testReadFrames(stream.textFrame(<span class="tok-null">true</span>, msg[<span class="tok-number">0</span>..]), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L402">	}</span>
+<span class="line" id="L403"></span>
+<span class="line" id="L404">	{</span>
+<span class="line" id="L405">		<span class="tok-comment">// single message that is much bigger than TEST_BUFFER_SIZE</span>
+</span>
+<span class="line" id="L406">		<span class="tok-kw">const</span> msg = [_]<span class="tok-type">u8</span>{<span class="tok-str">'a'</span>} ** (TEST_BUFFER_SIZE * <span class="tok-number">2</span>);</span>
+<span class="line" id="L407">		<span class="tok-kw">var</span> expected = [<span class="tok-number">1</span>]Expect{Expect.text(msg[<span class="tok-number">0</span>..])};</span>
+<span class="line" id="L408">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L409">		<span class="tok-kw">try</span> testReadFrames(stream.textFrame(<span class="tok-null">true</span>, msg[<span class="tok-number">0</span>..]), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L410">	}</span>
+<span class="line" id="L411"></span>
+<span class="line" id="L412">	{</span>
+<span class="line" id="L413">		<span class="tok-comment">// multiple small messages</span>
+</span>
+<span class="line" id="L414">		<span class="tok-kw">var</span> expected = [_]Expect{ Expect.text(<span class="tok-str">&quot;over&quot;</span>), Expect.text(<span class="tok-str">&quot; &quot;</span>), Expect.pong(<span class="tok-str">&quot;&quot;</span>), Expect.text(<span class="tok-str">&quot;9000&quot;</span>), Expect.text(<span class="tok-str">&quot;!&quot;</span>) };</span>
+<span class="line" id="L415">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L416">		<span class="tok-kw">try</span> testReadFrames(stream</span>
+<span class="line" id="L417">			.textFrame(<span class="tok-null">true</span>, <span class="tok-str">&quot;over&quot;</span>)</span>
+<span class="line" id="L418">			.textFrame(<span class="tok-null">true</span>, <span class="tok-str">&quot; &quot;</span>)</span>
+<span class="line" id="L419">			.ping()</span>
+<span class="line" id="L420">			.textFrame(<span class="tok-null">true</span>, <span class="tok-str">&quot;9000&quot;</span>)</span>
+<span class="line" id="L421">			.textFrame(<span class="tok-null">true</span>, <span class="tok-str">&quot;!&quot;</span>), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L422">	}</span>
+<span class="line" id="L423"></span>
+<span class="line" id="L424">	{</span>
+<span class="line" id="L425">		<span class="tok-comment">// two messages, individually smaller than TEST_BUFFER_SIZE, but</span>
+</span>
+<span class="line" id="L426">		<span class="tok-comment">// their total length is greater than TEST_BUFFER_SIZE (this is an important</span>
+</span>
+<span class="line" id="L427">		<span class="tok-comment">// test as it requires special handling since the two messages are valid</span>
+</span>
+<span class="line" id="L428">		<span class="tok-comment">// but don't fit in a single buffer)</span>
+</span>
+<span class="line" id="L429">		<span class="tok-kw">const</span> msg1 = [_]<span class="tok-type">u8</span>{<span class="tok-str">'a'</span>} ** (TEST_BUFFER_SIZE - <span class="tok-number">100</span>);</span>
+<span class="line" id="L430">		<span class="tok-kw">const</span> msg2 = [_]<span class="tok-type">u8</span>{<span class="tok-str">'b'</span>} ** <span class="tok-number">200</span>;</span>
+<span class="line" id="L431">		<span class="tok-kw">var</span> expected = [_]Expect{ Expect.text(msg1[<span class="tok-number">0</span>..]), Expect.text(msg2[<span class="tok-number">0</span>..]) };</span>
+<span class="line" id="L432">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L433">		<span class="tok-kw">try</span> testReadFrames(stream</span>
+<span class="line" id="L434">			.textFrame(<span class="tok-null">true</span>, msg1[<span class="tok-number">0</span>..])</span>
+<span class="line" id="L435">			.textFrame(<span class="tok-null">true</span>, msg2[<span class="tok-number">0</span>..]), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L436">	}</span>
+<span class="line" id="L437"></span>
+<span class="line" id="L438">	{</span>
+<span class="line" id="L439">		<span class="tok-comment">// two messages, the first bigger than TEST_BUFFER_SIZE, the second smaller</span>
+</span>
+<span class="line" id="L440">		<span class="tok-kw">const</span> msg1 = [_]<span class="tok-type">u8</span>{<span class="tok-str">'a'</span>} ** (TEST_BUFFER_SIZE + <span class="tok-number">100</span>);</span>
+<span class="line" id="L441">		<span class="tok-kw">const</span> msg2 = [_]<span class="tok-type">u8</span>{<span class="tok-str">'b'</span>} ** <span class="tok-number">200</span>;</span>
+<span class="line" id="L442">		<span class="tok-kw">var</span> expected = [_]Expect{ Expect.text(msg1[<span class="tok-number">0</span>..]), Expect.text(msg2[<span class="tok-number">0</span>..]) };</span>
+<span class="line" id="L443">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L444">		<span class="tok-kw">try</span> testReadFrames(stream</span>
+<span class="line" id="L445">			.textFrame(<span class="tok-null">true</span>, msg1[<span class="tok-number">0</span>..])</span>
+<span class="line" id="L446">			.textFrame(<span class="tok-null">true</span>, msg2[<span class="tok-number">0</span>..]), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L447">	}</span>
+<span class="line" id="L448"></span>
+<span class="line" id="L449">	{</span>
+<span class="line" id="L450">		<span class="tok-comment">// Simple fragmented (websocket fragmentation)</span>
+</span>
+<span class="line" id="L451">		<span class="tok-kw">var</span> expected = [_]Expect{Expect.text(<span class="tok-str">&quot;over 9000!&quot;</span>)};</span>
+<span class="line" id="L452">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L453">		<span class="tok-kw">try</span> testReadFrames(stream</span>
+<span class="line" id="L454">			.textFrame(<span class="tok-null">false</span>, <span class="tok-str">&quot;over&quot;</span>)</span>
+<span class="line" id="L455">			.cont(<span class="tok-null">true</span>, <span class="tok-str">&quot; 9000!&quot;</span>), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L456">	}</span>
+<span class="line" id="L457"></span>
+<span class="line" id="L458">	{</span>
+<span class="line" id="L459">		<span class="tok-comment">// large fragmented (websocket fragmentation)</span>
+</span>
+<span class="line" id="L460">		<span class="tok-kw">const</span> msg = [_]<span class="tok-type">u8</span>{<span class="tok-str">'a'</span>} ** (TEST_BUFFER_SIZE * <span class="tok-number">2</span> + <span class="tok-number">600</span>);</span>
+<span class="line" id="L461">		<span class="tok-kw">var</span> expected  = [_]Expect{Expect.text(msg[<span class="tok-number">0</span>..])};</span>
+<span class="line" id="L462">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L463">		<span class="tok-kw">try</span> testReadFrames(stream</span>
+<span class="line" id="L464">			.textFrame(<span class="tok-null">false</span>, msg[<span class="tok-number">0</span> .. TEST_BUFFER_SIZE + <span class="tok-number">100</span>])</span>
+<span class="line" id="L465">			.cont(<span class="tok-null">true</span>, msg[TEST_BUFFER_SIZE + <span class="tok-number">100</span> ..]), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L466">	}</span>
+<span class="line" id="L467"></span>
+<span class="line" id="L468">	{</span>
+<span class="line" id="L469">		<span class="tok-comment">// Fragmented with control in between</span>
+</span>
+<span class="line" id="L470">		<span class="tok-kw">var</span> expected = [_]Expect{ Expect.pong(<span class="tok-str">&quot;&quot;</span>), Expect.pong(<span class="tok-str">&quot;&quot;</span>), Expect.text(<span class="tok-str">&quot;over 9000!&quot;</span>) };</span>
+<span class="line" id="L471">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L472">		<span class="tok-kw">try</span> testReadFrames(stream</span>
+<span class="line" id="L473">			.textFrame(<span class="tok-null">false</span>, <span class="tok-str">&quot;over&quot;</span>)</span>
+<span class="line" id="L474">			.ping()</span>
+<span class="line" id="L475">			.cont(<span class="tok-null">false</span>, <span class="tok-str">&quot; &quot;</span>)</span>
+<span class="line" id="L476">			.ping()</span>
+<span class="line" id="L477">			.cont(<span class="tok-null">true</span>, <span class="tok-str">&quot;9000!&quot;</span>), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L478">	}</span>
+<span class="line" id="L479"></span>
+<span class="line" id="L480">	{</span>
+<span class="line" id="L481">		<span class="tok-comment">// Large Fragmented with control in between</span>
+</span>
+<span class="line" id="L482">		<span class="tok-kw">const</span> msg = [_]<span class="tok-type">u8</span>{<span class="tok-str">'b'</span>} ** (TEST_BUFFER_SIZE * <span class="tok-number">2</span> + <span class="tok-number">600</span>);</span>
+<span class="line" id="L483">		<span class="tok-kw">var</span> expected = [_]Expect{ Expect.pong(<span class="tok-str">&quot;&quot;</span>), Expect.pong(<span class="tok-str">&quot;&quot;</span>), Expect.text(msg[<span class="tok-number">0</span>..]) };</span>
+<span class="line" id="L484">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L485">		<span class="tok-kw">try</span> testReadFrames(stream</span>
+<span class="line" id="L486">			.textFrame(<span class="tok-null">false</span>, msg[<span class="tok-number">0</span> .. TEST_BUFFER_SIZE + <span class="tok-number">100</span>])</span>
+<span class="line" id="L487">			.ping()</span>
+<span class="line" id="L488">			.cont(<span class="tok-null">false</span>, msg[TEST_BUFFER_SIZE + <span class="tok-number">100</span> .. TEST_BUFFER_SIZE + <span class="tok-number">110</span>])</span>
+<span class="line" id="L489">			.ping()</span>
+<span class="line" id="L490">			.cont(<span class="tok-null">true</span>, msg[TEST_BUFFER_SIZE + <span class="tok-number">110</span> ..]), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L491">	}</span>
+<span class="line" id="L492"></span>
+<span class="line" id="L493">	{</span>
+<span class="line" id="L494">		<span class="tok-comment">// Empty fragmented messages</span>
+</span>
+<span class="line" id="L495">		<span class="tok-kw">var</span> expected = [_]Expect{Expect.text(<span class="tok-str">&quot;&quot;</span>)};</span>
+<span class="line" id="L496">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L497">		<span class="tok-kw">try</span> testReadFrames(stream</span>
+<span class="line" id="L498">			.textFrame(<span class="tok-null">false</span>, <span class="tok-str">&quot;&quot;</span>)</span>
+<span class="line" id="L499">			.cont(<span class="tok-null">false</span>, <span class="tok-str">&quot;&quot;</span>)</span>
+<span class="line" id="L500">			.cont(<span class="tok-null">true</span>, <span class="tok-str">&quot;&quot;</span>), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L501">	}</span>
+<span class="line" id="L502"></span>
+<span class="line" id="L503">	{</span>
+<span class="line" id="L504">		<span class="tok-comment">// max-size control</span>
+</span>
+<span class="line" id="L505">		<span class="tok-kw">const</span> msg = [_]<span class="tok-type">u8</span>{<span class="tok-str">'z'</span>} ** <span class="tok-number">125</span>;</span>
+<span class="line" id="L506">		<span class="tok-kw">var</span> expected = [_]Expect{Expect.pong(msg[<span class="tok-number">0</span>..])};</span>
+<span class="line" id="L507">		<span class="tok-kw">var</span> stream = t.Stream.handshake();</span>
+<span class="line" id="L508">		<span class="tok-kw">try</span> testReadFrames(stream.pingPayload(msg[<span class="tok-number">0</span>..]), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L509">	}</span>
+<span class="line" id="L510">}</span>
+<span class="line" id="L511"></span>
+<span class="line" id="L512"><span class="tok-kw">test</span> <span class="tok-str">&quot;readFrame errors&quot;</span> {</span>
+<span class="line" id="L513">	{</span>
+<span class="line" id="L514">		<span class="tok-comment">// Nested non-control fragmented (websocket fragmentation)</span>
+</span>
+<span class="line" id="L515">		<span class="tok-kw">var</span> expected = [_]Expect{};</span>
+<span class="line" id="L516">		<span class="tok-kw">var</span> s = t.Stream.handshake();</span>
+<span class="line" id="L517">		<span class="tok-kw">try</span> testReadFrames(s</span>
+<span class="line" id="L518">			.textFrame(<span class="tok-null">false</span>, <span class="tok-str">&quot;over&quot;</span>)</span>
+<span class="line" id="L519">			.textFrame(<span class="tok-null">false</span>, <span class="tok-str">&quot; 9000!&quot;</span>), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L520">	}</span>
+<span class="line" id="L521"></span>
+<span class="line" id="L522">	{</span>
+<span class="line" id="L523">		<span class="tok-comment">// Nested non-control fragmented FIN (websocket fragmentation)</span>
+</span>
+<span class="line" id="L524">		<span class="tok-kw">var</span> expected = [_]Expect{};</span>
+<span class="line" id="L525">		<span class="tok-kw">var</span> s = t.Stream.handshake();</span>
+<span class="line" id="L526">		<span class="tok-kw">try</span> testReadFrames(s</span>
+<span class="line" id="L527">			.textFrame(<span class="tok-null">false</span>, <span class="tok-str">&quot;over&quot;</span>)</span>
+<span class="line" id="L528">			.textFrame(<span class="tok-null">true</span>, <span class="tok-str">&quot; 9000!&quot;</span>), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L529">	}</span>
+<span class="line" id="L530"></span>
+<span class="line" id="L531">	{</span>
+<span class="line" id="L532">		<span class="tok-comment">// control too big</span>
+</span>
+<span class="line" id="L533">		<span class="tok-kw">const</span> msg = [_]<span class="tok-type">u8</span>{<span class="tok-str">'z'</span>} ** <span class="tok-number">126</span>;</span>
+<span class="line" id="L534">		<span class="tok-kw">var</span> expected = [_]Expect{Expect.close(&amp;.{<span class="tok-number">3</span>, <span class="tok-number">234</span>})};</span>
+<span class="line" id="L535">		<span class="tok-kw">var</span> s = t.Stream.handshake();</span>
+<span class="line" id="L536">		<span class="tok-kw">try</span> testReadFrames(s.pingPayload(msg[<span class="tok-number">0</span>..]), expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L537">	}</span>
+<span class="line" id="L538"></span>
+<span class="line" id="L539">	{</span>
+<span class="line" id="L540">		<span class="tok-comment">// reserved bit1</span>
+</span>
+<span class="line" id="L541">		<span class="tok-kw">var</span> expected = [_]Expect{Expect.close(&amp;.{<span class="tok-number">3</span>, <span class="tok-number">234</span>})};</span>
+<span class="line" id="L542">		<span class="tok-kw">var</span> s = t.Stream.handshake();</span>
+<span class="line" id="L543">		_ = s.textFrameReserved(<span class="tok-null">true</span>, <span class="tok-str">&quot;over9000&quot;</span>, <span class="tok-number">64</span>);</span>
+<span class="line" id="L544">		<span class="tok-kw">try</span> testReadFrames(&amp;s, expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L545">	}</span>
+<span class="line" id="L546"></span>
+<span class="line" id="L547">	{</span>
+<span class="line" id="L548">		<span class="tok-comment">// reserved bit2</span>
+</span>
+<span class="line" id="L549">		<span class="tok-kw">var</span> expected = [_]Expect{Expect.close(&amp;.{<span class="tok-number">3</span>, <span class="tok-number">234</span>})};</span>
+<span class="line" id="L550">		<span class="tok-kw">var</span> s = t.Stream.handshake();</span>
+<span class="line" id="L551">		_ = s.textFrameReserved(<span class="tok-null">true</span>, <span class="tok-str">&quot;over9000&quot;</span>, <span class="tok-number">32</span>);</span>
+<span class="line" id="L552">		<span class="tok-kw">try</span> testReadFrames(&amp;s, expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L553">	}</span>
+<span class="line" id="L554"></span>
+<span class="line" id="L555">	{</span>
+<span class="line" id="L556">		<span class="tok-comment">// reserved bit3</span>
+</span>
+<span class="line" id="L557">		<span class="tok-kw">var</span> expected = [_]Expect{Expect.close(&amp;.{<span class="tok-number">3</span>, <span class="tok-number">234</span>})};</span>
+<span class="line" id="L558">		<span class="tok-kw">var</span> s = t.Stream.handshake();</span>
+<span class="line" id="L559">		_ = s.textFrameReserved(<span class="tok-null">true</span>, <span class="tok-str">&quot;over9000&quot;</span>, <span class="tok-number">16</span>);</span>
+<span class="line" id="L560">		<span class="tok-kw">try</span> testReadFrames(&amp;s, expected[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L561">	}</span>
+<span class="line" id="L562">}</span>
+<span class="line" id="L563"></span>
+<span class="line" id="L564"><span class="tok-kw">fn</span> <span class="tok-fn">testReadFrames</span>(s: *t.Stream, expected: []Expect) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L565">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L566"></span>
+<span class="line" id="L567">	<span class="tok-comment">// we don't currently use this</span>
+</span>
+<span class="line" id="L568">	<span class="tok-kw">var</span> context = TestContext{};</span>
+<span class="line" id="L569"></span>
+<span class="line" id="L570">	<span class="tok-comment">// test with various random  TCP fragmentations</span>
+</span>
+<span class="line" id="L571">	<span class="tok-comment">// our t.Stream automatically fragments the frames on the first</span>
+</span>
+<span class="line" id="L572">	<span class="tok-comment">// call to read. Note this is TCP fragmentation, not websocket fragmentation</span>
+</span>
+<span class="line" id="L573">	<span class="tok-kw">const</span> config = Config{</span>
+<span class="line" id="L574">		.buffer_size = TEST_BUFFER_SIZE,</span>
+<span class="line" id="L575">		.max_size = TEST_BUFFER_SIZE * <span class="tok-number">10</span>,</span>
+<span class="line" id="L576">		.handshake_timeout_ms = <span class="tok-null">null</span>,</span>
+<span class="line" id="L577">	};</span>
+<span class="line" id="L578"></span>
+<span class="line" id="L579">	<span class="tok-kw">var</span> hp = <span class="tok-kw">try</span> HandshakePool.init(t.allocator, <span class="tok-number">10</span>, <span class="tok-number">512</span>, <span class="tok-number">10</span>);</span>
+<span class="line" id="L580">	<span class="tok-kw">defer</span> hp.deinit();</span>
+<span class="line" id="L581"></span>
+<span class="line" id="L582">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L583"></span>
+<span class="line" id="L584">	<span class="tok-kw">for</span> (<span class="tok-number">0</span>..<span class="tok-number">100</span>) |_| {</span>
+<span class="line" id="L585">		<span class="tok-kw">var</span> stream = s.clone();</span>
+<span class="line" id="L586">		clientLoop(TestHandler, context, NetConn{.stream = &amp;stream}, &amp;config, &amp;hp, &amp;bp);</span>
+<span class="line" id="L587">		<span class="tok-kw">try</span> t.expectEqual(stream.closed, <span class="tok-null">true</span>);</span>
+<span class="line" id="L588"></span>
+<span class="line" id="L589">		<span class="tok-kw">const</span> r = stream.asReceived(<span class="tok-null">true</span>);</span>
+<span class="line" id="L590">		<span class="tok-kw">const</span> messages = r.messages;</span>
+<span class="line" id="L591">		<span class="tok-kw">errdefer</span> r.deinit();</span>
+<span class="line" id="L592">		<span class="tok-kw">errdefer</span> stream.deinit();</span>
+<span class="line" id="L593"></span>
+<span class="line" id="L594">		<span class="tok-kw">try</span> t.expectEqual(expected.len, messages.len);</span>
+<span class="line" id="L595">		<span class="tok-kw">var</span> i: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L596">		<span class="tok-kw">while</span> (i &lt; expected.len) : (i += <span class="tok-number">1</span>) {</span>
+<span class="line" id="L597">			<span class="tok-kw">const</span> e = expected[i];</span>
+<span class="line" id="L598">			<span class="tok-kw">const</span> actual = messages[i];</span>
+<span class="line" id="L599">			<span class="tok-kw">try</span> t.expectEqual(e.<span class="tok-type">type</span>, actual.<span class="tok-type">type</span>);</span>
+<span class="line" id="L600">			<span class="tok-kw">try</span> t.expectString(e.data, actual.data);</span>
+<span class="line" id="L601">		}</span>
+<span class="line" id="L602">		r.deinit();</span>
+<span class="line" id="L603">		stream.deinit();</span>
+<span class="line" id="L604">	}</span>
+<span class="line" id="L605">}</span>
+<span class="line" id="L606"></span>
+<span class="line" id="L607"><span class="tok-kw">const</span> TEST_BUFFER_SIZE = <span class="tok-number">512</span>;</span>
+<span class="line" id="L608"><span class="tok-kw">const</span> TestContext = <span class="tok-kw">struct</span> {};</span>
+<span class="line" id="L609"><span class="tok-kw">const</span> TestHandler = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L610">	conn: *Conn,</span>
+<span class="line" id="L611">	counter: <span class="tok-type">i32</span>,</span>
+<span class="line" id="L612">	init_ptr: <span class="tok-type">usize</span>,</span>
+<span class="line" id="L613"></span>
+<span class="line" id="L614">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">init</span>(_: <span class="tok-kw">anytype</span>, conn: *Conn, _: TestContext) !TestHandler {</span>
+<span class="line" id="L615">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L616">			.conn = conn,</span>
+<span class="line" id="L617">			.counter = <span class="tok-number">0</span>,</span>
+<span class="line" id="L618">			.init_ptr = <span class="tok-number">0</span>,</span>
+<span class="line" id="L619">		};</span>
+<span class="line" id="L620">	}</span>
+<span class="line" id="L621"></span>
+<span class="line" id="L622">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">afterInit</span>(self: *TestHandler) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L623">		self.counter = <span class="tok-number">1</span>;</span>
+<span class="line" id="L624">		self.init_ptr = <span class="tok-builtin">@intFromPtr</span>(self);</span>
+<span class="line" id="L625">	}</span>
+<span class="line" id="L626"></span>
+<span class="line" id="L627">	<span class="tok-comment">// echo it back, so that it gets written back into our t.Stream</span>
+</span>
+<span class="line" id="L628">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">handle</span>(self: *TestHandler, message: lib.Message) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L629">		self.counter += <span class="tok-number">1</span>;</span>
+<span class="line" id="L630">		<span class="tok-kw">const</span> data = message.data;</span>
+<span class="line" id="L631">		<span class="tok-kw">switch</span> (message.<span class="tok-type">type</span>) {</span>
+<span class="line" id="L632">			.binary =&gt; <span class="tok-kw">try</span> self.conn.writeBin(data),</span>
+<span class="line" id="L633">			.text =&gt; {</span>
+<span class="line" id="L634">				<span class="tok-kw">if</span> (data.len == <span class="tok-number">1</span> <span class="tok-kw">and</span> data[<span class="tok-number">0</span>] == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L635">					std.debug.assert(self.init_ptr == <span class="tok-builtin">@intFromPtr</span>(self));</span>
+<span class="line" id="L636">					<span class="tok-kw">var</span> buf: [<span class="tok-number">4</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L637">					std.mem.writeInt(<span class="tok-type">i32</span>, &amp;buf, self.counter, .little);</span>
+<span class="line" id="L638">					<span class="tok-kw">try</span> self.conn.write(&amp;buf);</span>
+<span class="line" id="L639">				} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L640">					<span class="tok-kw">try</span> self.conn.write(data);</span>
+<span class="line" id="L641">				}</span>
+<span class="line" id="L642">			},</span>
+<span class="line" id="L643">			<span class="tok-kw">else</span> =&gt; <span class="tok-kw">unreachable</span>,</span>
+<span class="line" id="L644">		}</span>
+<span class="line" id="L645">	}</span>
+<span class="line" id="L646"></span>
+<span class="line" id="L647">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">close</span>(_: TestHandler) <span class="tok-type">void</span> {}</span>
+<span class="line" id="L648">};</span>
+<span class="line" id="L649"></span>
+<span class="line" id="L650"><span class="tok-kw">const</span> Expect = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L651">	data: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>,</span>
+<span class="line" id="L652">	<span class="tok-type">type</span>: lib.MessageType,</span>
+<span class="line" id="L653"></span>
+<span class="line" id="L654">	<span class="tok-kw">fn</span> <span class="tok-fn">text</span>(data: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) Expect {</span>
+<span class="line" id="L655">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L656">			.data = data,</span>
+<span class="line" id="L657">			.<span class="tok-type">type</span> = .text,</span>
+<span class="line" id="L658">		};</span>
+<span class="line" id="L659">	}</span>
+<span class="line" id="L660"></span>
+<span class="line" id="L661">	<span class="tok-kw">fn</span> <span class="tok-fn">pong</span>(data: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) Expect {</span>
+<span class="line" id="L662">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L663">			.data = data,</span>
+<span class="line" id="L664">			.<span class="tok-type">type</span> = .pong,</span>
+<span class="line" id="L665">		};</span>
+<span class="line" id="L666">	}</span>
+<span class="line" id="L667"></span>
+<span class="line" id="L668">	<span class="tok-kw">fn</span> <span class="tok-fn">close</span>(data: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) Expect {</span>
+<span class="line" id="L669">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L670">			.data = data,</span>
+<span class="line" id="L671">			.<span class="tok-type">type</span> = .close,</span>
+<span class="line" id="L672">		};</span>
+<span class="line" id="L673">	}</span>
+<span class="line" id="L674">};</span>
+<span class="line" id="L675"></span>
+</code></pre></body>
+</html>

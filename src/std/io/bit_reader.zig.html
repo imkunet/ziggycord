@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>io/bit_reader.zig - source view</title>
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPNJREFUeNpi/P//PwMlgOXHUjly9E0G4hwgZmQiQZMqEK8H4v9QzUEgQSaoADK+zhH9iAGL+C0gDoAaNg9mGLoLfgA1awK9hS9gzgJxA9RQBmQDrgMxJzRMGKE4HYj/Ial5A8QmQLwCJoBsgBYW2+TR1ChDaWt4LOBxKsi/VUh8XiD+gq4IVyzwQAMJBoKwacZlAB8Qf0bi96IZhtOAe1D6LpqaEiz6rmEzQAeIzwGxCJpieFqApo/vQKyJboAaEBsAsSEupwI1MwKjGBTVHOhegMX5UajYRqiBjMgYmj400cVh0XgTiKdC0zhJgJHS7AwQYABm9EAdCKrEfAAAAABJRU5ErkJggg=="/>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
     <style>
       body{
         font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
@@ -178,14 +179,14 @@
 <span class="line" id="L63">                <span class="tok-kw">const</span> n = <span class="tok-kw">if</span> (self.bit_count &gt;= bits) <span class="tok-builtin">@as</span>(<span class="tok-type">u3</span>, <span class="tok-builtin">@intCast</span>(bits)) <span class="tok-kw">else</span> self.bit_count;</span>
 <span class="line" id="L64">                <span class="tok-kw">const</span> shift = u7_bit_count - n;</span>
 <span class="line" id="L65">                <span class="tok-kw">switch</span> (endian) {</span>
-<span class="line" id="L66">                    .Big =&gt; {</span>
+<span class="line" id="L66">                    .big =&gt; {</span>
 <span class="line" id="L67">                        out_buffer = <span class="tok-builtin">@as</span>(Buf, self.bit_buffer &gt;&gt; shift);</span>
 <span class="line" id="L68">                        <span class="tok-kw">if</span> (n &gt;= u7_bit_count)</span>
 <span class="line" id="L69">                            self.bit_buffer = <span class="tok-number">0</span></span>
 <span class="line" id="L70">                        <span class="tok-kw">else</span></span>
 <span class="line" id="L71">                            self.bit_buffer &lt;&lt;= n;</span>
 <span class="line" id="L72">                    },</span>
-<span class="line" id="L73">                    .Little =&gt; {</span>
+<span class="line" id="L73">                    .little =&gt; {</span>
 <span class="line" id="L74">                        <span class="tok-kw">const</span> value = (self.bit_buffer &lt;&lt; shift) &gt;&gt; shift;</span>
 <span class="line" id="L75">                        out_buffer = <span class="tok-builtin">@as</span>(Buf, value);</span>
 <span class="line" id="L76">                        <span class="tok-kw">if</span> (n &gt;= u7_bit_count)</span>
@@ -210,7 +211,7 @@
 <span class="line" id="L93">                };</span>
 <span class="line" id="L94"></span>
 <span class="line" id="L95">                <span class="tok-kw">switch</span> (endian) {</span>
-<span class="line" id="L96">                    .Big =&gt; {</span>
+<span class="line" id="L96">                    .big =&gt; {</span>
 <span class="line" id="L97">                        <span class="tok-kw">if</span> (n &gt;= u8_bit_count) {</span>
 <span class="line" id="L98">                            out_buffer &lt;&lt;= <span class="tok-builtin">@as</span>(<span class="tok-type">u3</span>, <span class="tok-builtin">@intCast</span>(u8_bit_count - <span class="tok-number">1</span>));</span>
 <span class="line" id="L99">                            out_buffer &lt;&lt;= <span class="tok-number">1</span>;</span>
@@ -226,7 +227,7 @@
 <span class="line" id="L109">                        self.bit_buffer = <span class="tok-builtin">@as</span>(<span class="tok-type">u7</span>, <span class="tok-builtin">@truncate</span>(next_byte &lt;&lt; <span class="tok-builtin">@as</span>(<span class="tok-type">u3</span>, <span class="tok-builtin">@intCast</span>(n - <span class="tok-number">1</span>))));</span>
 <span class="line" id="L110">                        self.bit_count = shift;</span>
 <span class="line" id="L111">                    },</span>
-<span class="line" id="L112">                    .Little =&gt; {</span>
+<span class="line" id="L112">                    .little =&gt; {</span>
 <span class="line" id="L113">                        <span class="tok-kw">if</span> (n &gt;= u8_bit_count) {</span>
 <span class="line" id="L114">                            out_buffer |= <span class="tok-builtin">@as</span>(Buf, next_byte) &lt;&lt; <span class="tok-builtin">@as</span>(BufShift, <span class="tok-builtin">@intCast</span>(out_bits.*));</span>
 <span class="line" id="L115">                            out_bits.* += u8_bit_count;</span>
@@ -286,7 +287,7 @@
 <span class="line" id="L168">    <span class="tok-kw">const</span> mem_le = [_]<span class="tok-type">u8</span>{ <span class="tok-number">0b00011101</span>, <span class="tok-number">0b10010101</span> };</span>
 <span class="line" id="L169"></span>
 <span class="line" id="L170">    <span class="tok-kw">var</span> mem_in_be = io.fixedBufferStream(&amp;mem_be);</span>
-<span class="line" id="L171">    <span class="tok-kw">var</span> bit_stream_be = bitReader(.Big, mem_in_be.reader());</span>
+<span class="line" id="L171">    <span class="tok-kw">var</span> bit_stream_be = bitReader(.big, mem_in_be.reader());</span>
 <span class="line" id="L172"></span>
 <span class="line" id="L173">    <span class="tok-kw">var</span> out_bits: <span class="tok-type">usize</span> = <span class="tok-null">undefined</span>;</span>
 <span class="line" id="L174"></span>
@@ -323,7 +324,7 @@
 <span class="line" id="L205">    <span class="tok-kw">try</span> expectError(<span class="tok-kw">error</span>.EndOfStream, bit_stream_be.readBitsNoEof(<span class="tok-type">u1</span>, <span class="tok-number">1</span>));</span>
 <span class="line" id="L206"></span>
 <span class="line" id="L207">    <span class="tok-kw">var</span> mem_in_le = io.fixedBufferStream(&amp;mem_le);</span>
-<span class="line" id="L208">    <span class="tok-kw">var</span> bit_stream_le = bitReader(.Little, mem_in_le.reader());</span>
+<span class="line" id="L208">    <span class="tok-kw">var</span> bit_stream_le = bitReader(.little, mem_in_le.reader());</span>
 <span class="line" id="L209"></span>
 <span class="line" id="L210">    <span class="tok-kw">try</span> expect(<span class="tok-number">1</span> == <span class="tok-kw">try</span> bit_stream_le.readBits(<span class="tok-type">u2</span>, <span class="tok-number">1</span>, &amp;out_bits));</span>
 <span class="line" id="L211">    <span class="tok-kw">try</span> expect(out_bits == <span class="tok-number">1</span>);</span>

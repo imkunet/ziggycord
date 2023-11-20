@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>hash/cityhash.zig - source view</title>
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPNJREFUeNpi/P//PwMlgOXHUjly9E0G4hwgZmQiQZMqEK8H4v9QzUEgQSaoADK+zhH9iAGL+C0gDoAaNg9mGLoLfgA1awK9hS9gzgJxA9RQBmQDrgMxJzRMGKE4HYj/Ial5A8QmQLwCJoBsgBYW2+TR1ChDaWt4LOBxKsi/VUh8XiD+gq4IVyzwQAMJBoKwacZlAB8Qf0bi96IZhtOAe1D6LpqaEiz6rmEzQAeIzwGxCJpieFqApo/vQKyJboAaEBsAsSEupwI1MwKjGBTVHOhegMX5UajYRqiBjMgYmj400cVh0XgTiKdC0zhJgJHS7AwQYABm9EAdCKrEfAAAAABJRU5ErkJggg=="/>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
     <style>
       body{
         font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
@@ -120,11 +121,11 @@
 <span class="line" id="L6">}</span>
 <span class="line" id="L7"></span>
 <span class="line" id="L8"><span class="tok-kw">fn</span> <span class="tok-fn">fetch32</span>(ptr: [*]<span class="tok-kw">const</span> <span class="tok-type">u8</span>, offset: <span class="tok-type">usize</span>) <span class="tok-type">u32</span> {</span>
-<span class="line" id="L9">    <span class="tok-kw">return</span> std.mem.readIntLittle(<span class="tok-type">u32</span>, offsetPtr(ptr, offset)[<span class="tok-number">0</span>..<span class="tok-number">4</span>]);</span>
+<span class="line" id="L9">    <span class="tok-kw">return</span> std.mem.readInt(<span class="tok-type">u32</span>, offsetPtr(ptr, offset)[<span class="tok-number">0</span>..<span class="tok-number">4</span>], .little);</span>
 <span class="line" id="L10">}</span>
 <span class="line" id="L11"></span>
 <span class="line" id="L12"><span class="tok-kw">fn</span> <span class="tok-fn">fetch64</span>(ptr: [*]<span class="tok-kw">const</span> <span class="tok-type">u8</span>, offset: <span class="tok-type">usize</span>) <span class="tok-type">u64</span> {</span>
-<span class="line" id="L13">    <span class="tok-kw">return</span> std.mem.readIntLittle(<span class="tok-type">u64</span>, offsetPtr(ptr, offset)[<span class="tok-number">0</span>..<span class="tok-number">8</span>]);</span>
+<span class="line" id="L13">    <span class="tok-kw">return</span> std.mem.readInt(<span class="tok-type">u64</span>, offsetPtr(ptr, offset)[<span class="tok-number">0</span>..<span class="tok-number">8</span>], .little);</span>
 <span class="line" id="L14">}</span>
 <span class="line" id="L15"></span>
 <span class="line" id="L16"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> CityHash32 = <span class="tok-kw">struct</span> {</span>
@@ -462,81 +463,42 @@
 <span class="line" id="L342">    }</span>
 <span class="line" id="L343">};</span>
 <span class="line" id="L344"></span>
-<span class="line" id="L345"><span class="tok-kw">fn</span> <span class="tok-fn">SMHasherTest</span>(<span class="tok-kw">comptime</span> hash_fn: <span class="tok-kw">anytype</span>) <span class="tok-type">u32</span> {</span>
-<span class="line" id="L346">    <span class="tok-kw">const</span> HashResult = <span class="tok-builtin">@typeInfo</span>(<span class="tok-builtin">@TypeOf</span>(hash_fn)).Fn.return_type.?;</span>
-<span class="line" id="L347"></span>
-<span class="line" id="L348">    <span class="tok-kw">var</span> key: [<span class="tok-number">256</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
-<span class="line" id="L349">    <span class="tok-kw">var</span> hashes_bytes: [<span class="tok-number">256</span> * <span class="tok-builtin">@sizeOf</span>(HashResult)]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
-<span class="line" id="L350"></span>
-<span class="line" id="L351">    <span class="tok-builtin">@memset</span>(&amp;key, <span class="tok-number">0</span>);</span>
-<span class="line" id="L352">    <span class="tok-builtin">@memset</span>(&amp;hashes_bytes, <span class="tok-number">0</span>);</span>
-<span class="line" id="L353"></span>
-<span class="line" id="L354">    <span class="tok-kw">var</span> i: <span class="tok-type">u32</span> = <span class="tok-number">0</span>;</span>
-<span class="line" id="L355">    <span class="tok-kw">while</span> (i &lt; <span class="tok-number">256</span>) : (i += <span class="tok-number">1</span>) {</span>
-<span class="line" id="L356">        key[i] = <span class="tok-builtin">@as</span>(<span class="tok-type">u8</span>, <span class="tok-builtin">@intCast</span>(i));</span>
-<span class="line" id="L357"></span>
-<span class="line" id="L358">        <span class="tok-kw">var</span> h: HashResult = hash_fn(key[<span class="tok-number">0</span>..i], <span class="tok-number">256</span> - i);</span>
-<span class="line" id="L359"></span>
-<span class="line" id="L360">        <span class="tok-comment">// comptime can't really do reinterpret casting yet,</span>
+<span class="line" id="L345"><span class="tok-kw">fn</span> <span class="tok-fn">CityHash32hashIgnoreSeed</span>(str: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, seed: <span class="tok-type">u32</span>) <span class="tok-type">u32</span> {</span>
+<span class="line" id="L346">    _ = seed;</span>
+<span class="line" id="L347">    <span class="tok-kw">return</span> CityHash32.hash(str);</span>
+<span class="line" id="L348">}</span>
+<span class="line" id="L349"></span>
+<span class="line" id="L350"><span class="tok-kw">const</span> verify = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;verify.zig&quot;</span>);</span>
+<span class="line" id="L351"></span>
+<span class="line" id="L352"><span class="tok-kw">test</span> <span class="tok-str">&quot;cityhash32&quot;</span> {</span>
+<span class="line" id="L353">    <span class="tok-kw">const</span> Test = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L354">        <span class="tok-kw">fn</span> <span class="tok-fn">do</span>() !<span class="tok-type">void</span> {</span>
+<span class="line" id="L355">            <span class="tok-comment">// SMHasher doesn't provide a 32bit version of the algorithm.</span>
 </span>
-<span class="line" id="L361">        <span class="tok-comment">// so we need to write the bytes manually.</span>
+<span class="line" id="L356">            <span class="tok-comment">// The implementation was verified against the Google Abseil version.</span>
 </span>
-<span class="line" id="L362">        <span class="tok-kw">for</span> (hashes_bytes[i * <span class="tok-builtin">@sizeOf</span>(HashResult) ..][<span class="tok-number">0</span>..<span class="tok-builtin">@sizeOf</span>(HashResult)]) |*byte| {</span>
-<span class="line" id="L363">            byte.* = <span class="tok-builtin">@as</span>(<span class="tok-type">u8</span>, <span class="tok-builtin">@truncate</span>(h));</span>
-<span class="line" id="L364">            h = h &gt;&gt; <span class="tok-number">8</span>;</span>
-<span class="line" id="L365">        }</span>
-<span class="line" id="L366">    }</span>
-<span class="line" id="L367"></span>
-<span class="line" id="L368">    <span class="tok-kw">return</span> <span class="tok-builtin">@as</span>(<span class="tok-type">u32</span>, <span class="tok-builtin">@truncate</span>(hash_fn(&amp;hashes_bytes, <span class="tok-number">0</span>)));</span>
-<span class="line" id="L369">}</span>
-<span class="line" id="L370"></span>
-<span class="line" id="L371"><span class="tok-kw">fn</span> <span class="tok-fn">CityHash32hashIgnoreSeed</span>(str: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, seed: <span class="tok-type">u32</span>) <span class="tok-type">u32</span> {</span>
-<span class="line" id="L372">    _ = seed;</span>
-<span class="line" id="L373">    <span class="tok-kw">return</span> CityHash32.hash(str);</span>
-<span class="line" id="L374">}</span>
-<span class="line" id="L375"></span>
-<span class="line" id="L376"><span class="tok-kw">test</span> <span class="tok-str">&quot;cityhash32&quot;</span> {</span>
-<span class="line" id="L377">    <span class="tok-kw">const</span> Test = <span class="tok-kw">struct</span> {</span>
-<span class="line" id="L378">        <span class="tok-kw">fn</span> <span class="tok-fn">doTest</span>() !<span class="tok-type">void</span> {</span>
-<span class="line" id="L379">            <span class="tok-comment">// Note: SMHasher doesn't provide a 32bit version of the algorithm.</span>
+<span class="line" id="L357">            <span class="tok-kw">try</span> std.testing.expectEqual(verify.smhasher(CityHash32hashIgnoreSeed), <span class="tok-number">0x68254F81</span>);</span>
+<span class="line" id="L358">        }</span>
+<span class="line" id="L359">    };</span>
+<span class="line" id="L360">    <span class="tok-kw">try</span> Test.do();</span>
+<span class="line" id="L361">    <span class="tok-builtin">@setEvalBranchQuota</span>(<span class="tok-number">75000</span>);</span>
+<span class="line" id="L362">    <span class="tok-kw">try</span> <span class="tok-kw">comptime</span> Test.do();</span>
+<span class="line" id="L363">}</span>
+<span class="line" id="L364"></span>
+<span class="line" id="L365"><span class="tok-kw">test</span> <span class="tok-str">&quot;cityhash64&quot;</span> {</span>
+<span class="line" id="L366">    <span class="tok-kw">const</span> Test = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L367">        <span class="tok-kw">fn</span> <span class="tok-fn">do</span>() !<span class="tok-type">void</span> {</span>
+<span class="line" id="L368">            <span class="tok-comment">// This is not compliant with the SMHasher implementation of CityHash64!</span>
 </span>
-<span class="line" id="L380">            <span class="tok-comment">// Note: The implementation was verified against the Google Abseil version.</span>
+<span class="line" id="L369">            <span class="tok-comment">// The implementation was verified against the Google Abseil version.</span>
 </span>
-<span class="line" id="L381">            <span class="tok-kw">try</span> std.testing.expectEqual(SMHasherTest(CityHash32hashIgnoreSeed), <span class="tok-number">0x68254F81</span>);</span>
-<span class="line" id="L382">            <span class="tok-kw">try</span> std.testing.expectEqual(SMHasherTest(CityHash32hashIgnoreSeed), <span class="tok-number">0x68254F81</span>);</span>
-<span class="line" id="L383">        }</span>
-<span class="line" id="L384">    };</span>
-<span class="line" id="L385">    <span class="tok-kw">try</span> Test.doTest();</span>
-<span class="line" id="L386">    <span class="tok-comment">// TODO This is uncommented to prevent OOM on the CI server. Re-enable this test</span>
-</span>
-<span class="line" id="L387">    <span class="tok-comment">// case once we ship stage2.</span>
-</span>
-<span class="line" id="L388">    <span class="tok-comment">//@setEvalBranchQuota(50000);</span>
-</span>
-<span class="line" id="L389">    <span class="tok-comment">//comptime Test.doTest();</span>
-</span>
-<span class="line" id="L390">}</span>
-<span class="line" id="L391"></span>
-<span class="line" id="L392"><span class="tok-kw">test</span> <span class="tok-str">&quot;cityhash64&quot;</span> {</span>
-<span class="line" id="L393">    <span class="tok-kw">const</span> Test = <span class="tok-kw">struct</span> {</span>
-<span class="line" id="L394">        <span class="tok-kw">fn</span> <span class="tok-fn">doTest</span>() !<span class="tok-type">void</span> {</span>
-<span class="line" id="L395">            <span class="tok-comment">// Note: This is not compliant with the SMHasher implementation of CityHash64!</span>
-</span>
-<span class="line" id="L396">            <span class="tok-comment">// Note: The implementation was verified against the Google Abseil version.</span>
-</span>
-<span class="line" id="L397">            <span class="tok-kw">try</span> std.testing.expectEqual(SMHasherTest(CityHash64.hashWithSeed), <span class="tok-number">0x5FABC5C5</span>);</span>
-<span class="line" id="L398">        }</span>
-<span class="line" id="L399">    };</span>
-<span class="line" id="L400">    <span class="tok-kw">try</span> Test.doTest();</span>
-<span class="line" id="L401">    <span class="tok-comment">// TODO This is uncommented to prevent OOM on the CI server. Re-enable this test</span>
-</span>
-<span class="line" id="L402">    <span class="tok-comment">// case once we ship stage2.</span>
-</span>
-<span class="line" id="L403">    <span class="tok-comment">//@setEvalBranchQuota(50000);</span>
-</span>
-<span class="line" id="L404">    <span class="tok-comment">//comptime Test.doTest();</span>
-</span>
-<span class="line" id="L405">}</span>
-<span class="line" id="L406"></span>
+<span class="line" id="L370">            <span class="tok-kw">try</span> std.testing.expectEqual(verify.smhasher(CityHash64.hashWithSeed), <span class="tok-number">0x5FABC5C5</span>);</span>
+<span class="line" id="L371">        }</span>
+<span class="line" id="L372">    };</span>
+<span class="line" id="L373">    <span class="tok-kw">try</span> Test.do();</span>
+<span class="line" id="L374">    <span class="tok-builtin">@setEvalBranchQuota</span>(<span class="tok-number">75000</span>);</span>
+<span class="line" id="L375">    <span class="tok-kw">try</span> <span class="tok-kw">comptime</span> Test.do();</span>
+<span class="line" id="L376">}</span>
+<span class="line" id="L377"></span>
 </code></pre></body>
 </html>

@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>hash_map.zig - source view</title>
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPNJREFUeNpi/P//PwMlgOXHUjly9E0G4hwgZmQiQZMqEK8H4v9QzUEgQSaoADK+zhH9iAGL+C0gDoAaNg9mGLoLfgA1awK9hS9gzgJxA9RQBmQDrgMxJzRMGKE4HYj/Ial5A8QmQLwCJoBsgBYW2+TR1ChDaWt4LOBxKsi/VUh8XiD+gq4IVyzwQAMJBoKwacZlAB8Qf0bi96IZhtOAe1D6LpqaEiz6rmEzQAeIzwGxCJpieFqApo/vQKyJboAaEBsAsSEupwI1MwKjGBTVHOhegMX5UajYRqiBjMgYmj400cVh0XgTiKdC0zhJgJHS7AwQYABm9EAdCKrEfAAAAABJRU5ErkJggg=="/>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
     <style>
       body{
         font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
@@ -113,134 +114,134 @@
 <body>
 <pre><code><span class="line" id="L1"><span class="tok-kw">const</span> std = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std.zig&quot;</span>);</span>
 <span class="line" id="L2"><span class="tok-kw">const</span> builtin = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;builtin&quot;</span>);</span>
-<span class="line" id="L3"><span class="tok-kw">const</span> assert = debug.assert;</span>
+<span class="line" id="L3"><span class="tok-kw">const</span> assert = std.debug.assert;</span>
 <span class="line" id="L4"><span class="tok-kw">const</span> autoHash = std.hash.autoHash;</span>
-<span class="line" id="L5"><span class="tok-kw">const</span> debug = std.debug;</span>
-<span class="line" id="L6"><span class="tok-kw">const</span> math = std.math;</span>
-<span class="line" id="L7"><span class="tok-kw">const</span> mem = std.mem;</span>
-<span class="line" id="L8"><span class="tok-kw">const</span> meta = std.meta;</span>
-<span class="line" id="L9"><span class="tok-kw">const</span> trait = meta.trait;</span>
-<span class="line" id="L10"><span class="tok-kw">const</span> Allocator = mem.Allocator;</span>
-<span class="line" id="L11"><span class="tok-kw">const</span> Wyhash = std.hash.Wyhash;</span>
-<span class="line" id="L12"></span>
-<span class="line" id="L13"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">getAutoHashFn</span>(<span class="tok-kw">comptime</span> K: <span class="tok-type">type</span>, <span class="tok-kw">comptime</span> Context: <span class="tok-type">type</span>) (<span class="tok-kw">fn</span> (Context, K) <span class="tok-type">u64</span>) {</span>
-<span class="line" id="L14">    <span class="tok-kw">comptime</span> {</span>
-<span class="line" id="L15">        assert(<span class="tok-builtin">@hasDecl</span>(std, <span class="tok-str">&quot;StringHashMap&quot;</span>)); <span class="tok-comment">// detect when the following message needs updated</span>
+<span class="line" id="L5"><span class="tok-kw">const</span> math = std.math;</span>
+<span class="line" id="L6"><span class="tok-kw">const</span> mem = std.mem;</span>
+<span class="line" id="L7"><span class="tok-kw">const</span> meta = std.meta;</span>
+<span class="line" id="L8"><span class="tok-kw">const</span> trait = meta.trait;</span>
+<span class="line" id="L9"><span class="tok-kw">const</span> Allocator = mem.Allocator;</span>
+<span class="line" id="L10"><span class="tok-kw">const</span> Wyhash = std.hash.Wyhash;</span>
+<span class="line" id="L11"></span>
+<span class="line" id="L12"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">getAutoHashFn</span>(<span class="tok-kw">comptime</span> K: <span class="tok-type">type</span>, <span class="tok-kw">comptime</span> Context: <span class="tok-type">type</span>) (<span class="tok-kw">fn</span> (Context, K) <span class="tok-type">u64</span>) {</span>
+<span class="line" id="L13">    <span class="tok-kw">comptime</span> {</span>
+<span class="line" id="L14">        assert(<span class="tok-builtin">@hasDecl</span>(std, <span class="tok-str">&quot;StringHashMap&quot;</span>)); <span class="tok-comment">// detect when the following message needs updated</span>
 </span>
-<span class="line" id="L16">        <span class="tok-kw">if</span> (K == []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) {</span>
-<span class="line" id="L17">            <span class="tok-builtin">@compileError</span>(<span class="tok-str">&quot;std.auto_hash.autoHash does not allow slices here (&quot;</span> ++</span>
-<span class="line" id="L18">                <span class="tok-builtin">@typeName</span>(K) ++</span>
-<span class="line" id="L19">                <span class="tok-str">&quot;) because the intent is unclear. &quot;</span> ++</span>
-<span class="line" id="L20">                <span class="tok-str">&quot;Consider using std.StringHashMap for hashing the contents of []const u8. &quot;</span> ++</span>
-<span class="line" id="L21">                <span class="tok-str">&quot;Alternatively, consider using std.auto_hash.hash or providing your own hash function instead.&quot;</span>);</span>
-<span class="line" id="L22">        }</span>
-<span class="line" id="L23">    }</span>
-<span class="line" id="L24"></span>
-<span class="line" id="L25">    <span class="tok-kw">return</span> <span class="tok-kw">struct</span> {</span>
-<span class="line" id="L26">        <span class="tok-kw">fn</span> <span class="tok-fn">hash</span>(ctx: Context, key: K) <span class="tok-type">u64</span> {</span>
-<span class="line" id="L27">            _ = ctx;</span>
-<span class="line" id="L28">            <span class="tok-kw">if</span> (<span class="tok-kw">comptime</span> trait.hasUniqueRepresentation(K)) {</span>
-<span class="line" id="L29">                <span class="tok-kw">return</span> Wyhash.hash(<span class="tok-number">0</span>, std.mem.asBytes(&amp;key));</span>
-<span class="line" id="L30">            } <span class="tok-kw">else</span> {</span>
-<span class="line" id="L31">                <span class="tok-kw">var</span> hasher = Wyhash.init(<span class="tok-number">0</span>);</span>
-<span class="line" id="L32">                autoHash(&amp;hasher, key);</span>
-<span class="line" id="L33">                <span class="tok-kw">return</span> hasher.final();</span>
-<span class="line" id="L34">            }</span>
-<span class="line" id="L35">        }</span>
-<span class="line" id="L36">    }.hash;</span>
-<span class="line" id="L37">}</span>
-<span class="line" id="L38"></span>
-<span class="line" id="L39"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">getAutoEqlFn</span>(<span class="tok-kw">comptime</span> K: <span class="tok-type">type</span>, <span class="tok-kw">comptime</span> Context: <span class="tok-type">type</span>) (<span class="tok-kw">fn</span> (Context, K, K) <span class="tok-type">bool</span>) {</span>
-<span class="line" id="L40">    <span class="tok-kw">return</span> <span class="tok-kw">struct</span> {</span>
-<span class="line" id="L41">        <span class="tok-kw">fn</span> <span class="tok-fn">eql</span>(ctx: Context, a: K, b: K) <span class="tok-type">bool</span> {</span>
-<span class="line" id="L42">            _ = ctx;</span>
-<span class="line" id="L43">            <span class="tok-kw">return</span> meta.eql(a, b);</span>
-<span class="line" id="L44">        }</span>
-<span class="line" id="L45">    }.eql;</span>
-<span class="line" id="L46">}</span>
-<span class="line" id="L47"></span>
-<span class="line" id="L48"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">AutoHashMap</span>(<span class="tok-kw">comptime</span> K: <span class="tok-type">type</span>, <span class="tok-kw">comptime</span> V: <span class="tok-type">type</span>) <span class="tok-type">type</span> {</span>
-<span class="line" id="L49">    <span class="tok-kw">return</span> HashMap(K, V, AutoContext(K), default_max_load_percentage);</span>
-<span class="line" id="L50">}</span>
-<span class="line" id="L51"></span>
-<span class="line" id="L52"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">AutoHashMapUnmanaged</span>(<span class="tok-kw">comptime</span> K: <span class="tok-type">type</span>, <span class="tok-kw">comptime</span> V: <span class="tok-type">type</span>) <span class="tok-type">type</span> {</span>
-<span class="line" id="L53">    <span class="tok-kw">return</span> HashMapUnmanaged(K, V, AutoContext(K), default_max_load_percentage);</span>
-<span class="line" id="L54">}</span>
-<span class="line" id="L55"></span>
-<span class="line" id="L56"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">AutoContext</span>(<span class="tok-kw">comptime</span> K: <span class="tok-type">type</span>) <span class="tok-type">type</span> {</span>
-<span class="line" id="L57">    <span class="tok-kw">return</span> <span class="tok-kw">struct</span> {</span>
-<span class="line" id="L58">        <span class="tok-kw">pub</span> <span class="tok-kw">const</span> hash = getAutoHashFn(K, <span class="tok-builtin">@This</span>());</span>
-<span class="line" id="L59">        <span class="tok-kw">pub</span> <span class="tok-kw">const</span> eql = getAutoEqlFn(K, <span class="tok-builtin">@This</span>());</span>
-<span class="line" id="L60">    };</span>
-<span class="line" id="L61">}</span>
-<span class="line" id="L62"></span>
-<span class="line" id="L63"><span class="tok-comment">/// Builtin hashmap for strings as keys.</span></span>
-<span class="line" id="L64"><span class="tok-comment">/// Key memory is managed by the caller.  Keys and values</span></span>
-<span class="line" id="L65"><span class="tok-comment">/// will not automatically be freed.</span></span>
-<span class="line" id="L66"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">StringHashMap</span>(<span class="tok-kw">comptime</span> V: <span class="tok-type">type</span>) <span class="tok-type">type</span> {</span>
-<span class="line" id="L67">    <span class="tok-kw">return</span> HashMap([]<span class="tok-kw">const</span> <span class="tok-type">u8</span>, V, StringContext, default_max_load_percentage);</span>
-<span class="line" id="L68">}</span>
-<span class="line" id="L69"></span>
-<span class="line" id="L70"><span class="tok-comment">/// Key memory is managed by the caller.  Keys and values</span></span>
-<span class="line" id="L71"><span class="tok-comment">/// will not automatically be freed.</span></span>
-<span class="line" id="L72"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">StringHashMapUnmanaged</span>(<span class="tok-kw">comptime</span> V: <span class="tok-type">type</span>) <span class="tok-type">type</span> {</span>
-<span class="line" id="L73">    <span class="tok-kw">return</span> HashMapUnmanaged([]<span class="tok-kw">const</span> <span class="tok-type">u8</span>, V, StringContext, default_max_load_percentage);</span>
-<span class="line" id="L74">}</span>
-<span class="line" id="L75"></span>
-<span class="line" id="L76"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> StringContext = <span class="tok-kw">struct</span> {</span>
-<span class="line" id="L77">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">hash</span>(self: <span class="tok-builtin">@This</span>(), s: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) <span class="tok-type">u64</span> {</span>
-<span class="line" id="L78">        _ = self;</span>
-<span class="line" id="L79">        <span class="tok-kw">return</span> hashString(s);</span>
-<span class="line" id="L80">    }</span>
-<span class="line" id="L81">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">eql</span>(self: <span class="tok-builtin">@This</span>(), a: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, b: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) <span class="tok-type">bool</span> {</span>
-<span class="line" id="L82">        _ = self;</span>
-<span class="line" id="L83">        <span class="tok-kw">return</span> eqlString(a, b);</span>
-<span class="line" id="L84">    }</span>
-<span class="line" id="L85">};</span>
-<span class="line" id="L86"></span>
-<span class="line" id="L87"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">eqlString</span>(a: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, b: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) <span class="tok-type">bool</span> {</span>
-<span class="line" id="L88">    <span class="tok-kw">return</span> mem.eql(<span class="tok-type">u8</span>, a, b);</span>
-<span class="line" id="L89">}</span>
-<span class="line" id="L90"></span>
-<span class="line" id="L91"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">hashString</span>(s: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) <span class="tok-type">u64</span> {</span>
-<span class="line" id="L92">    <span class="tok-kw">return</span> std.hash.Wyhash.hash(<span class="tok-number">0</span>, s);</span>
-<span class="line" id="L93">}</span>
-<span class="line" id="L94"></span>
-<span class="line" id="L95"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> StringIndexContext = <span class="tok-kw">struct</span> {</span>
-<span class="line" id="L96">    bytes: *std.ArrayListUnmanaged(<span class="tok-type">u8</span>),</span>
-<span class="line" id="L97"></span>
-<span class="line" id="L98">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">eql</span>(self: <span class="tok-builtin">@This</span>(), a: <span class="tok-type">u32</span>, b: <span class="tok-type">u32</span>) <span class="tok-type">bool</span> {</span>
-<span class="line" id="L99">        _ = self;</span>
-<span class="line" id="L100">        <span class="tok-kw">return</span> a == b;</span>
-<span class="line" id="L101">    }</span>
-<span class="line" id="L102"></span>
-<span class="line" id="L103">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">hash</span>(self: <span class="tok-builtin">@This</span>(), x: <span class="tok-type">u32</span>) <span class="tok-type">u64</span> {</span>
-<span class="line" id="L104">        <span class="tok-kw">const</span> x_slice = mem.sliceTo(<span class="tok-builtin">@as</span>([*:<span class="tok-number">0</span>]<span class="tok-kw">const</span> <span class="tok-type">u8</span>, <span class="tok-builtin">@ptrCast</span>(self.bytes.items.ptr)) + x, <span class="tok-number">0</span>);</span>
-<span class="line" id="L105">        <span class="tok-kw">return</span> hashString(x_slice);</span>
-<span class="line" id="L106">    }</span>
-<span class="line" id="L107">};</span>
-<span class="line" id="L108"></span>
-<span class="line" id="L109"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> StringIndexAdapter = <span class="tok-kw">struct</span> {</span>
-<span class="line" id="L110">    bytes: *std.ArrayListUnmanaged(<span class="tok-type">u8</span>),</span>
-<span class="line" id="L111"></span>
-<span class="line" id="L112">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">eql</span>(self: <span class="tok-builtin">@This</span>(), a_slice: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, b: <span class="tok-type">u32</span>) <span class="tok-type">bool</span> {</span>
-<span class="line" id="L113">        <span class="tok-kw">const</span> b_slice = mem.sliceTo(<span class="tok-builtin">@as</span>([*:<span class="tok-number">0</span>]<span class="tok-kw">const</span> <span class="tok-type">u8</span>, <span class="tok-builtin">@ptrCast</span>(self.bytes.items.ptr)) + b, <span class="tok-number">0</span>);</span>
-<span class="line" id="L114">        <span class="tok-kw">return</span> mem.eql(<span class="tok-type">u8</span>, a_slice, b_slice);</span>
-<span class="line" id="L115">    }</span>
-<span class="line" id="L116"></span>
-<span class="line" id="L117">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">hash</span>(self: <span class="tok-builtin">@This</span>(), adapted_key: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) <span class="tok-type">u64</span> {</span>
-<span class="line" id="L118">        _ = self;</span>
-<span class="line" id="L119">        <span class="tok-kw">return</span> hashString(adapted_key);</span>
-<span class="line" id="L120">    }</span>
-<span class="line" id="L121">};</span>
-<span class="line" id="L122"></span>
-<span class="line" id="L123"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> default_max_load_percentage = <span class="tok-number">80</span>;</span>
-<span class="line" id="L124"></span>
-<span class="line" id="L125"><span class="tok-comment">/// This function issues a compile error with a helpful message if there</span></span>
-<span class="line" id="L126"><span class="tok-comment">/// is a problem with the provided context type.  A context must have the following</span></span>
-<span class="line" id="L127"><span class="tok-comment">/// member functions:</span></span>
-<span class="line" id="L128"><span class="tok-comment">///   - hash(self, PseudoKey) Hash</span></span>
-<span class="line" id="L129"><span class="tok-comment">///   - eql(self, PseudoKey, Key) bool</span></span>
+<span class="line" id="L15">        <span class="tok-kw">if</span> (K == []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) {</span>
+<span class="line" id="L16">            <span class="tok-builtin">@compileError</span>(<span class="tok-str">&quot;std.auto_hash.autoHash does not allow slices here (&quot;</span> ++</span>
+<span class="line" id="L17">                <span class="tok-builtin">@typeName</span>(K) ++</span>
+<span class="line" id="L18">                <span class="tok-str">&quot;) because the intent is unclear. &quot;</span> ++</span>
+<span class="line" id="L19">                <span class="tok-str">&quot;Consider using std.StringHashMap for hashing the contents of []const u8. &quot;</span> ++</span>
+<span class="line" id="L20">                <span class="tok-str">&quot;Alternatively, consider using std.auto_hash.hash or providing your own hash function instead.&quot;</span>);</span>
+<span class="line" id="L21">        }</span>
+<span class="line" id="L22">    }</span>
+<span class="line" id="L23"></span>
+<span class="line" id="L24">    <span class="tok-kw">return</span> <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L25">        <span class="tok-kw">fn</span> <span class="tok-fn">hash</span>(ctx: Context, key: K) <span class="tok-type">u64</span> {</span>
+<span class="line" id="L26">            _ = ctx;</span>
+<span class="line" id="L27">            <span class="tok-kw">if</span> (<span class="tok-kw">comptime</span> trait.hasUniqueRepresentation(K)) {</span>
+<span class="line" id="L28">                <span class="tok-kw">return</span> Wyhash.hash(<span class="tok-number">0</span>, std.mem.asBytes(&amp;key));</span>
+<span class="line" id="L29">            } <span class="tok-kw">else</span> {</span>
+<span class="line" id="L30">                <span class="tok-kw">var</span> hasher = Wyhash.init(<span class="tok-number">0</span>);</span>
+<span class="line" id="L31">                autoHash(&amp;hasher, key);</span>
+<span class="line" id="L32">                <span class="tok-kw">return</span> hasher.final();</span>
+<span class="line" id="L33">            }</span>
+<span class="line" id="L34">        }</span>
+<span class="line" id="L35">    }.hash;</span>
+<span class="line" id="L36">}</span>
+<span class="line" id="L37"></span>
+<span class="line" id="L38"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">getAutoEqlFn</span>(<span class="tok-kw">comptime</span> K: <span class="tok-type">type</span>, <span class="tok-kw">comptime</span> Context: <span class="tok-type">type</span>) (<span class="tok-kw">fn</span> (Context, K, K) <span class="tok-type">bool</span>) {</span>
+<span class="line" id="L39">    <span class="tok-kw">return</span> <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L40">        <span class="tok-kw">fn</span> <span class="tok-fn">eql</span>(ctx: Context, a: K, b: K) <span class="tok-type">bool</span> {</span>
+<span class="line" id="L41">            _ = ctx;</span>
+<span class="line" id="L42">            <span class="tok-kw">return</span> meta.eql(a, b);</span>
+<span class="line" id="L43">        }</span>
+<span class="line" id="L44">    }.eql;</span>
+<span class="line" id="L45">}</span>
+<span class="line" id="L46"></span>
+<span class="line" id="L47"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">AutoHashMap</span>(<span class="tok-kw">comptime</span> K: <span class="tok-type">type</span>, <span class="tok-kw">comptime</span> V: <span class="tok-type">type</span>) <span class="tok-type">type</span> {</span>
+<span class="line" id="L48">    <span class="tok-kw">return</span> HashMap(K, V, AutoContext(K), default_max_load_percentage);</span>
+<span class="line" id="L49">}</span>
+<span class="line" id="L50"></span>
+<span class="line" id="L51"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">AutoHashMapUnmanaged</span>(<span class="tok-kw">comptime</span> K: <span class="tok-type">type</span>, <span class="tok-kw">comptime</span> V: <span class="tok-type">type</span>) <span class="tok-type">type</span> {</span>
+<span class="line" id="L52">    <span class="tok-kw">return</span> HashMapUnmanaged(K, V, AutoContext(K), default_max_load_percentage);</span>
+<span class="line" id="L53">}</span>
+<span class="line" id="L54"></span>
+<span class="line" id="L55"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">AutoContext</span>(<span class="tok-kw">comptime</span> K: <span class="tok-type">type</span>) <span class="tok-type">type</span> {</span>
+<span class="line" id="L56">    <span class="tok-kw">return</span> <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L57">        <span class="tok-kw">pub</span> <span class="tok-kw">const</span> hash = getAutoHashFn(K, <span class="tok-builtin">@This</span>());</span>
+<span class="line" id="L58">        <span class="tok-kw">pub</span> <span class="tok-kw">const</span> eql = getAutoEqlFn(K, <span class="tok-builtin">@This</span>());</span>
+<span class="line" id="L59">    };</span>
+<span class="line" id="L60">}</span>
+<span class="line" id="L61"></span>
+<span class="line" id="L62"><span class="tok-comment">/// Builtin hashmap for strings as keys.</span></span>
+<span class="line" id="L63"><span class="tok-comment">/// Key memory is managed by the caller.  Keys and values</span></span>
+<span class="line" id="L64"><span class="tok-comment">/// will not automatically be freed.</span></span>
+<span class="line" id="L65"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">StringHashMap</span>(<span class="tok-kw">comptime</span> V: <span class="tok-type">type</span>) <span class="tok-type">type</span> {</span>
+<span class="line" id="L66">    <span class="tok-kw">return</span> HashMap([]<span class="tok-kw">const</span> <span class="tok-type">u8</span>, V, StringContext, default_max_load_percentage);</span>
+<span class="line" id="L67">}</span>
+<span class="line" id="L68"></span>
+<span class="line" id="L69"><span class="tok-comment">/// Key memory is managed by the caller.  Keys and values</span></span>
+<span class="line" id="L70"><span class="tok-comment">/// will not automatically be freed.</span></span>
+<span class="line" id="L71"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">StringHashMapUnmanaged</span>(<span class="tok-kw">comptime</span> V: <span class="tok-type">type</span>) <span class="tok-type">type</span> {</span>
+<span class="line" id="L72">    <span class="tok-kw">return</span> HashMapUnmanaged([]<span class="tok-kw">const</span> <span class="tok-type">u8</span>, V, StringContext, default_max_load_percentage);</span>
+<span class="line" id="L73">}</span>
+<span class="line" id="L74"></span>
+<span class="line" id="L75"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> StringContext = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L76">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">hash</span>(self: <span class="tok-builtin">@This</span>(), s: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) <span class="tok-type">u64</span> {</span>
+<span class="line" id="L77">        _ = self;</span>
+<span class="line" id="L78">        <span class="tok-kw">return</span> hashString(s);</span>
+<span class="line" id="L79">    }</span>
+<span class="line" id="L80">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">eql</span>(self: <span class="tok-builtin">@This</span>(), a: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, b: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) <span class="tok-type">bool</span> {</span>
+<span class="line" id="L81">        _ = self;</span>
+<span class="line" id="L82">        <span class="tok-kw">return</span> eqlString(a, b);</span>
+<span class="line" id="L83">    }</span>
+<span class="line" id="L84">};</span>
+<span class="line" id="L85"></span>
+<span class="line" id="L86"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">eqlString</span>(a: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, b: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) <span class="tok-type">bool</span> {</span>
+<span class="line" id="L87">    <span class="tok-kw">return</span> mem.eql(<span class="tok-type">u8</span>, a, b);</span>
+<span class="line" id="L88">}</span>
+<span class="line" id="L89"></span>
+<span class="line" id="L90"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">hashString</span>(s: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) <span class="tok-type">u64</span> {</span>
+<span class="line" id="L91">    <span class="tok-kw">return</span> std.hash.Wyhash.hash(<span class="tok-number">0</span>, s);</span>
+<span class="line" id="L92">}</span>
+<span class="line" id="L93"></span>
+<span class="line" id="L94"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> StringIndexContext = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L95">    bytes: *<span class="tok-kw">const</span> std.ArrayListUnmanaged(<span class="tok-type">u8</span>),</span>
+<span class="line" id="L96"></span>
+<span class="line" id="L97">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">eql</span>(self: <span class="tok-builtin">@This</span>(), a: <span class="tok-type">u32</span>, b: <span class="tok-type">u32</span>) <span class="tok-type">bool</span> {</span>
+<span class="line" id="L98">        _ = self;</span>
+<span class="line" id="L99">        <span class="tok-kw">return</span> a == b;</span>
+<span class="line" id="L100">    }</span>
+<span class="line" id="L101"></span>
+<span class="line" id="L102">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">hash</span>(self: <span class="tok-builtin">@This</span>(), x: <span class="tok-type">u32</span>) <span class="tok-type">u64</span> {</span>
+<span class="line" id="L103">        <span class="tok-kw">const</span> x_slice = mem.sliceTo(<span class="tok-builtin">@as</span>([*:<span class="tok-number">0</span>]<span class="tok-kw">const</span> <span class="tok-type">u8</span>, <span class="tok-builtin">@ptrCast</span>(self.bytes.items.ptr)) + x, <span class="tok-number">0</span>);</span>
+<span class="line" id="L104">        <span class="tok-kw">return</span> hashString(x_slice);</span>
+<span class="line" id="L105">    }</span>
+<span class="line" id="L106">};</span>
+<span class="line" id="L107"></span>
+<span class="line" id="L108"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> StringIndexAdapter = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L109">    bytes: *<span class="tok-kw">const</span> std.ArrayListUnmanaged(<span class="tok-type">u8</span>),</span>
+<span class="line" id="L110"></span>
+<span class="line" id="L111">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">eql</span>(self: <span class="tok-builtin">@This</span>(), a_slice: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, b: <span class="tok-type">u32</span>) <span class="tok-type">bool</span> {</span>
+<span class="line" id="L112">        <span class="tok-kw">const</span> b_slice = mem.sliceTo(<span class="tok-builtin">@as</span>([*:<span class="tok-number">0</span>]<span class="tok-kw">const</span> <span class="tok-type">u8</span>, <span class="tok-builtin">@ptrCast</span>(self.bytes.items.ptr)) + b, <span class="tok-number">0</span>);</span>
+<span class="line" id="L113">        <span class="tok-kw">return</span> mem.eql(<span class="tok-type">u8</span>, a_slice, b_slice);</span>
+<span class="line" id="L114">    }</span>
+<span class="line" id="L115"></span>
+<span class="line" id="L116">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">hash</span>(self: <span class="tok-builtin">@This</span>(), adapted_key: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>) <span class="tok-type">u64</span> {</span>
+<span class="line" id="L117">        _ = self;</span>
+<span class="line" id="L118">        <span class="tok-kw">return</span> hashString(adapted_key);</span>
+<span class="line" id="L119">    }</span>
+<span class="line" id="L120">};</span>
+<span class="line" id="L121"></span>
+<span class="line" id="L122"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> default_max_load_percentage = <span class="tok-number">80</span>;</span>
+<span class="line" id="L123"></span>
+<span class="line" id="L124"><span class="tok-comment">/// This function issues a compile error with a helpful message if there</span></span>
+<span class="line" id="L125"><span class="tok-comment">/// is a problem with the provided context type.  A context must have the following</span></span>
+<span class="line" id="L126"><span class="tok-comment">/// member functions:</span></span>
+<span class="line" id="L127"><span class="tok-comment">///   - hash(self, PseudoKey) Hash</span></span>
+<span class="line" id="L128"><span class="tok-comment">///   - eql(self, PseudoKey, Key) bool</span></span>
+<span class="line" id="L129"><span class="tok-comment">///</span></span>
 <span class="line" id="L130"><span class="tok-comment">/// If you are passing a context to a *Adapted function, PseudoKey is the type</span></span>
 <span class="line" id="L131"><span class="tok-comment">/// of the key parameter.  Otherwise, when creating a HashMap or HashMapUnmanaged</span></span>
 <span class="line" id="L132"><span class="tok-comment">/// type, PseudoKey = Key = K.</span></span>
@@ -602,7 +603,7 @@
 <span class="line" id="L470">        }</span>
 <span class="line" id="L471"></span>
 <span class="line" id="L472">        <span class="tok-comment">/// If key exists this function cannot fail.</span></span>
-<span class="line" id="L473">        <span class="tok-comment">/// If there is an existing item with `key`, then the result</span></span>
+<span class="line" id="L473">        <span class="tok-comment">/// If there is an existing item with `key`, then the result's</span></span>
 <span class="line" id="L474">        <span class="tok-comment">/// `Entry` pointers point to it, and found_existing is true.</span></span>
 <span class="line" id="L475">        <span class="tok-comment">/// Otherwise, puts a new item with undefined value, and</span></span>
 <span class="line" id="L476">        <span class="tok-comment">/// the `Entry` pointers point to it. Caller should then initialize</span></span>
@@ -612,7 +613,7 @@
 <span class="line" id="L480">        }</span>
 <span class="line" id="L481"></span>
 <span class="line" id="L482">        <span class="tok-comment">/// If key exists this function cannot fail.</span></span>
-<span class="line" id="L483">        <span class="tok-comment">/// If there is an existing item with `key`, then the result</span></span>
+<span class="line" id="L483">        <span class="tok-comment">/// If there is an existing item with `key`, then the result's</span></span>
 <span class="line" id="L484">        <span class="tok-comment">/// `Entry` pointers point to it, and found_existing is true.</span></span>
 <span class="line" id="L485">        <span class="tok-comment">/// Otherwise, puts a new item with undefined key and value, and</span></span>
 <span class="line" id="L486">        <span class="tok-comment">/// the `Entry` pointers point to it. Caller must then initialize</span></span>
@@ -621,7 +622,7 @@
 <span class="line" id="L489">            <span class="tok-kw">return</span> self.unmanaged.getOrPutContextAdapted(self.allocator, key, ctx, self.ctx);</span>
 <span class="line" id="L490">        }</span>
 <span class="line" id="L491"></span>
-<span class="line" id="L492">        <span class="tok-comment">/// If there is an existing item with `key`, then the result</span></span>
+<span class="line" id="L492">        <span class="tok-comment">/// If there is an existing item with `key`, then the result's</span></span>
 <span class="line" id="L493">        <span class="tok-comment">/// `Entry` pointers point to it, and found_existing is true.</span></span>
 <span class="line" id="L494">        <span class="tok-comment">/// Otherwise, puts a new item with undefined value, and</span></span>
 <span class="line" id="L495">        <span class="tok-comment">/// the `Entry` pointers point to it. Caller should then initialize</span></span>
@@ -632,7 +633,7 @@
 <span class="line" id="L500">            <span class="tok-kw">return</span> self.unmanaged.getOrPutAssumeCapacityContext(key, self.ctx);</span>
 <span class="line" id="L501">        }</span>
 <span class="line" id="L502"></span>
-<span class="line" id="L503">        <span class="tok-comment">/// If there is an existing item with `key`, then the result</span></span>
+<span class="line" id="L503">        <span class="tok-comment">/// If there is an existing item with `key`, then the result's</span></span>
 <span class="line" id="L504">        <span class="tok-comment">/// `Entry` pointers point to it, and found_existing is true.</span></span>
 <span class="line" id="L505">        <span class="tok-comment">/// Otherwise, puts a new item with undefined value, and</span></span>
 <span class="line" id="L506">        <span class="tok-comment">/// the `Entry` pointers point to it. Caller must then initialize</span></span>
@@ -698,7 +699,7 @@
 <span class="line" id="L566">        }</span>
 <span class="line" id="L567"></span>
 <span class="line" id="L568">        <span class="tok-comment">/// Inserts a new `Entry` into the hash map, returning the previous one, if any.</span></span>
-<span class="line" id="L569">        <span class="tok-comment">/// If insertion happuns, asserts there is enough capacity without allocating.</span></span>
+<span class="line" id="L569">        <span class="tok-comment">/// If insertion happens, asserts there is enough capacity without allocating.</span></span>
 <span class="line" id="L570">        <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">fetchPutAssumeCapacity</span>(self: *Self, key: K, value: V) ?KV {</span>
 <span class="line" id="L571">            <span class="tok-kw">return</span> self.unmanaged.fetchPutAssumeCapacityContext(key, value, self.ctx);</span>
 <span class="line" id="L572">        }</span>
@@ -817,7 +818,7 @@
 <span class="line" id="L685">}</span>
 <span class="line" id="L686"></span>
 <span class="line" id="L687"><span class="tok-comment">/// A HashMap based on open addressing and linear probing.</span></span>
-<span class="line" id="L688"><span class="tok-comment">/// A lookup or modification typically occurs only 2 cache misses.</span></span>
+<span class="line" id="L688"><span class="tok-comment">/// A lookup or modification typically incurs only 2 cache misses.</span></span>
 <span class="line" id="L689"><span class="tok-comment">/// No order is guaranteed and any modification invalidates live iterators.</span></span>
 <span class="line" id="L690"><span class="tok-comment">/// It achieves good performance with quite high load factors (by default,</span></span>
 <span class="line" id="L691"><span class="tok-comment">/// grow is triggered at 80% full) and only one byte of overhead per element.</span></span>

@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>handshake.zig - source view</title>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
+    <style>
+      body{
+        font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      pre > code {
+        display: block;
+        overflow: auto;
+        line-height: normal;
+        margin: 0em;
+      }
+      .tok-kw {
+          color: #333;
+          font-weight: bold;
+      }
+      .tok-str {
+          color: #d14;
+      }
+      .tok-builtin {
+          color: #005C7A;
+      }
+      .tok-comment {
+          color: #545454;
+          font-style: italic;
+      }
+      .tok-fn {
+          color: #900;
+          font-weight: bold;
+      }
+      .tok-null {
+          color: #005C5C;
+      }
+      .tok-number {
+          color: #005C5C;
+      }
+      .tok-type {
+          color: #458;
+          font-weight: bold;
+      }
+      pre {
+        counter-reset: line;
+      }
+      pre .line:before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        padding-right: 1em;
+        width: 2em;
+        text-align: right;
+        color: #999;
+      }
+      
+      .line {
+        width: 100%;
+        display: inline-block;
+      }
+      .line:target {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        background: #fafafa;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body{
+            background:#222;
+            color: #ccc;
+        }
+        pre > code {
+            color: #ccc;
+            background: #222;
+            border: unset;
+        }
+        .line:target {
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+            background: #333;
+        }
+        .tok-kw {
+            color: #eee;
+        }
+        .tok-str {
+            color: #2e5;
+        }
+        .tok-builtin {
+            color: #ff894c;
+        }
+        .tok-comment {
+            color: #aa7;
+        }
+        .tok-fn {
+            color: #B1A0F8;
+        }
+        .tok-null {
+            color: #ff8080;
+        }
+        .tok-number {
+            color: #ff8080;
+        }
+        .tok-type {
+            color: #68f;
+        }
+      }
+    </style>
+</head>
+<body>
+<pre><code><span class="line" id="L1"><span class="tok-kw">const</span> std = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std&quot;</span>);</span>
+<span class="line" id="L2"><span class="tok-kw">const</span> lib = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;lib.zig&quot;</span>);</span>
+<span class="line" id="L3"></span>
+<span class="line" id="L4"><span class="tok-kw">const</span> KeyValue = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;key_value.zig&quot;</span>).KeyValue;</span>
+<span class="line" id="L5"></span>
+<span class="line" id="L6"><span class="tok-kw">const</span> mem = std.mem;</span>
+<span class="line" id="L7"><span class="tok-kw">const</span> net = std.net;</span>
+<span class="line" id="L8"><span class="tok-kw">const</span> ascii = std.ascii;</span>
+<span class="line" id="L9"><span class="tok-kw">const</span> Mutex = std.Thread.Mutex;</span>
+<span class="line" id="L10"><span class="tok-kw">const</span> Allocator = std.mem.Allocator;</span>
+<span class="line" id="L11"></span>
+<span class="line" id="L12"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> Handshake = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L13">	url: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>,</span>
+<span class="line" id="L14">	key: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>,</span>
+<span class="line" id="L15">	method: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>,</span>
+<span class="line" id="L16">	headers: *KeyValue,</span>
+<span class="line" id="L17">	raw_header: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>,</span>
+<span class="line" id="L18"></span>
+<span class="line" id="L19">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">parse</span>(buf: []<span class="tok-type">u8</span>, headers: *KeyValue) !Handshake {</span>
+<span class="line" id="L20">		<span class="tok-builtin">@setRuntimeSafety</span>(lib.is_test);</span>
+<span class="line" id="L21"></span>
+<span class="line" id="L22">		<span class="tok-kw">var</span> data = buf;</span>
+<span class="line" id="L23">		<span class="tok-kw">const</span> request_line_end = mem.indexOfScalar(<span class="tok-type">u8</span>, data, <span class="tok-str">'\r'</span>) <span class="tok-kw">orelse</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L24">		<span class="tok-kw">var</span> request_line = data[<span class="tok-number">0</span>..request_line_end];</span>
+<span class="line" id="L25"></span>
+<span class="line" id="L26">		<span class="tok-kw">if</span> (!ascii.endsWithIgnoreCase(request_line, <span class="tok-str">&quot;http/1.1&quot;</span>)) {</span>
+<span class="line" id="L27">			<span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidProtocol;</span>
+<span class="line" id="L28">		}</span>
+<span class="line" id="L29"></span>
+<span class="line" id="L30">		<span class="tok-kw">var</span> key: []<span class="tok-kw">const</span> <span class="tok-type">u8</span> = <span class="tok-str">&quot;&quot;</span>;</span>
+<span class="line" id="L31">		<span class="tok-kw">var</span> required_headers: <span class="tok-type">u8</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L32"></span>
+<span class="line" id="L33">		<span class="tok-kw">var</span> request_length = request_line_end;</span>
+<span class="line" id="L34"></span>
+<span class="line" id="L35">		data = data[request_line_end+<span class="tok-number">2</span>..];</span>
+<span class="line" id="L36"></span>
+<span class="line" id="L37">		<span class="tok-kw">while</span> (data.len &gt; <span class="tok-number">4</span>) {</span>
+<span class="line" id="L38">			<span class="tok-kw">const</span> index = mem.indexOfScalar(<span class="tok-type">u8</span>, data, <span class="tok-str">'\r'</span>) <span class="tok-kw">orelse</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L39">			<span class="tok-kw">const</span> separator = mem.indexOfScalar(<span class="tok-type">u8</span>, data[<span class="tok-number">0</span>..index], <span class="tok-str">':'</span>) <span class="tok-kw">orelse</span> <span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidHeader;</span>
+<span class="line" id="L40"></span>
+<span class="line" id="L41">			<span class="tok-kw">const</span> name = mem.trim(<span class="tok-type">u8</span>, toLower(data[<span class="tok-number">0</span>..separator]), &amp;ascii.whitespace);</span>
+<span class="line" id="L42">			<span class="tok-kw">const</span> value = mem.trim(<span class="tok-type">u8</span>, data[(separator + <span class="tok-number">1</span>)..index], &amp;ascii.whitespace);</span>
+<span class="line" id="L43">			headers.add(name, value);</span>
+<span class="line" id="L44"></span>
+<span class="line" id="L45">			<span class="tok-kw">if</span> (mem.eql(<span class="tok-type">u8</span>, <span class="tok-str">&quot;upgrade&quot;</span>, name)) {</span>
+<span class="line" id="L46">				<span class="tok-kw">if</span> (!ascii.eqlIgnoreCase(<span class="tok-str">&quot;websocket&quot;</span>, value)) {</span>
+<span class="line" id="L47">					<span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidUpgrade;</span>
+<span class="line" id="L48">				}</span>
+<span class="line" id="L49">				required_headers |= <span class="tok-number">1</span>;</span>
+<span class="line" id="L50">			} <span class="tok-kw">else</span> <span class="tok-kw">if</span> (mem.eql(<span class="tok-type">u8</span>, <span class="tok-str">&quot;sec-websocket-version&quot;</span>, name)) {</span>
+<span class="line" id="L51">				<span class="tok-kw">if</span> (!mem.eql(<span class="tok-type">u8</span>, <span class="tok-str">&quot;13&quot;</span>, value)) {</span>
+<span class="line" id="L52">					<span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidVersion;</span>
+<span class="line" id="L53">				}</span>
+<span class="line" id="L54">				required_headers |= <span class="tok-number">2</span>;</span>
+<span class="line" id="L55">			} <span class="tok-kw">else</span> <span class="tok-kw">if</span> (mem.eql(<span class="tok-type">u8</span>, <span class="tok-str">&quot;connection&quot;</span>, name)) {</span>
+<span class="line" id="L56">				<span class="tok-comment">// find if connection header has upgrade in it, example header: </span>
+</span>
+<span class="line" id="L57">				<span class="tok-comment">//		Connection: keep-alive, Upgrade</span>
+</span>
+<span class="line" id="L58">				<span class="tok-kw">if</span> (ascii.indexOfIgnoreCase(value, <span class="tok-str">&quot;upgrade&quot;</span>) == <span class="tok-null">null</span>) {</span>
+<span class="line" id="L59">					<span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidConnection;</span>
+<span class="line" id="L60">				}</span>
+<span class="line" id="L61">				required_headers |= <span class="tok-number">4</span>;</span>
+<span class="line" id="L62">			} <span class="tok-kw">else</span> <span class="tok-kw">if</span> (mem.eql(<span class="tok-type">u8</span>, <span class="tok-str">&quot;sec-websocket-key&quot;</span>, name)) {</span>
+<span class="line" id="L63">				key = value;</span>
+<span class="line" id="L64">				required_headers |= <span class="tok-number">8</span>;</span>
+<span class="line" id="L65">			}</span>
+<span class="line" id="L66">			<span class="tok-kw">const</span> next = index + <span class="tok-number">2</span>;</span>
+<span class="line" id="L67">			request_length += next;</span>
+<span class="line" id="L68">			data = data[next..];</span>
+<span class="line" id="L69">		}</span>
+<span class="line" id="L70"></span>
+<span class="line" id="L71">		<span class="tok-kw">if</span> (required_headers != <span class="tok-number">15</span>) {</span>
+<span class="line" id="L72">			<span class="tok-kw">return</span> <span class="tok-kw">error</span>.MissingHeaders;</span>
+<span class="line" id="L73">		}</span>
+<span class="line" id="L74"></span>
+<span class="line" id="L75">		<span class="tok-comment">// we already established that request_line ends with http/1.1, so this buys</span>
+</span>
+<span class="line" id="L76">		<span class="tok-comment">// us some leeway into parsing it</span>
+</span>
+<span class="line" id="L77">		<span class="tok-kw">const</span> separator = mem.indexOfScalar(<span class="tok-type">u8</span>, request_line, <span class="tok-str">' '</span>) <span class="tok-kw">orelse</span> <span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidRequestLine;</span>
+<span class="line" id="L78">		<span class="tok-kw">const</span> method = request_line[<span class="tok-number">0</span>..separator];</span>
+<span class="line" id="L79">		<span class="tok-kw">const</span> url = mem.trim(<span class="tok-type">u8</span>, request_line[separator + <span class="tok-number">1</span> .. request_line.len - <span class="tok-number">9</span>], &amp;ascii.whitespace);</span>
+<span class="line" id="L80"></span>
+<span class="line" id="L81">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L82">			.key = key,</span>
+<span class="line" id="L83">			.url = url,</span>
+<span class="line" id="L84">			.method = method,</span>
+<span class="line" id="L85">			.headers = headers,</span>
+<span class="line" id="L86">			.raw_header = buf[request_line_end+<span class="tok-number">2</span>..request_length+<span class="tok-number">2</span>],</span>
+<span class="line" id="L87">		};</span>
+<span class="line" id="L88">	}</span>
+<span class="line" id="L89"></span>
+<span class="line" id="L90">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">close</span>(stream: <span class="tok-kw">anytype</span>, err: <span class="tok-type">anyerror</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L91">		<span class="tok-kw">try</span> stream.writeAll(<span class="tok-str">&quot;HTTP/1.1 400 Invalid\r\nerror: &quot;</span>);</span>
+<span class="line" id="L92">		<span class="tok-kw">const</span> s = <span class="tok-kw">switch</span> (err) {</span>
+<span class="line" id="L93">			<span class="tok-kw">error</span>.Empty =&gt; <span class="tok-str">&quot;empty&quot;</span>,</span>
+<span class="line" id="L94">			<span class="tok-kw">error</span>.InvalidProtocol =&gt; <span class="tok-str">&quot;invalidprotocol&quot;</span>,</span>
+<span class="line" id="L95">			<span class="tok-kw">error</span>.InvalidRequestLine =&gt; <span class="tok-str">&quot;invalidrequestline&quot;</span>,</span>
+<span class="line" id="L96">			<span class="tok-kw">error</span>.InvalidHeader =&gt; <span class="tok-str">&quot;invalidheader&quot;</span>,</span>
+<span class="line" id="L97">			<span class="tok-kw">error</span>.InvalidUpgrade =&gt; <span class="tok-str">&quot;invalidupgrade&quot;</span>,</span>
+<span class="line" id="L98">			<span class="tok-kw">error</span>.InvalidVersion =&gt; <span class="tok-str">&quot;invalidversion&quot;</span>,</span>
+<span class="line" id="L99">			<span class="tok-kw">error</span>.InvalidConnection =&gt; <span class="tok-str">&quot;invalidconnection&quot;</span>,</span>
+<span class="line" id="L100">			<span class="tok-kw">error</span>.MissingHeaders =&gt; <span class="tok-str">&quot;missingheaders&quot;</span>,</span>
+<span class="line" id="L101">			<span class="tok-kw">else</span> =&gt; <span class="tok-str">&quot;unknown&quot;</span>,</span>
+<span class="line" id="L102">		};</span>
+<span class="line" id="L103">		<span class="tok-kw">try</span> stream.writeAll(s);</span>
+<span class="line" id="L104">		<span class="tok-kw">try</span> stream.writeAll(<span class="tok-str">&quot;\r\n\r\n&quot;</span>);</span>
+<span class="line" id="L105">	}</span>
+<span class="line" id="L106"></span>
+<span class="line" id="L107">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">reply</span>(self: Handshake, stream: <span class="tok-kw">anytype</span>) !<span class="tok-type">void</span> {</span>
+<span class="line" id="L108">		<span class="tok-kw">var</span> h: [<span class="tok-number">20</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L109"></span>
+<span class="line" id="L110">		<span class="tok-comment">// HTTP/1.1 101 Switching Protocols\r\n</span>
+</span>
+<span class="line" id="L111">		<span class="tok-comment">// Upgrade: websocket\r\n</span>
+</span>
+<span class="line" id="L112">		<span class="tok-comment">// Connection: upgrade\r\n</span>
+</span>
+<span class="line" id="L113">		<span class="tok-comment">// Sec-Websocket-Accept: BASE64_ENCODED_KEY_HASH_PLACEHOLDER_000\r\n\r\n</span>
+</span>
+<span class="line" id="L114">		<span class="tok-kw">var</span> buf = [_]<span class="tok-type">u8</span>{</span>
+<span class="line" id="L115">			<span class="tok-str">'H'</span>,<span class="tok-str">'T'</span>,<span class="tok-str">'T'</span>,<span class="tok-str">'P'</span>,<span class="tok-str">'/'</span>,<span class="tok-str">'1'</span>,<span class="tok-str">'.'</span>,<span class="tok-str">'1'</span>,<span class="tok-str">' '</span>, <span class="tok-str">'1'</span>,<span class="tok-str">'0'</span>,<span class="tok-str">'1'</span>,<span class="tok-str">' '</span>, <span class="tok-str">'S'</span>,<span class="tok-str">'w'</span>,<span class="tok-str">'i'</span>,<span class="tok-str">'t'</span>,<span class="tok-str">'c'</span>,<span class="tok-str">'h'</span>,<span class="tok-str">'i'</span>,<span class="tok-str">'n'</span>,<span class="tok-str">'g'</span>,<span class="tok-str">' '</span>,<span class="tok-str">'P'</span>,<span class="tok-str">'r'</span>,<span class="tok-str">'o'</span>,<span class="tok-str">'t'</span>,<span class="tok-str">'o'</span>,<span class="tok-str">'c'</span>,<span class="tok-str">'o'</span>,<span class="tok-str">'l'</span>,<span class="tok-str">'s'</span>, <span class="tok-str">'\r'</span>,<span class="tok-str">'\n'</span>,</span>
+<span class="line" id="L116">			<span class="tok-str">'U'</span>,<span class="tok-str">'p'</span>,<span class="tok-str">'g'</span>,<span class="tok-str">'r'</span>,<span class="tok-str">'a'</span>,<span class="tok-str">'d'</span>,<span class="tok-str">'e'</span>,<span class="tok-str">':'</span>,<span class="tok-str">' '</span>,<span class="tok-str">'w'</span>,<span class="tok-str">'e'</span>,<span class="tok-str">'b'</span>,<span class="tok-str">'s'</span>,<span class="tok-str">'o'</span>,<span class="tok-str">'c'</span>,<span class="tok-str">'k'</span>,<span class="tok-str">'e'</span>,<span class="tok-str">'t'</span>,<span class="tok-str">'\r'</span>,<span class="tok-str">'\n'</span>,</span>
+<span class="line" id="L117">			<span class="tok-str">'C'</span>,<span class="tok-str">'o'</span>,<span class="tok-str">'n'</span>,<span class="tok-str">'n'</span>,<span class="tok-str">'e'</span>,<span class="tok-str">'c'</span>,<span class="tok-str">'t'</span>,<span class="tok-str">'i'</span>,<span class="tok-str">'o'</span>,<span class="tok-str">'n'</span>,<span class="tok-str">':'</span>,<span class="tok-str">' '</span>,<span class="tok-str">'u'</span>,<span class="tok-str">'p'</span>,<span class="tok-str">'g'</span>,<span class="tok-str">'r'</span>,<span class="tok-str">'a'</span>,<span class="tok-str">'d'</span>,<span class="tok-str">'e'</span>,<span class="tok-str">'\r'</span>,<span class="tok-str">'\n'</span>,</span>
+<span class="line" id="L118">			<span class="tok-str">'S'</span>,<span class="tok-str">'e'</span>,<span class="tok-str">'c'</span>,<span class="tok-str">'-'</span>,<span class="tok-str">'W'</span>,<span class="tok-str">'e'</span>,<span class="tok-str">'b'</span>,<span class="tok-str">'s'</span>,<span class="tok-str">'o'</span>,<span class="tok-str">'c'</span>,<span class="tok-str">'k'</span>,<span class="tok-str">'e'</span>,<span class="tok-str">'t'</span>,<span class="tok-str">'-'</span>,<span class="tok-str">'A'</span>,<span class="tok-str">'c'</span>,<span class="tok-str">'c'</span>,<span class="tok-str">'e'</span>,<span class="tok-str">'p'</span>,<span class="tok-str">'t'</span>,<span class="tok-str">':'</span>,<span class="tok-str">' '</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-number">0</span>,<span class="tok-str">'\r'</span>,<span class="tok-str">'\n'</span>,</span>
+<span class="line" id="L119">			<span class="tok-str">'\r'</span>,<span class="tok-str">'\n'</span></span>
+<span class="line" id="L120">		};</span>
+<span class="line" id="L121">		<span class="tok-kw">const</span> key_pos = buf.len - <span class="tok-number">32</span>;</span>
+<span class="line" id="L122"></span>
+<span class="line" id="L123">		<span class="tok-kw">var</span> hasher = std.crypto.hash.Sha1.init(.{});</span>
+<span class="line" id="L124">		hasher.update(self.key);</span>
+<span class="line" id="L125">		hasher.update(<span class="tok-str">&quot;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&quot;</span>);</span>
+<span class="line" id="L126">		hasher.final(&amp;h);</span>
+<span class="line" id="L127"></span>
+<span class="line" id="L128">		_ = std.base64.standard.Encoder.encode(buf[key_pos..key_pos+<span class="tok-number">28</span>], h[<span class="tok-number">0</span>..]);</span>
+<span class="line" id="L129">		<span class="tok-kw">try</span> stream.writeAll(&amp;buf);</span>
+<span class="line" id="L130">	}</span>
+<span class="line" id="L131">};</span>
+<span class="line" id="L132"></span>
+<span class="line" id="L133"><span class="tok-kw">fn</span> <span class="tok-fn">toLower</span>(str: []<span class="tok-type">u8</span>) []<span class="tok-type">u8</span> {</span>
+<span class="line" id="L134">	<span class="tok-kw">for</span> (str, <span class="tok-number">0</span>..) |c, i| {</span>
+<span class="line" id="L135">		str[i] = ascii.toLower(c);</span>
+<span class="line" id="L136">	}</span>
+<span class="line" id="L137">	<span class="tok-kw">return</span> str;</span>
+<span class="line" id="L138">}</span>
+<span class="line" id="L139"></span>
+<span class="line" id="L140"><span class="tok-comment">// This is what we're pooling</span>
+</span>
+<span class="line" id="L141"><span class="tok-kw">const</span> HandshakeState = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L142">	<span class="tok-comment">// a buffer to read data into</span>
+</span>
+<span class="line" id="L143">	buffer: []<span class="tok-type">u8</span>,</span>
+<span class="line" id="L144"></span>
+<span class="line" id="L145">	<span class="tok-comment">// Headers</span>
+</span>
+<span class="line" id="L146">	headers: KeyValue,</span>
+<span class="line" id="L147"></span>
+<span class="line" id="L148">	<span class="tok-kw">fn</span> <span class="tok-fn">init</span>(allocator: Allocator, buffer_size: <span class="tok-type">usize</span>, max_headers: <span class="tok-type">usize</span>) !*HandshakeState {</span>
+<span class="line" id="L149">		<span class="tok-kw">const</span> hs = <span class="tok-kw">try</span> allocator.create(HandshakeState);</span>
+<span class="line" id="L150">		hs.* = .{</span>
+<span class="line" id="L151">			.buffer = <span class="tok-kw">try</span> allocator.alloc(<span class="tok-type">u8</span>, buffer_size),</span>
+<span class="line" id="L152">			.headers = <span class="tok-kw">try</span> KeyValue.init(allocator, max_headers),</span>
+<span class="line" id="L153">		};</span>
+<span class="line" id="L154">		<span class="tok-kw">return</span> hs;</span>
+<span class="line" id="L155">	}</span>
+<span class="line" id="L156"></span>
+<span class="line" id="L157">	<span class="tok-kw">fn</span> <span class="tok-fn">deinit</span>(self: *HandshakeState, allocator: Allocator) <span class="tok-type">void</span> {</span>
+<span class="line" id="L158">		allocator.free(self.buffer);</span>
+<span class="line" id="L159">		self.headers.deinit(allocator);</span>
+<span class="line" id="L160">		allocator.destroy(self);</span>
+<span class="line" id="L161">	}</span>
+<span class="line" id="L162"></span>
+<span class="line" id="L163">	<span class="tok-kw">fn</span> <span class="tok-fn">reset</span>(self: *HandshakeState) <span class="tok-type">void</span> {</span>
+<span class="line" id="L164">		self.headers.reset();</span>
+<span class="line" id="L165">	}</span>
+<span class="line" id="L166">};</span>
+<span class="line" id="L167"></span>
+<span class="line" id="L168"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> Pool = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L169">	mutex: Mutex,</span>
+<span class="line" id="L170">	available: <span class="tok-type">usize</span>,</span>
+<span class="line" id="L171">	allocator: Allocator,</span>
+<span class="line" id="L172">	buffer_size: <span class="tok-type">usize</span>,</span>
+<span class="line" id="L173">	max_headers: <span class="tok-type">usize</span>,</span>
+<span class="line" id="L174">	states: []*HandshakeState,</span>
+<span class="line" id="L175"></span>
+<span class="line" id="L176">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">init</span>(allocator: Allocator, count: <span class="tok-type">usize</span>, buffer_size: <span class="tok-type">usize</span>, max_headers: <span class="tok-type">usize</span>) !Pool {</span>
+<span class="line" id="L177">		<span class="tok-kw">const</span> states = <span class="tok-kw">try</span> allocator.alloc(*HandshakeState, count);</span>
+<span class="line" id="L178"></span>
+<span class="line" id="L179">		<span class="tok-kw">for</span> (<span class="tok-number">0</span>..count) |i| {</span>
+<span class="line" id="L180">			states[i] = <span class="tok-kw">try</span> HandshakeState.init(allocator, buffer_size, max_headers);</span>
+<span class="line" id="L181">		}</span>
+<span class="line" id="L182"></span>
+<span class="line" id="L183">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L184">			.mutex = Mutex{},</span>
+<span class="line" id="L185">			.states = states,</span>
+<span class="line" id="L186">			.allocator = allocator,</span>
+<span class="line" id="L187">			.available = count,</span>
+<span class="line" id="L188">			.max_headers = max_headers,</span>
+<span class="line" id="L189">			.buffer_size = buffer_size,</span>
+<span class="line" id="L190">		};</span>
+<span class="line" id="L191">	}</span>
+<span class="line" id="L192"></span>
+<span class="line" id="L193">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">deinit</span>(self: *Pool) <span class="tok-type">void</span> {</span>
+<span class="line" id="L194">		<span class="tok-kw">const</span> allocator = self.allocator;</span>
+<span class="line" id="L195">		<span class="tok-kw">for</span> (self.states) |s| {</span>
+<span class="line" id="L196">			s.deinit(allocator);</span>
+<span class="line" id="L197">		}</span>
+<span class="line" id="L198">		allocator.free(self.states);</span>
+<span class="line" id="L199">	}</span>
+<span class="line" id="L200"></span>
+<span class="line" id="L201">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">acquire</span>(self: *Pool) !*HandshakeState {</span>
+<span class="line" id="L202">		<span class="tok-kw">const</span> states = self.states;</span>
+<span class="line" id="L203"></span>
+<span class="line" id="L204">		self.mutex.lock();</span>
+<span class="line" id="L205">		<span class="tok-kw">const</span> available = self.available;</span>
+<span class="line" id="L206">		<span class="tok-kw">if</span> (available == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L207">			<span class="tok-comment">// dont hold the lock over factory</span>
+</span>
+<span class="line" id="L208">			self.mutex.unlock();</span>
+<span class="line" id="L209">			<span class="tok-kw">return</span> <span class="tok-kw">try</span> HandshakeState.init(self.allocator, self.buffer_size, self.max_headers);</span>
+<span class="line" id="L210">		}</span>
+<span class="line" id="L211">		<span class="tok-kw">const</span> index = available - <span class="tok-number">1</span>;</span>
+<span class="line" id="L212">		<span class="tok-kw">const</span> state = states[index];</span>
+<span class="line" id="L213">		self.available = index;</span>
+<span class="line" id="L214">		self.mutex.unlock();</span>
+<span class="line" id="L215">		<span class="tok-kw">return</span> state;</span>
+<span class="line" id="L216">	}</span>
+<span class="line" id="L217"></span>
+<span class="line" id="L218">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">release</span>(self: *Pool, state: *HandshakeState) <span class="tok-type">void</span> {</span>
+<span class="line" id="L219">		state.reset();</span>
+<span class="line" id="L220">		<span class="tok-kw">var</span> states = self.states;</span>
+<span class="line" id="L221"></span>
+<span class="line" id="L222">		self.mutex.lock();</span>
+<span class="line" id="L223">		<span class="tok-kw">const</span> available = self.available;</span>
+<span class="line" id="L224">		<span class="tok-kw">if</span> (available == states.len) {</span>
+<span class="line" id="L225">			self.mutex.unlock();</span>
+<span class="line" id="L226">			state.deinit(self.allocator);</span>
+<span class="line" id="L227">			<span class="tok-kw">return</span>;</span>
+<span class="line" id="L228">		}</span>
+<span class="line" id="L229">		states[available] = state;</span>
+<span class="line" id="L230">		self.available = available + <span class="tok-number">1</span>;</span>
+<span class="line" id="L231">		self.mutex.unlock();</span>
+<span class="line" id="L232">	}</span>
+<span class="line" id="L233">};</span>
+<span class="line" id="L234"></span>
+<span class="line" id="L235"><span class="tok-kw">const</span> t = lib.testing;</span>
+<span class="line" id="L236"><span class="tok-kw">const</span> readRequest = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;server.zig&quot;</span>).readRequest;</span>
+<span class="line" id="L237"><span class="tok-kw">test</span> <span class="tok-str">&quot;handshake: parse&quot;</span> {</span>
+<span class="line" id="L238">	<span class="tok-kw">var</span> buffer: [<span class="tok-number">512</span>]<span class="tok-type">u8</span> = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L239">	<span class="tok-kw">var</span> buf = buffer[<span class="tok-number">0</span>..];</span>
+<span class="line" id="L240">	<span class="tok-kw">var</span> headers = <span class="tok-kw">try</span> KeyValue.init(t.allocator, <span class="tok-number">10</span>);</span>
+<span class="line" id="L241">	<span class="tok-kw">defer</span> headers.deinit(t.allocator);</span>
+<span class="line" id="L242"></span>
+<span class="line" id="L243">	<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.InvalidProtocol, testHandshake(<span class="tok-str">&quot;GET / HTTP/1.0\r\n\r\n&quot;</span>, buf, &amp;headers));</span>
+<span class="line" id="L244">	<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.MissingHeaders, testHandshake(<span class="tok-str">&quot;GET / HTTP/1.1\r\n\r\n&quot;</span>, buf, &amp;headers));</span>
+<span class="line" id="L245">	<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.MissingHeaders, testHandshake(<span class="tok-str">&quot;GET / HTTP/1.1\r\nConnection:  upgrade\r\n\r\n&quot;</span>, buf, &amp;headers));</span>
+<span class="line" id="L246">	<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.MissingHeaders, testHandshake(<span class="tok-str">&quot;GET / HTTP/1.1\r\nConnection: upgrade\r\nUpgrade: websocket\r\n\r\n&quot;</span>, buf, &amp;headers));</span>
+<span class="line" id="L247">	<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.MissingHeaders, testHandshake(<span class="tok-str">&quot;GET / HTTP/1.1\r\nConnection: upgrade\r\nUpgrade: websocket\r\nsec-websocket-version:13\r\n\r\n&quot;</span>, buf, &amp;headers));</span>
+<span class="line" id="L248"></span>
+<span class="line" id="L249">	{</span>
+<span class="line" id="L250">		headers.reset();</span>
+<span class="line" id="L251">		<span class="tok-kw">const</span> h = <span class="tok-kw">try</span> testHandshake(<span class="tok-str">&quot;GET /test?a=1   HTTP/1.1\r\nConnection: upgrade\r\nUpgrade: websocket\r\nsec-websocket-version:13\r\nsec-websocket-key: 9000!\r\nCustom:  Header-Value\r\n\r\n&quot;</span>, buf, &amp;headers);</span>
+<span class="line" id="L252">		<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;9000!&quot;</span>, h.key);</span>
+<span class="line" id="L253">		<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;GET&quot;</span>, h.method);</span>
+<span class="line" id="L254">		<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;/test?a=1&quot;</span>, h.url);</span>
+<span class="line" id="L255">		<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;connection: upgrade\r\nupgrade: websocket\r\nsec-websocket-version:13\r\nsec-websocket-key: 9000!\r\ncustom:  Header-Value\r\n&quot;</span>, h.raw_header);</span>
+<span class="line" id="L256">		<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;upgrade&quot;</span>, headers.get(<span class="tok-str">&quot;connection&quot;</span>).?);</span>
+<span class="line" id="L257">		<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;websocket&quot;</span>, headers.get(<span class="tok-str">&quot;upgrade&quot;</span>).?);</span>
+<span class="line" id="L258">		<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;13&quot;</span>, headers.get(<span class="tok-str">&quot;sec-websocket-version&quot;</span>).?);</span>
+<span class="line" id="L259">		<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;9000!&quot;</span>, headers.get(<span class="tok-str">&quot;sec-websocket-key&quot;</span>).?);</span>
+<span class="line" id="L260">		<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;Header-Value&quot;</span>, headers.get(<span class="tok-str">&quot;custom&quot;</span>).?);</span>
+<span class="line" id="L261">	}</span>
+<span class="line" id="L262"></span>
+<span class="line" id="L263">	<span class="tok-comment">// fuzz tests</span>
+</span>
+<span class="line" id="L264">	{</span>
+<span class="line" id="L265">		headers.reset();</span>
+<span class="line" id="L266">		<span class="tok-kw">var</span> r = t.getRandom();</span>
+<span class="line" id="L267">		<span class="tok-kw">var</span> random = r.random();</span>
+<span class="line" id="L268">		<span class="tok-kw">var</span> count: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L269">		<span class="tok-kw">const</span> valid = <span class="tok-str">&quot;GET / HTTP/1.1\r\nsec-websocket-key: 1139329\r\nConnection: upgrade\r\nUpgrade:WebSocket\r\nSEC-WEBSOCKET-VERSION:   13  \r\n\r\n&quot;</span>;</span>
+<span class="line" id="L270">		<span class="tok-kw">while</span> (count &lt; <span class="tok-number">5000</span>) : (count += <span class="tok-number">1</span>) {</span>
+<span class="line" id="L271">			<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L272">			<span class="tok-kw">var</span> data: []<span class="tok-kw">const</span> <span class="tok-type">u8</span> = valid[<span class="tok-number">0</span>..];</span>
+<span class="line" id="L273">			<span class="tok-kw">while</span> (data.len &gt; <span class="tok-number">0</span>) {</span>
+<span class="line" id="L274">				<span class="tok-kw">const</span> l = random.uintAtMost(<span class="tok-type">usize</span>, data.len - <span class="tok-number">1</span>) + <span class="tok-number">1</span>;</span>
+<span class="line" id="L275">				_ = s.add(data[<span class="tok-number">0</span>..l]);</span>
+<span class="line" id="L276">				data = data[l..];</span>
+<span class="line" id="L277">			}</span>
+<span class="line" id="L278">			<span class="tok-kw">const</span> request_buf = readRequest(&amp;s, buf, <span class="tok-null">null</span>) <span class="tok-kw">catch</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L279">			<span class="tok-kw">const</span> h = Handshake.parse(request_buf, &amp;headers) <span class="tok-kw">catch</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L280">			<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;1139329&quot;</span>, h.key);</span>
+<span class="line" id="L281">			<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;/&quot;</span>, h.url);</span>
+<span class="line" id="L282">			<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;GET&quot;</span>, h.method);</span>
+<span class="line" id="L283">			s.deinit();</span>
+<span class="line" id="L284">		}</span>
+<span class="line" id="L285">	}</span>
+<span class="line" id="L286">}</span>
+<span class="line" id="L287"></span>
+<span class="line" id="L288"><span class="tok-kw">test</span> <span class="tok-str">&quot;handshake: reply&quot;</span> {</span>
+<span class="line" id="L289">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L290">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L291"></span>
+<span class="line" id="L292">	<span class="tok-kw">const</span> h = Handshake{</span>
+<span class="line" id="L293">		.url = <span class="tok-str">&quot;&quot;</span>,</span>
+<span class="line" id="L294">		.method = <span class="tok-str">&quot;&quot;</span>,</span>
+<span class="line" id="L295">		.raw_header = <span class="tok-str">&quot;&quot;</span>,</span>
+<span class="line" id="L296">		.headers = <span class="tok-null">undefined</span>,</span>
+<span class="line" id="L297">		.key = <span class="tok-str">&quot;this is my key&quot;</span>,</span>
+<span class="line" id="L298">	};</span>
+<span class="line" id="L299">	<span class="tok-kw">try</span> h.reply(&amp;s);</span>
+<span class="line" id="L300"></span>
+<span class="line" id="L301">	<span class="tok-kw">var</span> pos: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L302">	<span class="tok-kw">const</span> expected = <span class="tok-str">&quot;HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: upgrade\r\nSec-Websocket-Accept: flzHu2DevQ2dSCSVqKSii5e9C2o=\r\n\r\n&quot;</span>;</span>
+<span class="line" id="L303">	<span class="tok-kw">for</span> (s.received.items) |chunk| {</span>
+<span class="line" id="L304">		<span class="tok-kw">try</span> t.expectString(expected[pos..(pos+chunk.len)], chunk);</span>
+<span class="line" id="L305">		pos += chunk.len;</span>
+<span class="line" id="L306">	}</span>
+<span class="line" id="L307">}</span>
+<span class="line" id="L308"></span>
+<span class="line" id="L309"><span class="tok-kw">test</span> <span class="tok-str">&quot;pool: acquire and release&quot;</span> {</span>
+<span class="line" id="L310">	<span class="tok-comment">// not 100% sure this is testing exactly what I want, but it's ....something ?</span>
+</span>
+<span class="line" id="L311">	<span class="tok-kw">var</span> p = <span class="tok-kw">try</span> Pool.init(t.allocator, <span class="tok-number">2</span>, <span class="tok-number">10</span>, <span class="tok-number">3</span>);</span>
+<span class="line" id="L312">	<span class="tok-kw">defer</span> p.deinit();</span>
+<span class="line" id="L313"></span>
+<span class="line" id="L314">	<span class="tok-kw">var</span> hs1a = p.acquire() <span class="tok-kw">catch</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L315">	<span class="tok-kw">var</span> hs2a = p.acquire() <span class="tok-kw">catch</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L316">	<span class="tok-kw">var</span> hs3a = p.acquire() <span class="tok-kw">catch</span> <span class="tok-kw">unreachable</span>; <span class="tok-comment">// this should be dynamically generated</span>
+</span>
+<span class="line" id="L317"></span>
+<span class="line" id="L318">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">false</span>, &amp;hs1a.buffer[<span class="tok-number">0</span>] == &amp;hs2a.buffer[<span class="tok-number">0</span>]);</span>
+<span class="line" id="L319">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">false</span>, &amp;hs2a.buffer[<span class="tok-number">0</span>] == &amp;hs3a.buffer[<span class="tok-number">0</span>]);</span>
+<span class="line" id="L320">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">10</span>, hs1a.buffer.len);</span>
+<span class="line" id="L321">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">10</span>, hs2a.buffer.len);</span>
+<span class="line" id="L322">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">10</span>, hs3a.buffer.len);</span>
+<span class="line" id="L323">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">0</span>, hs1a.headers.len);</span>
+<span class="line" id="L324">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">0</span>, hs2a.headers.len);</span>
+<span class="line" id="L325">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">0</span>, hs3a.headers.len);</span>
+<span class="line" id="L326">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">3</span>, hs1a.headers.keys.len);</span>
+<span class="line" id="L327">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">3</span>, hs2a.headers.keys.len);</span>
+<span class="line" id="L328">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-number">3</span>, hs3a.headers.keys.len);</span>
+<span class="line" id="L329"></span>
+<span class="line" id="L330">	p.release(hs1a);</span>
+<span class="line" id="L331"></span>
+<span class="line" id="L332">	<span class="tok-kw">var</span> hs1b = p.acquire() <span class="tok-kw">catch</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L333">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, &amp;hs1a.buffer[<span class="tok-number">0</span>] == &amp;hs1b.buffer[<span class="tok-number">0</span>]);</span>
+<span class="line" id="L334"></span>
+<span class="line" id="L335">	p.release(hs3a);</span>
+<span class="line" id="L336">	p.release(hs2a);</span>
+<span class="line" id="L337">	p.release(hs1b);</span>
+<span class="line" id="L338">}</span>
+<span class="line" id="L339"></span>
+<span class="line" id="L340"><span class="tok-kw">test</span> <span class="tok-str">&quot;pool: threadsafety&quot;</span> {</span>
+<span class="line" id="L341">	<span class="tok-kw">var</span> p = <span class="tok-kw">try</span> Pool.init(t.allocator, <span class="tok-number">4</span>, <span class="tok-number">10</span>, <span class="tok-number">2</span>);</span>
+<span class="line" id="L342">	<span class="tok-kw">defer</span> p.deinit();</span>
+<span class="line" id="L343"></span>
+<span class="line" id="L344">	<span class="tok-kw">for</span> (p.states) |hs| {</span>
+<span class="line" id="L345">		hs.buffer[<span class="tok-number">0</span>] = <span class="tok-number">0</span>;</span>
+<span class="line" id="L346">	}</span>
+<span class="line" id="L347"></span>
+<span class="line" id="L348">	<span class="tok-kw">const</span> t1 = <span class="tok-kw">try</span> std.Thread.spawn(.{}, testPool, .{&amp;p});</span>
+<span class="line" id="L349">	<span class="tok-kw">const</span> t2 = <span class="tok-kw">try</span> std.Thread.spawn(.{}, testPool, .{&amp;p});</span>
+<span class="line" id="L350">	<span class="tok-kw">const</span> t3 = <span class="tok-kw">try</span> std.Thread.spawn(.{}, testPool, .{&amp;p});</span>
+<span class="line" id="L351">	<span class="tok-kw">const</span> t4 = <span class="tok-kw">try</span> std.Thread.spawn(.{}, testPool, .{&amp;p});</span>
+<span class="line" id="L352"></span>
+<span class="line" id="L353">	t1.join(); t2.join(); t3.join(); t4.join();</span>
+<span class="line" id="L354">}</span>
+<span class="line" id="L355"></span>
+<span class="line" id="L356"><span class="tok-kw">fn</span> <span class="tok-fn">testPool</span>(p: *Pool) <span class="tok-type">void</span> {</span>
+<span class="line" id="L357">	<span class="tok-kw">var</span> r = t.getRandom();</span>
+<span class="line" id="L358">	<span class="tok-kw">const</span> random = r.random();</span>
+<span class="line" id="L359"></span>
+<span class="line" id="L360">	<span class="tok-kw">for</span> (<span class="tok-number">0</span>..<span class="tok-number">5000</span>) |_| {</span>
+<span class="line" id="L361">		<span class="tok-kw">var</span> hs = p.acquire() <span class="tok-kw">catch</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L362">		std.debug.assert(hs.buffer[<span class="tok-number">0</span>] == <span class="tok-number">0</span>);</span>
+<span class="line" id="L363">		hs.buffer[<span class="tok-number">0</span>] = <span class="tok-number">255</span>;</span>
+<span class="line" id="L364">		std.time.sleep(random.uintAtMost(<span class="tok-type">u32</span>, <span class="tok-number">100000</span>));</span>
+<span class="line" id="L365">		hs.buffer[<span class="tok-number">0</span>] = <span class="tok-number">0</span>;</span>
+<span class="line" id="L366">		p.release(hs);</span>
+<span class="line" id="L367">	}</span>
+<span class="line" id="L368">}</span>
+<span class="line" id="L369"></span>
+<span class="line" id="L370"><span class="tok-kw">fn</span> <span class="tok-fn">testHandshake</span>(input: []<span class="tok-kw">const</span> <span class="tok-type">u8</span>, buf: []<span class="tok-type">u8</span>, headers: *KeyValue) !Handshake {</span>
+<span class="line" id="L371">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L372">	_ = s.add(input);</span>
+<span class="line" id="L373"></span>
+<span class="line" id="L374">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L375">	<span class="tok-kw">const</span> request_buf = <span class="tok-kw">try</span> readRequest(&amp;s, buf, <span class="tok-null">null</span>);</span>
+<span class="line" id="L376">	<span class="tok-kw">return</span> Handshake.parse(request_buf, headers);</span>
+<span class="line" id="L377">}</span>
+<span class="line" id="L378"></span>
+</code></pre></body>
+</html>

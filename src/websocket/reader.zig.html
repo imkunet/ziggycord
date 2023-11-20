@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>reader.zig - source view</title>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgklEQVR4AWMYWuD7EllJIM4G4g4g5oIJ/odhOJ8wToOxSTXgNxDHoeiBMfA4+wGShjyYOCkG/IGqWQziEzYAoUAeiF9D5U+DxEg14DRU7jWIT5IBIOdCxf+A+CQZAAoopEB7QJwBCBwHiip8UYmRdrAlDpIMgApwQZNnNii5Dq0MBgCxxycBnwEd+wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
+    <style>
+      body{
+        font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      pre > code {
+        display: block;
+        overflow: auto;
+        line-height: normal;
+        margin: 0em;
+      }
+      .tok-kw {
+          color: #333;
+          font-weight: bold;
+      }
+      .tok-str {
+          color: #d14;
+      }
+      .tok-builtin {
+          color: #005C7A;
+      }
+      .tok-comment {
+          color: #545454;
+          font-style: italic;
+      }
+      .tok-fn {
+          color: #900;
+          font-weight: bold;
+      }
+      .tok-null {
+          color: #005C5C;
+      }
+      .tok-number {
+          color: #005C5C;
+      }
+      .tok-type {
+          color: #458;
+          font-weight: bold;
+      }
+      pre {
+        counter-reset: line;
+      }
+      pre .line:before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        padding-right: 1em;
+        width: 2em;
+        text-align: right;
+        color: #999;
+      }
+      
+      .line {
+        width: 100%;
+        display: inline-block;
+      }
+      .line:target {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        background: #fafafa;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body{
+            background:#222;
+            color: #ccc;
+        }
+        pre > code {
+            color: #ccc;
+            background: #222;
+            border: unset;
+        }
+        .line:target {
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+            background: #333;
+        }
+        .tok-kw {
+            color: #eee;
+        }
+        .tok-str {
+            color: #2e5;
+        }
+        .tok-builtin {
+            color: #ff894c;
+        }
+        .tok-comment {
+            color: #aa7;
+        }
+        .tok-fn {
+            color: #B1A0F8;
+        }
+        .tok-null {
+            color: #ff8080;
+        }
+        .tok-number {
+            color: #ff8080;
+        }
+        .tok-type {
+            color: #68f;
+        }
+      }
+    </style>
+</head>
+<body>
+<pre><code><span class="line" id="L1"><span class="tok-kw">const</span> std = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std&quot;</span>);</span>
+<span class="line" id="L2"><span class="tok-kw">const</span> lib = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;lib.zig&quot;</span>);</span>
+<span class="line" id="L3"></span>
+<span class="line" id="L4"><span class="tok-kw">const</span> buffer = lib.buffer;</span>
+<span class="line" id="L5"><span class="tok-kw">const</span> framing = lib.framing;</span>
+<span class="line" id="L6"><span class="tok-kw">const</span> Message = lib.Message;</span>
+<span class="line" id="L7"><span class="tok-kw">const</span> MessageType = lib.MessageType;</span>
+<span class="line" id="L8"></span>
+<span class="line" id="L9"><span class="tok-kw">const</span> Fragmented = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;fragmented.zig&quot;</span>).Fragmented;</span>
+<span class="line" id="L10"></span>
+<span class="line" id="L11"><span class="tok-kw">const</span> Allocator = std.mem.Allocator;</span>
+<span class="line" id="L12"></span>
+<span class="line" id="L13"><span class="tok-kw">const</span> ParsePhase = <span class="tok-kw">enum</span> {</span>
+<span class="line" id="L14">	pre,</span>
+<span class="line" id="L15">	header,</span>
+<span class="line" id="L16">	payload,</span>
+<span class="line" id="L17">};</span>
+<span class="line" id="L18"></span>
+<span class="line" id="L19"><span class="tok-kw">pub</span> <span class="tok-kw">const</span> Reader = <span class="tok-kw">struct</span> {</span>
+<span class="line" id="L20">	<span class="tok-comment">// Where we go to get buffers. Hides the buffer-getting details, which is</span>
+</span>
+<span class="line" id="L21">	<span class="tok-comment">// based on both how we're configured as well as how large a buffer we need</span>
+</span>
+<span class="line" id="L22">	bp: *buffer.Provider,</span>
+<span class="line" id="L23"></span>
+<span class="line" id="L24">	<span class="tok-comment">// Start position in buf of active data</span>
+</span>
+<span class="line" id="L25">	start: <span class="tok-type">usize</span>,</span>
+<span class="line" id="L26"></span>
+<span class="line" id="L27">	<span class="tok-comment">// Length of active data. Can span more than one message</span>
+</span>
+<span class="line" id="L28">	<span class="tok-comment">// buf[start..start + len]</span>
+</span>
+<span class="line" id="L29">	len: <span class="tok-type">usize</span>,</span>
+<span class="line" id="L30"></span>
+<span class="line" id="L31">	<span class="tok-comment">// Length of active message. message_len is always &lt;= len</span>
+</span>
+<span class="line" id="L32">	<span class="tok-comment">// buf[start..start + message_len]</span>
+</span>
+<span class="line" id="L33">	message_len: <span class="tok-type">usize</span>,</span>
+<span class="line" id="L34"></span>
+<span class="line" id="L35">	<span class="tok-comment">// Maximum supported message size</span>
+</span>
+<span class="line" id="L36">	max_size: <span class="tok-type">usize</span>,</span>
+<span class="line" id="L37"></span>
+<span class="line" id="L38">	<span class="tok-comment">// The current buffer, can reference static, a buffer from the pool, or some</span>
+</span>
+<span class="line" id="L39">	<span class="tok-comment">// dynamically allocated memory</span>
+</span>
+<span class="line" id="L40">	buf: buffer.Buffer,</span>
+<span class="line" id="L41"></span>
+<span class="line" id="L42">	<span class="tok-comment">// Our static buffer. Initialized upfront.</span>
+</span>
+<span class="line" id="L43">	static: buffer.Buffer,</span>
+<span class="line" id="L44"></span>
+<span class="line" id="L45">	<span class="tok-comment">// If we're dealing with a fragmented message (websocket fragment, not tcp</span>
+</span>
+<span class="line" id="L46">	<span class="tok-comment">// fragment), the state of the fragmented message is maintained here.)</span>
+</span>
+<span class="line" id="L47">	fragment: ?Fragmented,</span>
+<span class="line" id="L48"></span>
+<span class="line" id="L49">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">init</span>(buffer_size: <span class="tok-type">usize</span>, max_size: <span class="tok-type">usize</span>, bp: *buffer.Provider) !Reader {</span>
+<span class="line" id="L50">		<span class="tok-kw">const</span> static = <span class="tok-kw">try</span> bp.static(buffer_size);</span>
+<span class="line" id="L51"></span>
+<span class="line" id="L52">		<span class="tok-kw">return</span> .{</span>
+<span class="line" id="L53">			.bp = bp,</span>
+<span class="line" id="L54">			.len = <span class="tok-number">0</span>,</span>
+<span class="line" id="L55">			.start = <span class="tok-number">0</span>,</span>
+<span class="line" id="L56">			.buf = static,</span>
+<span class="line" id="L57">			.static = static,</span>
+<span class="line" id="L58">			.message_len = <span class="tok-number">0</span>,</span>
+<span class="line" id="L59">			.fragment = <span class="tok-null">null</span>,</span>
+<span class="line" id="L60">			.max_size = max_size,</span>
+<span class="line" id="L61">		};</span>
+<span class="line" id="L62">	}</span>
+<span class="line" id="L63"></span>
+<span class="line" id="L64">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">deinit</span>(self: *Reader) <span class="tok-type">void</span> {</span>
+<span class="line" id="L65">		<span class="tok-kw">if</span> (self.fragment) |f| {</span>
+<span class="line" id="L66">			f.deinit();</span>
+<span class="line" id="L67">		}</span>
+<span class="line" id="L68"></span>
+<span class="line" id="L69">		<span class="tok-kw">if</span> (self.buf.<span class="tok-type">type</span> != .static) {</span>
+<span class="line" id="L70">			self.bp.free(self.buf);</span>
+<span class="line" id="L71">		}</span>
+<span class="line" id="L72"></span>
+<span class="line" id="L73">		<span class="tok-comment">// the reader owns static, when it goes, static goes</span>
+</span>
+<span class="line" id="L74">		self.bp.free(self.static);</span>
+<span class="line" id="L75">	}</span>
+<span class="line" id="L76"></span>
+<span class="line" id="L77">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">handled</span>(self: *Reader) <span class="tok-type">void</span> {</span>
+<span class="line" id="L78">		<span class="tok-kw">if</span> (self.fragment) |f| {</span>
+<span class="line" id="L79">			f.deinit();</span>
+<span class="line" id="L80">			self.fragment = <span class="tok-null">null</span>;</span>
+<span class="line" id="L81">		}</span>
+<span class="line" id="L82">	}</span>
+<span class="line" id="L83"></span>
+<span class="line" id="L84">	<span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">readMessage</span>(self: *Reader, stream: <span class="tok-kw">anytype</span>) !Message {</span>
+<span class="line" id="L85">		<span class="tok-comment">// Our inner loop reads 1 websocket frame, which may not form a whole message</span>
+</span>
+<span class="line" id="L86">		<span class="tok-comment">// due to the fact that websocket has its own annoying fragmentation thing</span>
+</span>
+<span class="line" id="L87">		<span class="tok-comment">// going on.</span>
+</span>
+<span class="line" id="L88">		<span class="tok-comment">// Besides an error, we only want to return from here if we have a full message</span>
+</span>
+<span class="line" id="L89">		<span class="tok-comment">// which would either be:</span>
+</span>
+<span class="line" id="L90">		<span class="tok-comment">//  - a control frame within a fragmented message,</span>
+</span>
+<span class="line" id="L91">		<span class="tok-comment">//  - a fragmented message that we have all the pieces to,</span>
+</span>
+<span class="line" id="L92">		<span class="tok-comment">//  - a single frame (control or otherwise) that forms a full message</span>
+</span>
+<span class="line" id="L93">		<span class="tok-comment">//    (this last one is the most common case)</span>
+</span>
+<span class="line" id="L94">		outer: <span class="tok-kw">while</span> (<span class="tok-null">true</span>) {</span>
+<span class="line" id="L95">			<span class="tok-kw">var</span> data_needed: <span class="tok-type">usize</span> = <span class="tok-number">2</span>; <span class="tok-comment">// always need at least the first two bytes to start figuring things out</span>
+</span>
+<span class="line" id="L96">			<span class="tok-kw">var</span> phase = ParsePhase.pre;</span>
+<span class="line" id="L97">			<span class="tok-kw">var</span> header_length: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L98">			<span class="tok-kw">var</span> length_of_length: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L99"></span>
+<span class="line" id="L100">			<span class="tok-kw">var</span> masked = <span class="tok-null">true</span>;</span>
+<span class="line" id="L101">			<span class="tok-kw">var</span> is_continuation = <span class="tok-null">false</span>;</span>
+<span class="line" id="L102">			<span class="tok-kw">var</span> message_type: MessageType = <span class="tok-null">undefined</span>;</span>
+<span class="line" id="L103"></span>
+<span class="line" id="L104">			self.prepareForNewMessage();</span>
+<span class="line" id="L105"></span>
+<span class="line" id="L106">			<span class="tok-kw">while</span> (<span class="tok-null">true</span>) {</span>
+<span class="line" id="L107">				<span class="tok-kw">if</span> ((<span class="tok-kw">try</span> self.read(stream, data_needed)) == <span class="tok-null">false</span>) {</span>
+<span class="line" id="L108">					<span class="tok-kw">return</span> <span class="tok-kw">error</span>.Closed;</span>
+<span class="line" id="L109">				}</span>
+<span class="line" id="L110"></span>
+<span class="line" id="L111">				<span class="tok-kw">switch</span> (phase) {</span>
+<span class="line" id="L112">					.pre =&gt; {</span>
+<span class="line" id="L113">						<span class="tok-kw">const</span> msg = self.currentMessage();</span>
+<span class="line" id="L114">						<span class="tok-kw">var</span> byte1 = msg[<span class="tok-number">0</span>];</span>
+<span class="line" id="L115">						<span class="tok-kw">var</span> byte2 = msg[<span class="tok-number">1</span>];</span>
+<span class="line" id="L116">						masked = byte2 &amp; <span class="tok-number">128</span> == <span class="tok-number">128</span>;</span>
+<span class="line" id="L117">						length_of_length = <span class="tok-kw">switch</span> (byte2 &amp; <span class="tok-number">127</span>) {</span>
+<span class="line" id="L118">							<span class="tok-number">126</span> =&gt; <span class="tok-number">2</span>,</span>
+<span class="line" id="L119">							<span class="tok-number">127</span> =&gt; <span class="tok-number">8</span>,</span>
+<span class="line" id="L120">							<span class="tok-kw">else</span> =&gt; <span class="tok-number">0</span>,</span>
+<span class="line" id="L121">						};</span>
+<span class="line" id="L122">						phase = ParsePhase.header;</span>
+<span class="line" id="L123">						header_length = <span class="tok-number">2</span> + length_of_length;</span>
+<span class="line" id="L124">						<span class="tok-kw">if</span> (masked) {</span>
+<span class="line" id="L125">							header_length += <span class="tok-number">4</span>;</span>
+<span class="line" id="L126">						}</span>
+<span class="line" id="L127">						data_needed = header_length;</span>
+<span class="line" id="L128"></span>
+<span class="line" id="L129">						<span class="tok-kw">switch</span> (byte1 &amp; <span class="tok-number">15</span>) {</span>
+<span class="line" id="L130">							<span class="tok-number">0</span> =&gt; is_continuation = <span class="tok-null">true</span>,</span>
+<span class="line" id="L131">							<span class="tok-number">1</span> =&gt; message_type = .text,</span>
+<span class="line" id="L132">							<span class="tok-number">2</span> =&gt; message_type = .binary,</span>
+<span class="line" id="L133">							<span class="tok-number">8</span> =&gt; message_type = .close,</span>
+<span class="line" id="L134">							<span class="tok-number">9</span> =&gt; message_type = .ping,</span>
+<span class="line" id="L135">							<span class="tok-number">10</span> =&gt; message_type = .pong,</span>
+<span class="line" id="L136">							<span class="tok-kw">else</span> =&gt; <span class="tok-kw">return</span> <span class="tok-kw">error</span>.InvalidMessageType,</span>
+<span class="line" id="L137">						}</span>
+<span class="line" id="L138"></span>
+<span class="line" id="L139">						<span class="tok-comment">// FIN, RSV1, RSV2, RSV3, OP,OP,OP,OP</span>
+</span>
+<span class="line" id="L140">						<span class="tok-comment">// none of the RSV bits should be set</span>
+</span>
+<span class="line" id="L141">						<span class="tok-kw">if</span> (byte1 &amp; <span class="tok-number">112</span> != <span class="tok-number">0</span>) {</span>
+<span class="line" id="L142">							<span class="tok-kw">return</span> <span class="tok-kw">error</span>.ReservedFlags;</span>
+<span class="line" id="L143">						}</span>
+<span class="line" id="L144"></span>
+<span class="line" id="L145">						<span class="tok-kw">if</span> (!is_continuation <span class="tok-kw">and</span> length_of_length != <span class="tok-number">0</span> <span class="tok-kw">and</span> (message_type == .ping <span class="tok-kw">or</span> message_type == .close <span class="tok-kw">or</span> message_type == .pong)) {</span>
+<span class="line" id="L146">							<span class="tok-kw">return</span> <span class="tok-kw">error</span>.LargeControl;</span>
+<span class="line" id="L147">						}</span>
+<span class="line" id="L148">					},</span>
+<span class="line" id="L149">					.header =&gt; {</span>
+<span class="line" id="L150">						<span class="tok-kw">const</span> msg = self.currentMessage();</span>
+<span class="line" id="L151">						<span class="tok-kw">var</span> payload_length = <span class="tok-kw">switch</span> (length_of_length) {</span>
+<span class="line" id="L152">							<span class="tok-number">2</span> =&gt; <span class="tok-builtin">@as</span>(<span class="tok-type">u16</span>, <span class="tok-builtin">@intCast</span>(msg[<span class="tok-number">3</span>])) | <span class="tok-builtin">@as</span>(<span class="tok-type">u16</span>, <span class="tok-builtin">@intCast</span>(msg[<span class="tok-number">2</span>])) &lt;&lt; <span class="tok-number">8</span>,</span>
+<span class="line" id="L153">							<span class="tok-number">8</span> =&gt; <span class="tok-builtin">@as</span>(<span class="tok-type">u64</span>, <span class="tok-builtin">@intCast</span>(msg[<span class="tok-number">9</span>])) | <span class="tok-builtin">@as</span>(<span class="tok-type">u64</span>, <span class="tok-builtin">@intCast</span>(msg[<span class="tok-number">8</span>])) &lt;&lt; <span class="tok-number">8</span> | <span class="tok-builtin">@as</span>(<span class="tok-type">u64</span>, <span class="tok-builtin">@intCast</span>(msg[<span class="tok-number">7</span>])) &lt;&lt; <span class="tok-number">16</span> | <span class="tok-builtin">@as</span>(<span class="tok-type">u64</span>, <span class="tok-builtin">@intCast</span>(msg[<span class="tok-number">6</span>])) &lt;&lt; <span class="tok-number">24</span> | <span class="tok-builtin">@as</span>(<span class="tok-type">u64</span>, <span class="tok-builtin">@intCast</span>(msg[<span class="tok-number">5</span>])) &lt;&lt; <span class="tok-number">32</span> | <span class="tok-builtin">@as</span>(<span class="tok-type">u64</span>, <span class="tok-builtin">@intCast</span>(msg[<span class="tok-number">4</span>])) &lt;&lt; <span class="tok-number">40</span> | <span class="tok-builtin">@as</span>(<span class="tok-type">u64</span>, <span class="tok-builtin">@intCast</span>(msg[<span class="tok-number">3</span>])) &lt;&lt; <span class="tok-number">48</span> | <span class="tok-builtin">@as</span>(<span class="tok-type">u64</span>, <span class="tok-builtin">@intCast</span>(msg[<span class="tok-number">2</span>])) &lt;&lt; <span class="tok-number">56</span>,</span>
+<span class="line" id="L154">							<span class="tok-kw">else</span> =&gt; msg[<span class="tok-number">1</span>] &amp; <span class="tok-number">127</span>,</span>
+<span class="line" id="L155">						};</span>
+<span class="line" id="L156">						data_needed += payload_length;</span>
+<span class="line" id="L157">						phase = ParsePhase.payload;</span>
+<span class="line" id="L158">					},</span>
+<span class="line" id="L159">					.payload =&gt; {</span>
+<span class="line" id="L160">						<span class="tok-kw">const</span> msg = self.currentMessage();</span>
+<span class="line" id="L161">						<span class="tok-kw">const</span> fin = msg[<span class="tok-number">0</span>] &amp; <span class="tok-number">128</span> == <span class="tok-number">128</span>;</span>
+<span class="line" id="L162">						<span class="tok-kw">var</span> payload = msg[header_length..];</span>
+<span class="line" id="L163"></span>
+<span class="line" id="L164">						<span class="tok-kw">if</span> (masked) {</span>
+<span class="line" id="L165">							<span class="tok-kw">const</span> mask = msg[header_length - <span class="tok-number">4</span> .. header_length];</span>
+<span class="line" id="L166">							framing.mask(mask, payload);</span>
+<span class="line" id="L167">						}</span>
+<span class="line" id="L168"></span>
+<span class="line" id="L169">						<span class="tok-kw">if</span> (fin) {</span>
+<span class="line" id="L170">							<span class="tok-kw">if</span> (is_continuation) {</span>
+<span class="line" id="L171">								<span class="tok-kw">if</span> (self.fragment) |*f| {</span>
+<span class="line" id="L172">									<span class="tok-kw">return</span> Message{ .<span class="tok-type">type</span> = f.<span class="tok-type">type</span>, .data = <span class="tok-kw">try</span> f.last(payload) };</span>
+<span class="line" id="L173">								}</span>
+<span class="line" id="L174">								<span class="tok-kw">return</span> <span class="tok-kw">error</span>.UnfragmentedContinuation;</span>
+<span class="line" id="L175">							}</span>
+<span class="line" id="L176"></span>
+<span class="line" id="L177">							<span class="tok-kw">if</span> (self.fragment != <span class="tok-null">null</span> <span class="tok-kw">and</span> (message_type == .text <span class="tok-kw">or</span> message_type == .binary)) {</span>
+<span class="line" id="L178">								<span class="tok-kw">return</span> <span class="tok-kw">error</span>.NestedFragment;</span>
+<span class="line" id="L179">							}</span>
+<span class="line" id="L180"></span>
+<span class="line" id="L181">							<span class="tok-comment">// just a normal single-fragment message (most common case)</span>
+</span>
+<span class="line" id="L182">							<span class="tok-kw">return</span> Message{ .<span class="tok-type">type</span> = message_type, .data = payload };</span>
+<span class="line" id="L183">						}</span>
+<span class="line" id="L184"></span>
+<span class="line" id="L185">						<span class="tok-kw">if</span> (is_continuation) {</span>
+<span class="line" id="L186">							<span class="tok-kw">if</span> (self.fragment) |*f| {</span>
+<span class="line" id="L187">								<span class="tok-kw">try</span> f.add(payload);</span>
+<span class="line" id="L188">								<span class="tok-kw">continue</span> :outer;</span>
+<span class="line" id="L189">							}</span>
+<span class="line" id="L190">							<span class="tok-kw">return</span> <span class="tok-kw">error</span>.UnfragmentedContinuation;</span>
+<span class="line" id="L191">						} <span class="tok-kw">else</span> <span class="tok-kw">if</span> (message_type != .text <span class="tok-kw">and</span> message_type != .binary) {</span>
+<span class="line" id="L192">							<span class="tok-kw">return</span> <span class="tok-kw">error</span>.FragmentedControl;</span>
+<span class="line" id="L193">						}</span>
+<span class="line" id="L194"></span>
+<span class="line" id="L195">						<span class="tok-kw">if</span> (self.fragment != <span class="tok-null">null</span>) {</span>
+<span class="line" id="L196">							<span class="tok-kw">return</span> <span class="tok-kw">error</span>.NestedFragment;</span>
+<span class="line" id="L197">						}</span>
+<span class="line" id="L198">						self.fragment = <span class="tok-kw">try</span> Fragmented.init(self.bp, self.max_size, message_type, payload);</span>
+<span class="line" id="L199">						<span class="tok-kw">continue</span> :outer;</span>
+<span class="line" id="L200">					},</span>
+<span class="line" id="L201">				}</span>
+<span class="line" id="L202">			}</span>
+<span class="line" id="L203">		}</span>
+<span class="line" id="L204">	}</span>
+<span class="line" id="L205"></span>
+<span class="line" id="L206">	<span class="tok-kw">fn</span> <span class="tok-fn">prepareForNewMessage</span>(self: *Reader) <span class="tok-type">void</span> {</span>
+<span class="line" id="L207">		<span class="tok-kw">if</span> (self.buf.<span class="tok-type">type</span> != .static) {</span>
+<span class="line" id="L208">			self.bp.release(self.buf);</span>
+<span class="line" id="L209">			self.buf = self.static;</span>
+<span class="line" id="L210">			self.len = <span class="tok-number">0</span>;</span>
+<span class="line" id="L211">			self.start = <span class="tok-number">0</span>;</span>
+<span class="line" id="L212">			<span class="tok-kw">return</span>;</span>
+<span class="line" id="L213">		}</span>
+<span class="line" id="L214"></span>
+<span class="line" id="L215">		<span class="tok-comment">// self.buf is this reader's static buffer, we might have overread</span>
+</span>
+<span class="line" id="L216">		<span class="tok-kw">const</span> message_len = self.message_len;</span>
+<span class="line" id="L217">		self.message_len = <span class="tok-number">0</span>;</span>
+<span class="line" id="L218">		<span class="tok-kw">if</span> (message_len == self.len) {</span>
+<span class="line" id="L219">			<span class="tok-comment">// The last read we did got exactly 1 message, no overread. This is good</span>
+</span>
+<span class="line" id="L220">			<span class="tok-comment">// since we can just reset our indexes to 0.</span>
+</span>
+<span class="line" id="L221">			self.len = <span class="tok-number">0</span>;</span>
+<span class="line" id="L222">			self.start = <span class="tok-number">0</span>;</span>
+<span class="line" id="L223">		} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L224">			<span class="tok-comment">// We overread into the next message.</span>
+</span>
+<span class="line" id="L225">			self.len -= message_len;</span>
+<span class="line" id="L226">			self.start += message_len;</span>
+<span class="line" id="L227">		}</span>
+<span class="line" id="L228">	}</span>
+<span class="line" id="L229"></span>
+<span class="line" id="L230">	<span class="tok-comment">// Reads at least to_read bytes and returns true</span>
+</span>
+<span class="line" id="L231">	<span class="tok-comment">// When read fails, returns false</span>
+</span>
+<span class="line" id="L232">	<span class="tok-kw">fn</span> <span class="tok-fn">read</span>(self: *Reader, stream: <span class="tok-kw">anytype</span>, to_read: <span class="tok-type">usize</span>) !<span class="tok-type">bool</span> {</span>
+<span class="line" id="L233">		<span class="tok-kw">var</span> len = self.len;</span>
+<span class="line" id="L234"></span>
+<span class="line" id="L235">		<span class="tok-kw">if</span> (to_read &lt; len) {</span>
+<span class="line" id="L236">			<span class="tok-comment">// we already have to_read bytes available</span>
+</span>
+<span class="line" id="L237">			self.message_len = to_read;</span>
+<span class="line" id="L238">			<span class="tok-kw">return</span> <span class="tok-null">true</span>;</span>
+<span class="line" id="L239">		}</span>
+<span class="line" id="L240"></span>
+<span class="line" id="L241">		<span class="tok-kw">var</span> buf = self.buf.data;</span>
+<span class="line" id="L242"></span>
+<span class="line" id="L243">		<span class="tok-comment">// the position in buf up to which we have valid data, this is where</span>
+</span>
+<span class="line" id="L244">		<span class="tok-comment">// we should start filling it up from.</span>
+</span>
+<span class="line" id="L245">		<span class="tok-kw">var</span> pos = self.start + len;</span>
+<span class="line" id="L246"></span>
+<span class="line" id="L247">		<span class="tok-comment">// how much data we're missing to satifisfy to_read</span>
+</span>
+<span class="line" id="L248">		<span class="tok-kw">const</span> missing = to_read - len;</span>
+<span class="line" id="L249"></span>
+<span class="line" id="L250">		<span class="tok-kw">if</span> (missing &gt; buf.len - pos) {</span>
+<span class="line" id="L251">			<span class="tok-comment">// the position, in buf, where the current message starts</span>
+</span>
+<span class="line" id="L252">			<span class="tok-kw">const</span> start = self.start;</span>
+<span class="line" id="L253"></span>
+<span class="line" id="L254">			<span class="tok-kw">if</span> (to_read &lt;= buf.len) {</span>
+<span class="line" id="L255">				<span class="tok-comment">// We have enough space to read this message in our</span>
+</span>
+<span class="line" id="L256">				<span class="tok-comment">// current buffer, but we need to compact it.</span>
+</span>
+<span class="line" id="L257">				std.mem.copyForwards(<span class="tok-type">u8</span>, buf[<span class="tok-number">0</span>..], buf[start..pos]);</span>
+<span class="line" id="L258">				self.start = <span class="tok-number">0</span>;</span>
+<span class="line" id="L259">				pos = len;</span>
+<span class="line" id="L260">			} <span class="tok-kw">else</span> <span class="tok-kw">if</span> (to_read &lt;= self.max_size) {</span>
+<span class="line" id="L261">				<span class="tok-kw">const</span> new_buf = <span class="tok-kw">try</span> self.bp.alloc(to_read);</span>
+<span class="line" id="L262">				<span class="tok-kw">if</span> (len &gt; <span class="tok-number">0</span>) {</span>
+<span class="line" id="L263">					<span class="tok-builtin">@memcpy</span>(new_buf.data[<span class="tok-number">0</span> .. len], buf[start .. start + len]);</span>
+<span class="line" id="L264">				}</span>
+<span class="line" id="L265"></span>
+<span class="line" id="L266">				<span class="tok-comment">// bp.alloc can return a larger buffer (e.g. from a pool). But we don't</span>
+</span>
+<span class="line" id="L267">				<span class="tok-comment">// want to over-read data here, since we want to be able to cleanly</span>
+</span>
+<span class="line" id="L268">				<span class="tok-comment">// revert back to our static buffer</span>
+</span>
+<span class="line" id="L269">				buf = new_buf.data[<span class="tok-number">0</span>..to_read];</span>
+<span class="line" id="L270">				pos = len;</span>
+<span class="line" id="L271"></span>
+<span class="line" id="L272">				self.start = <span class="tok-number">0</span>;</span>
+<span class="line" id="L273">				self.buf = new_buf;</span>
+<span class="line" id="L274">				self.len = self.message_len;</span>
+<span class="line" id="L275">			} <span class="tok-kw">else</span> {</span>
+<span class="line" id="L276">				<span class="tok-kw">return</span> <span class="tok-kw">error</span>.TooLarge;</span>
+<span class="line" id="L277">			}</span>
+<span class="line" id="L278">		}</span>
+<span class="line" id="L279"></span>
+<span class="line" id="L280">		<span class="tok-comment">// Once pos reaches this position, then we have to_read bytes</span>
+</span>
+<span class="line" id="L281">		<span class="tok-kw">const</span> need_pos = pos + missing;</span>
+<span class="line" id="L282"></span>
+<span class="line" id="L283">		<span class="tok-comment">// A bit arbitrary</span>
+</span>
+<span class="line" id="L284">		<span class="tok-kw">const</span> buf_end = <span class="tok-kw">if</span> (to_read &gt; <span class="tok-number">20</span>) buf.len <span class="tok-kw">else</span> need_pos;</span>
+<span class="line" id="L285">		<span class="tok-comment">// const buf_end = if (buf.len - need_pos &gt; 20) buf.len else need_pos;</span>
+</span>
+<span class="line" id="L286"></span>
+<span class="line" id="L287">		<span class="tok-kw">while</span> (pos &lt; need_pos) {</span>
+<span class="line" id="L288">			<span class="tok-kw">const</span> n = <span class="tok-kw">try</span> stream.read(buf[pos..buf_end]);</span>
+<span class="line" id="L289">			<span class="tok-kw">if</span> (n == <span class="tok-number">0</span>) {</span>
+<span class="line" id="L290">				<span class="tok-kw">return</span> <span class="tok-null">false</span>;</span>
+<span class="line" id="L291">			}</span>
+<span class="line" id="L292">			pos += n;</span>
+<span class="line" id="L293">		}</span>
+<span class="line" id="L294"></span>
+<span class="line" id="L295">		self.len = pos - self.start;</span>
+<span class="line" id="L296">		self.message_len = to_read;</span>
+<span class="line" id="L297">		<span class="tok-kw">return</span> <span class="tok-null">true</span>;</span>
+<span class="line" id="L298">	}</span>
+<span class="line" id="L299"></span>
+<span class="line" id="L300">	<span class="tok-kw">fn</span> <span class="tok-fn">currentMessage</span>(self: *Reader) []<span class="tok-type">u8</span> {</span>
+<span class="line" id="L301">		<span class="tok-kw">const</span> start = self.start;</span>
+<span class="line" id="L302">		<span class="tok-kw">return</span> self.buf.data[start .. start + self.message_len];</span>
+<span class="line" id="L303">	}</span>
+<span class="line" id="L304">};</span>
+<span class="line" id="L305"></span>
+<span class="line" id="L306"><span class="tok-kw">const</span> t = lib.testing;</span>
+<span class="line" id="L307"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: readMessage too larrge&quot;</span> {</span>
+<span class="line" id="L308">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L309">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L310">	_ = s.textFrame(<span class="tok-null">true</span>, <span class="tok-str">&quot;hello world&quot;</span>);</span>
+<span class="line" id="L311"></span>
+<span class="line" id="L312">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L313">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">16</span>, <span class="tok-number">16</span>, &amp;bp);</span>
+<span class="line" id="L314">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L315">	<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.TooLarge, r.readMessage(&amp;s));</span>
+<span class="line" id="L316">}</span>
+<span class="line" id="L317"></span>
+<span class="line" id="L318"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: readMessage too large over multiple fragments&quot;</span> {</span>
+<span class="line" id="L319">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L320">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L321">	_ = s.textFrame(<span class="tok-null">false</span>, <span class="tok-str">&quot;hello world&quot;</span>).</span>
+<span class="line" id="L322">		cont(<span class="tok-null">false</span>, <span class="tok-str">&quot; !!!_!!! &quot;</span>).</span>
+<span class="line" id="L323">		cont(<span class="tok-null">true</span>, <span class="tok-str">&quot;how are you doing?&quot;</span>);</span>
+<span class="line" id="L324"></span>
+<span class="line" id="L325">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L326">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">32</span>, <span class="tok-number">32</span>, &amp;bp);</span>
+<span class="line" id="L327">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L328">	<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.TooLarge, r.readMessage(&amp;s));</span>
+<span class="line" id="L329">}</span>
+<span class="line" id="L330"></span>
+<span class="line" id="L331"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: exact read into static with no overflow&quot;</span> {</span>
+<span class="line" id="L332">	<span class="tok-comment">// exact read into static with no overflow</span>
+</span>
+<span class="line" id="L333">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L334">	_ = s.add(<span class="tok-str">&quot;hello1&quot;</span>);</span>
+<span class="line" id="L335">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L336"></span>
+<span class="line" id="L337">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L338"></span>
+<span class="line" id="L339">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">20</span>, <span class="tok-number">20</span>, &amp;bp);</span>
+<span class="line" id="L340">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L341"></span>
+<span class="line" id="L342">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">6</span>));</span>
+<span class="line" id="L343">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello1&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L344">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello1&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L345">}</span>
+<span class="line" id="L346"></span>
+<span class="line" id="L347"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: overread into static with no overflow&quot;</span> {</span>
+<span class="line" id="L348">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L349">	_ = s.add(<span class="tok-str">&quot;hello1world&quot;</span>);</span>
+<span class="line" id="L350">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L351"></span>
+<span class="line" id="L352">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L353"></span>
+<span class="line" id="L354">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">20</span>, <span class="tok-number">20</span>, &amp;bp);</span>
+<span class="line" id="L355">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L356"></span>
+<span class="line" id="L357">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">6</span>));</span>
+<span class="line" id="L358">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello1&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L359">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello1&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L360"></span>
+<span class="line" id="L361">	r.prepareForNewMessage();</span>
+<span class="line" id="L362">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">5</span>));</span>
+<span class="line" id="L363">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;world&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L364">}</span>
+<span class="line" id="L365"></span>
+<span class="line" id="L366"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: incremental read of message&quot;</span> {</span>
+<span class="line" id="L367">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L368">	_ = s.add(<span class="tok-str">&quot;12345&quot;</span>);</span>
+<span class="line" id="L369">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L370"></span>
+<span class="line" id="L371">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L372"></span>
+<span class="line" id="L373">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">20</span>, <span class="tok-number">20</span>, &amp;bp);</span>
+<span class="line" id="L374">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L375"></span>
+<span class="line" id="L376">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">2</span>));</span>
+<span class="line" id="L377">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;12&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L378"></span>
+<span class="line" id="L379">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">5</span>));</span>
+<span class="line" id="L380">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;12345&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L381">}</span>
+<span class="line" id="L382"></span>
+<span class="line" id="L383"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: reads with overflow&quot;</span> {</span>
+<span class="line" id="L384">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L385">	_ = s.add(<span class="tok-str">&quot;hellow&quot;</span>).add(<span class="tok-str">&quot;orld!&quot;</span>);</span>
+<span class="line" id="L386">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L387"></span>
+<span class="line" id="L388"></span>
+<span class="line" id="L389">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L390"></span>
+<span class="line" id="L391">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">6</span>, <span class="tok-number">5</span>, &amp;bp);</span>
+<span class="line" id="L392">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L393"></span>
+<span class="line" id="L394">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">5</span>));</span>
+<span class="line" id="L395">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L396">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L397"></span>
+<span class="line" id="L398">	r.prepareForNewMessage();</span>
+<span class="line" id="L399">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">6</span>));</span>
+<span class="line" id="L400">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L401">}</span>
+<span class="line" id="L402"></span>
+<span class="line" id="L403"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: reads too large&quot;</span> {</span>
+<span class="line" id="L404">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L405">	_ = s.add(<span class="tok-str">&quot;12356&quot;</span>);</span>
+<span class="line" id="L406">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L407"></span>
+<span class="line" id="L408">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L409"></span>
+<span class="line" id="L410">	<span class="tok-kw">var</span> r1 = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">5</span>, <span class="tok-number">5</span>, &amp;bp);</span>
+<span class="line" id="L411">	<span class="tok-kw">defer</span> r1.deinit();</span>
+<span class="line" id="L412">	<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.TooLarge, r1.read(&amp;s, <span class="tok-number">6</span>));</span>
+<span class="line" id="L413"></span>
+<span class="line" id="L414">	<span class="tok-kw">var</span> r2 = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">5</span>, <span class="tok-number">10</span>, &amp;bp);</span>
+<span class="line" id="L415">	<span class="tok-kw">defer</span> r2.deinit();</span>
+<span class="line" id="L416">	<span class="tok-kw">try</span> t.expectError(<span class="tok-kw">error</span>.TooLarge, r2.read(&amp;s, <span class="tok-number">11</span>));</span>
+<span class="line" id="L417">}</span>
+<span class="line" id="L418"></span>
+<span class="line" id="L419"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: reads message larger than static&quot;</span> {</span>
+<span class="line" id="L420">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L421">	_ = s.add(<span class="tok-str">&quot;hello world&quot;</span>);</span>
+<span class="line" id="L422">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L423"></span>
+<span class="line" id="L424">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L425"></span>
+<span class="line" id="L426">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">5</span>, <span class="tok-number">20</span>, &amp;bp);</span>
+<span class="line" id="L427">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L428"></span>
+<span class="line" id="L429">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">11</span>));</span>
+<span class="line" id="L430">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L431">}</span>
+<span class="line" id="L432"></span>
+<span class="line" id="L433"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: reads fragmented message larger than static (no pool)&quot;</span> {</span>
+<span class="line" id="L434">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L435">	_ = s.add(<span class="tok-str">&quot;hello&quot;</span>).add(<span class="tok-str">&quot; &quot;</span>).add(<span class="tok-str">&quot;world!&quot;</span>).add(<span class="tok-str">&quot;nice&quot;</span>);</span>
+<span class="line" id="L436">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L437"></span>
+<span class="line" id="L438">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L439"></span>
+<span class="line" id="L440">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">5</span>, <span class="tok-number">20</span>, &amp;bp);</span>
+<span class="line" id="L441">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L442"></span>
+<span class="line" id="L443">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">12</span>));</span>
+<span class="line" id="L444">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L445">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L446"></span>
+<span class="line" id="L447">	r.prepareForNewMessage();</span>
+<span class="line" id="L448">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">4</span>));</span>
+<span class="line" id="L449">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;nice&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L450">}</span>
+<span class="line" id="L451"></span>
+<span class="line" id="L452"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: reads fragmented message larger than static smaller than pool&quot;</span> {</span>
+<span class="line" id="L453">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L454">	_ = s.add(<span class="tok-str">&quot;hello&quot;</span>).add(<span class="tok-str">&quot; &quot;</span>).add(<span class="tok-str">&quot;world!&quot;</span>).add(<span class="tok-str">&quot;nice&quot;</span>);</span>
+<span class="line" id="L455">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L456"></span>
+<span class="line" id="L457">	<span class="tok-kw">var</span> pool = <span class="tok-kw">try</span> buffer.Pool.init(t.allocator, <span class="tok-number">2</span>, <span class="tok-number">50</span>);</span>
+<span class="line" id="L458">	<span class="tok-kw">defer</span> pool.deinit();</span>
+<span class="line" id="L459">	<span class="tok-kw">var</span> bp = buffer.Provider.init(t.allocator, &amp;pool, <span class="tok-number">50</span>);</span>
+<span class="line" id="L460"></span>
+<span class="line" id="L461">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">5</span>, <span class="tok-number">20</span>, &amp;bp);</span>
+<span class="line" id="L462">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L463"></span>
+<span class="line" id="L464">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">12</span>));</span>
+<span class="line" id="L465">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L466">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L467"></span>
+<span class="line" id="L468">	r.prepareForNewMessage();</span>
+<span class="line" id="L469">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">4</span>));</span>
+<span class="line" id="L470">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;nice&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L471">}</span>
+<span class="line" id="L472"></span>
+<span class="line" id="L473"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: reads large fragmented message after small message no pool&quot;</span> {</span>
+<span class="line" id="L474">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L475">	_ = s.add(<span class="tok-str">&quot;nice&quot;</span>).add(<span class="tok-str">&quot;hello&quot;</span>).add(<span class="tok-str">&quot; &quot;</span>).add(<span class="tok-str">&quot;world!&quot;</span>);</span>
+<span class="line" id="L476">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L477"></span>
+<span class="line" id="L478">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L479"></span>
+<span class="line" id="L480">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">5</span>, <span class="tok-number">20</span>, &amp;bp);</span>
+<span class="line" id="L481">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L482"></span>
+<span class="line" id="L483">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">4</span>));</span>
+<span class="line" id="L484">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;nice&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L485"></span>
+<span class="line" id="L486">	r.prepareForNewMessage();</span>
+<span class="line" id="L487">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">12</span>));</span>
+<span class="line" id="L488">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L489">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L490">}</span>
+<span class="line" id="L491"></span>
+<span class="line" id="L492"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: reads large fragmented message after small with pool&quot;</span> {</span>
+<span class="line" id="L493">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L494">	_ = s.add(<span class="tok-str">&quot;nice&quot;</span>).add(<span class="tok-str">&quot;hello&quot;</span>).add(<span class="tok-str">&quot; &quot;</span>).add(<span class="tok-str">&quot;world!&quot;</span>);</span>
+<span class="line" id="L495">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L496"></span>
+<span class="line" id="L497">	<span class="tok-kw">var</span> pool = <span class="tok-kw">try</span> buffer.Pool.init(t.allocator, <span class="tok-number">2</span>, <span class="tok-number">50</span>);</span>
+<span class="line" id="L498">	<span class="tok-kw">defer</span> pool.deinit();</span>
+<span class="line" id="L499">	<span class="tok-kw">var</span> bp = buffer.Provider.init(t.allocator, &amp;pool, <span class="tok-number">50</span>);</span>
+<span class="line" id="L500"></span>
+<span class="line" id="L501">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">5</span>, <span class="tok-number">20</span>, &amp;bp);</span>
+<span class="line" id="L502">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L503"></span>
+<span class="line" id="L504">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">4</span>));</span>
+<span class="line" id="L505">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;nice&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L506"></span>
+<span class="line" id="L507">	r.prepareForNewMessage();</span>
+<span class="line" id="L508">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">12</span>));</span>
+<span class="line" id="L509">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L510">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L511">}</span>
+<span class="line" id="L512"></span>
+<span class="line" id="L513"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: reads large fragmented message fragmented with small message&quot;</span> {</span>
+<span class="line" id="L514">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L515">	_ = s.add(<span class="tok-str">&quot;nicehel&quot;</span>).add(<span class="tok-str">&quot;lo&quot;</span>).add(<span class="tok-str">&quot; &quot;</span>).add(<span class="tok-str">&quot;world!&quot;</span>);</span>
+<span class="line" id="L516">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L517"></span>
+<span class="line" id="L518">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L519"></span>
+<span class="line" id="L520">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">7</span>, <span class="tok-number">20</span>, &amp;bp);</span>
+<span class="line" id="L521">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L522"></span>
+<span class="line" id="L523">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">4</span>));</span>
+<span class="line" id="L524">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;nice&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L525"></span>
+<span class="line" id="L526">	r.prepareForNewMessage();</span>
+<span class="line" id="L527">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">12</span>));</span>
+<span class="line" id="L528">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L529">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L530">}</span>
+<span class="line" id="L531"></span>
+<span class="line" id="L532"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: reads large fragmented message with a small message when static buffer is smaller than read size&quot;</span> {</span>
+<span class="line" id="L533">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L534">	_= s.add(<span class="tok-str">&quot;nicehel&quot;</span>).add(<span class="tok-str">&quot;lo&quot;</span>).add(<span class="tok-str">&quot; &quot;</span>).add(<span class="tok-str">&quot;world!&quot;</span>);</span>
+<span class="line" id="L535">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L536"></span>
+<span class="line" id="L537">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L538"></span>
+<span class="line" id="L539">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">5</span>, <span class="tok-number">20</span>, &amp;bp);</span>
+<span class="line" id="L540">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L541"></span>
+<span class="line" id="L542">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">4</span>));</span>
+<span class="line" id="L543">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;nice&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L544"></span>
+<span class="line" id="L545">	r.prepareForNewMessage();</span>
+<span class="line" id="L546">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">12</span>));</span>
+<span class="line" id="L547">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L548">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;hello world!&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L549">}</span>
+<span class="line" id="L550"></span>
+<span class="line" id="L551"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: reads large fragmented message&quot;</span> {</span>
+<span class="line" id="L552">	<span class="tok-kw">var</span> s = t.Stream.init();</span>
+<span class="line" id="L553">	_ = s.add(<span class="tok-str">&quot;0&quot;</span>).add(<span class="tok-str">&quot;123456&quot;</span>).add(<span class="tok-str">&quot;789ABCabc&quot;</span>).add(<span class="tok-str">&quot;defghijklmn&quot;</span>);</span>
+<span class="line" id="L554">	<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L555"></span>
+<span class="line" id="L556">	<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L557"></span>
+<span class="line" id="L558">	<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">5</span>, <span class="tok-number">20</span>, &amp;bp);</span>
+<span class="line" id="L559">	<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L560"></span>
+<span class="line" id="L561">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">1</span>));</span>
+<span class="line" id="L562">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;0&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L563"></span>
+<span class="line" id="L564">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">13</span>));</span>
+<span class="line" id="L565">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;0123456789ABC&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L566"></span>
+<span class="line" id="L567">	r.prepareForNewMessage();</span>
+<span class="line" id="L568">	<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, <span class="tok-number">14</span>));</span>
+<span class="line" id="L569">	<span class="tok-kw">try</span> t.expectString(<span class="tok-str">&quot;abcdefghijklmn&quot;</span>, r.currentMessage());</span>
+<span class="line" id="L570">}</span>
+<span class="line" id="L571"></span>
+<span class="line" id="L572"><span class="tok-kw">test</span> <span class="tok-str">&quot;Reader: fuzz&quot;</span> {</span>
+<span class="line" id="L573">	<span class="tok-kw">const</span> allocator = t.allocator;</span>
+<span class="line" id="L574">	<span class="tok-kw">var</span> rnd = t.getRandom();</span>
+<span class="line" id="L575">	<span class="tok-kw">const</span> random = rnd.random();</span>
+<span class="line" id="L576"></span>
+<span class="line" id="L577">	<span class="tok-comment">// NOTE: there's an inner fuzzing loop also.</span>
+</span>
+<span class="line" id="L578">	<span class="tok-comment">// This loop generates 1 set of messages/expectations. The inner loop</span>
+</span>
+<span class="line" id="L579">	<span class="tok-comment">// generates random fragmentation over those messages.</span>
+</span>
+<span class="line" id="L580"></span>
+<span class="line" id="L581">	<span class="tok-kw">var</span> outer: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L582">	<span class="tok-kw">while</span> (outer &lt; <span class="tok-number">100</span>) : (outer += <span class="tok-number">1</span>) {</span>
+<span class="line" id="L583">		<span class="tok-comment">// The number of message this iteration will be setting up/expecting</span>
+</span>
+<span class="line" id="L584">		<span class="tok-kw">const</span> message_count = random.uintAtMost(<span class="tok-type">usize</span>, <span class="tok-number">10</span>) + <span class="tok-number">1</span>;</span>
+<span class="line" id="L585">		<span class="tok-kw">var</span> messages = allocator.alloc([]<span class="tok-type">u8</span>, message_count) <span class="tok-kw">catch</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L586">		<span class="tok-kw">defer</span> {</span>
+<span class="line" id="L587">			<span class="tok-kw">for</span> (messages) |m| {</span>
+<span class="line" id="L588">				allocator.free(m);</span>
+<span class="line" id="L589">			}</span>
+<span class="line" id="L590">			allocator.free(messages);</span>
+<span class="line" id="L591">		}</span>
+<span class="line" id="L592"></span>
+<span class="line" id="L593">		<span class="tok-kw">var</span> j: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L594">		<span class="tok-kw">while</span> (j &lt; message_count) : (j += <span class="tok-number">1</span>) {</span>
+<span class="line" id="L595">			<span class="tok-kw">const</span> len = random.uintAtMost(<span class="tok-type">usize</span>, <span class="tok-number">100</span>) + <span class="tok-number">1</span>;</span>
+<span class="line" id="L596">			messages[j] = allocator.alloc(<span class="tok-type">u8</span>, len) <span class="tok-kw">catch</span> <span class="tok-kw">unreachable</span>;</span>
+<span class="line" id="L597">			random.bytes(messages[j]);</span>
+<span class="line" id="L598">		}</span>
+<span class="line" id="L599"></span>
+<span class="line" id="L600">		<span class="tok-comment">// Now we have all ouf our expectations setup, let's setup our mock stream</span>
+</span>
+<span class="line" id="L601">		<span class="tok-kw">var</span> stream = t.Stream.init();</span>
+<span class="line" id="L602">		<span class="tok-kw">for</span> (messages) |m| {</span>
+<span class="line" id="L603">			_ = stream.fragmentedAdd(m);</span>
+<span class="line" id="L604">		}</span>
+<span class="line" id="L605"></span>
+<span class="line" id="L606">		<span class="tok-comment">// This is the inner fuzzing loop which takes a set of messages</span>
+</span>
+<span class="line" id="L607">		<span class="tok-comment">// and tries multiple time with random fragmentation</span>
+</span>
+<span class="line" id="L608">		<span class="tok-kw">var</span> inner: <span class="tok-type">usize</span> = <span class="tok-number">0</span>;</span>
+<span class="line" id="L609">		<span class="tok-kw">while</span> (inner &lt; <span class="tok-number">10</span>) : (inner += <span class="tok-number">1</span>) {</span>
+<span class="line" id="L610">			<span class="tok-kw">var</span> s = stream.clone();</span>
+<span class="line" id="L611">			<span class="tok-kw">defer</span> s.deinit();</span>
+<span class="line" id="L612"></span>
+<span class="line" id="L613">			<span class="tok-kw">var</span> bp = buffer.Provider.initNoPool(t.allocator);</span>
+<span class="line" id="L614"></span>
+<span class="line" id="L615">			<span class="tok-kw">var</span> r = <span class="tok-kw">try</span> Reader.init(<span class="tok-number">40</span>, <span class="tok-number">101</span>, &amp;bp);</span>
+<span class="line" id="L616">			<span class="tok-kw">defer</span> r.deinit();</span>
+<span class="line" id="L617"></span>
+<span class="line" id="L618">			<span class="tok-kw">for</span> (messages) |m| {</span>
+<span class="line" id="L619">				<span class="tok-kw">try</span> t.expectEqual(<span class="tok-null">true</span>, <span class="tok-kw">try</span> r.read(&amp;s, m.len));</span>
+<span class="line" id="L620">				<span class="tok-kw">try</span> t.expectString(m, r.currentMessage());</span>
+<span class="line" id="L621">				r.prepareForNewMessage();</span>
+<span class="line" id="L622">			}</span>
+<span class="line" id="L623"></span>
+<span class="line" id="L624">		}</span>
+<span class="line" id="L625">		stream.deinit();</span>
+<span class="line" id="L626">	}</span>
+<span class="line" id="L627">}</span>
+<span class="line" id="L628"></span>
+</code></pre></body>
+</html>
