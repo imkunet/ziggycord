@@ -13,7 +13,7 @@ const websocket = @import("websocket");
 /// Intents are the way to tell the Gateway what extra permissions your bot needs
 pub const GatewayIntents = @import("intents.zig");
 
-const IGNORE_UNNOWN = .{ .ignore_unknown_fields = true };
+const IGNORE_UNKNOWN = .{ .ignore_unknown_fields = true };
 
 pub const GatewayConnectionError = error{
     InvalidGatewayHost,
@@ -49,7 +49,7 @@ pub const GatewayClient = struct {
         sequence: ?i64 = null,
         heart_handle: std.Thread.ResetEvent = std.Thread.ResetEvent{},
         heart_interval: u32 = 30_000,
-        heart_last_beat: i128 = -1,
+        heart_last_beat: i64 = -1,
         heart_started: bool = false,
 
         pub fn handle(self: *@This(), message: websocket.Message) !void {
@@ -70,7 +70,7 @@ pub const GatewayClient = struct {
                 10 => {
                     // hello opcode
                     if (res.d) |raw_data| {
-                        const hello = try json.parseFromValueLeaky(types.GatewayR10Hello, allocator, raw_data, IGNORE_UNNOWN);
+                        const hello = try json.parseFromValueLeaky(types.GatewayR10Hello, allocator, raw_data, IGNORE_UNKNOWN);
                         const pause = @as(u32, @intFromFloat(self.gateway_client.jitter * @as(f32, @floatFromInt(hello.heartbeat_interval))));
                         self.heart_interval = hello.heartbeat_interval;
 
@@ -78,7 +78,7 @@ pub const GatewayClient = struct {
 
                         if (@cmpxchgStrong(bool, &self.heart_started, false, true, .Monotonic, .Monotonic) == null) {
                             const thread = try std.Thread.spawn(.{
-                                .stack_size = 1 * 1024 * 1024, // 1MB, we'll see how it goes...
+                                .stack_size = 4 * 1024 * 1024, // 4MB, we'll see how it goes...
                             }, start_heart, .{ self, pause });
                             thread.detach();
                         } else {
@@ -100,8 +100,8 @@ pub const GatewayClient = struct {
                 },
 
                 11 => {
-                    const ping_time = std.time.nanoTimestamp() - @atomicRmw(i128, &self.heart_last_beat, .Xchg, -1, .Monotonic);
-                    log.debug("<3 PONG (RTT {d}ns)", .{ping_time});
+                    const ping_time = std.time.milliTimestamp() - @atomicRmw(i64, &self.heart_last_beat, .Xchg, -1, .Monotonic);
+                    log.debug("<3 PONG (RTT {d}ms)", .{ping_time});
                 },
 
                 else => {
@@ -125,15 +125,15 @@ pub const GatewayClient = struct {
                 const allocator = arena.allocator();
 
                 log.debug("<3 PING", .{});
-                if (@cmpxchgWeak(i128, &self.heart_last_beat, -1, std.time.nanoTimestamp(), .Monotonic, .Monotonic) != null) {
+                if (@cmpxchgWeak(i64, &self.heart_last_beat, -1, std.time.milliTimestamp(), .Monotonic, .Monotonic) != null) {
                     log.debug("</3 double ping (no response since last ping)", .{});
+                    self.client.close();
                     return;
                 }
                 self.transmit(allocator, ?i64, self.sequence, 1) catch |why| {
                     arena.deinit();
                     log.debug("</3 ping error {!} (cardiac arresting)", .{why});
-                    @atomicStore(bool, &self.heart_started, false, .Monotonic);
-                    @atomicStore(i128, &self.heart_last_beat, -1, .Monotonic);
+                    self.client.close();
                     return;
                 };
 
@@ -141,8 +141,6 @@ pub const GatewayClient = struct {
                 delay = self.heart_interval;
             }
 
-            @atomicStore(bool, &self.heart_started, false, .Monotonic);
-            @atomicStore(i128, &self.heart_last_beat, -1, .Monotonic);
             log.debug("</3 cardiac arrest", .{});
         }
 
@@ -188,7 +186,12 @@ pub const GatewayClient = struct {
             .headers = formattedHost,
         });
 
-        var handler = Handler{ .client = &client, .gateway_client = self };
+        var handler = Handler{
+            .client = &client,
+            .gateway_client = self,
+        };
         try client.readLoop(&handler);
+
+        log.debug("exited", .{});
     }
 };

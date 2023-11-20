@@ -11,33 +11,36 @@ const BASE_URL = "https://discord.com/api/v10";
 const VERSION = "0.0.1";
 const USER_AGENT = std.fmt.comptimePrint("Ziggycord (https://github.com/imkunet/ziggycord/, v{s})", .{VERSION});
 
-const PARSE_OPTIONS = .{ .ignore_unknown_fields = true, .allocate = .alloc_always };
+const PARSE_OPTIONS = .{
+    .ignore_unknown_fields = true,
+    .allocate = .alloc_always,
+};
 
 pub const HttpClient = struct {
     allocator: Allocator,
     token: []const u8,
 
     http_client: http.Client,
-    http_options: http.Client.Options,
+    http_options: http.Client.RequestOptions,
     http_headers: http.Headers,
 
     pub fn init(allocator: Allocator, token: []const u8) !@This() {
         const token_formatted = try std.fmt.allocPrint(allocator, "Bot {s}", .{token});
 
         var headers = http.Headers.init(allocator);
-        try headers.append("Authorization", token_formatted);
-        try headers.append("User-Agent", USER_AGENT);
-        try headers.append("Content-Type", "application/json");
         try headers.append("Accept", "application/json");
+        try headers.append("Authorization", token_formatted);
+        try headers.append("Content-Type", "application/json");
+        try headers.append("User-Agent", USER_AGENT);
         headers.sort();
 
         return .{
             .allocator = allocator,
             .token = token_formatted,
-            .http_client = http.Client{
+            .http_client = .{
                 .allocator = allocator,
             },
-            .http_options = http.Client.Options{},
+            .http_options = .{},
             .http_headers = headers,
         };
     }
@@ -55,16 +58,22 @@ pub const HttpClient = struct {
 
     fn queryDiscord(self: *@This(), allocator: Allocator, method: http.Method, url: []const u8) !QueryResponse {
         const uri = try std.Uri.parse(url);
-        var req = try self.http_client.request(method, uri, self.http_headers, self.http_options);
-        defer req.deinit();
-        try req.start();
-        try req.wait();
 
-        // hopefully 4MB will be enough to store the data from a single request
-        // the highest I can imagine Discord returning ATM is a 100 message batch
-        // filled with content and metadata
-        const body = try req.reader().readAllAlloc(allocator, 4_000_000);
-        return .{ .body = body, .status = req.response.status };
+        var res = try self.http_client.fetch(allocator, .{
+            .method = method,
+            .location = http.Client.FetchOptions.Location{ .uri = uri },
+            .headers = self.http_headers,
+        });
+        defer res.deinit();
+
+        var buffer = try allocator.alloc(u8, res.body.?.len);
+        std.mem.copy(u8, buffer, res.body.?);
+
+        for (res.headers.list.items) |value| {
+            std.log.info("{s}: {s}", .{ value.name, value.value });
+        }
+
+        return .{ .body = buffer, .status = res.status };
     }
 
     fn fixedUrl(comptime path: []const u8) []const u8 {

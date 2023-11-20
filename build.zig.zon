@@ -1,14 +1,15 @@
 .{
     .name = "ziggycord",
     .version = "0.0.1",
+    .paths = .{""},
 
     .dependencies = .{
         // karlseguin/websocket.zig
         // https://github.com/karlseguin/websocket.zig
         // Mozilla Public License 2.0
         .websocket = .{
-            .url = "https://github.com/karlseguin/websocket.zig/archive/3c5ad58ce74d6d23782ef41c412c106f062f7f23.tar.gz",
-            .hash = "12201cc83792352f73e84a601934c380d4ad64072aaae0216d286edc7ddda7530c93",
+            .url = "https://github.com/karlseguin/websocket.zig/archive/aa77656ec974b73b614f485d0bab4d1c62b826a1.tar.gz",
+            .hash = "1220e88b7e373e5e0d1f2bf12ecd72219ac1d8d0d4f209154a61762d70634faece65",
         },
     },
 }
