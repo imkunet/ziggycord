@@ -1,41 +1,15 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 const log = std.log;
+const helpers = @import("helpers.zig");
 
 const ziggycord = @import("ziggycord");
 const HttpClient = ziggycord.http.HttpClient;
 const GatewayClient = ziggycord.gateway.GatewayClient;
 
-const ESC = "\x1b[";
-const RESET = ESC ++ "0m";
-
-inline fn esc(comptime inside: []const u8) []const u8 {
-    return ESC ++ inside ++ "m";
-}
-
-fn levelText(comptime level: log.Level) []const u8 {
-    return switch (level) {
-        .err => esc("31") ++ "FATL",
-        .warn => esc("33") ++ "WARN",
-        .info => esc("34") ++ "INFO",
-        .debug => esc("32") ++ "DBUG",
-    };
-}
-
-pub fn coloredLogFn(comptime level: log.Level, comptime scope: @TypeOf(.EnumLiteral), comptime format: []const u8, args: anytype) void {
-    const level_text = comptime levelText(level);
-    const scope_text = comptime if (scope == .default) RESET ++ ": " else esc("90") ++ " [" ++ @tagName(scope) ++ "]" ++ RESET ++ ": ";
-
-    const stderr = std.io.getStdErr().writer();
-    std.debug.getStderrMutex().lock();
-    defer std.debug.getStderrMutex().unlock();
-
-    nosuspend stderr.print(level_text ++ scope_text ++ format ++ "\n", args) catch return;
-}
-
 pub const std_options = struct {
     pub const log_level = .debug;
-    pub const logFn = coloredLogFn;
+    pub const logFn = helpers.coloredLogFn;
 };
 
 fn getToken(allocator: Allocator) ?[]u8 {
@@ -80,7 +54,4 @@ pub fn main() !void {
     var gateway_client = try GatewayClient.init(allocator, http);
     defer gateway_client.deinit();
     try gateway_client.connect();
-
-    // sleep so we can check memory usage of the process
-    std.time.sleep(std.time.ns_per_s * 5);
 }
