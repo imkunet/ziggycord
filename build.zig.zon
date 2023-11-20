@@ -1,16 +1,15 @@
 .{
     .name = "ziggycord",
     .version = "0.0.1",
+    .paths = .{""},
 
-    // right now, there isn't a de facto web socket library
-    // future goals might be to just implement one
     .dependencies = .{
         // karlseguin/websocket.zig
         // https://github.com/karlseguin/websocket.zig
         // Mozilla Public License 2.0
-        .websocket_zig = .{
-            .url = "https://github.com/karlseguin/websocket.zig/archive/c72fff80b14f0c42136febcb30787921cd1ea60d.tar.gz",
-            .hash = "1220296a1500d068be6f1683ffc8fe70f1572b9db132feb2217dc49b98d72be1381d",
+        .websocket = .{
+            .url = "https://github.com/karlseguin/websocket.zig/archive/aa77656ec974b73b614f485d0bab4d1c62b826a1.tar.gz",
+            .hash = "1220e88b7e373e5e0d1f2bf12ecd72219ac1d8d0d4f209154a61762d70634faece65",
         },
     },
 }
