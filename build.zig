@@ -7,7 +7,7 @@ pub fn build(b: *std.Build) !void {
     });
 
     const ziggycord = b.addModule("ziggycord", .{
-        .source_file = .{ .path = "src/ziggycord/ziggycord.zig" },
+        .root_source_file = .{ .path = "src/ziggycord/ziggycord.zig" },
     });
 
     const ws = b.dependency("websocket", .{
@@ -15,7 +15,8 @@ pub fn build(b: *std.Build) !void {
         .optimize = optimize,
     });
 
-    try ziggycord.dependencies.put("websocket", ws.module("websocket"));
+    ziggycord.addImport("websocket", ws.module("websocket"));
+    //try ziggycord.dependencies.put("websocket", ws.module("websocket"));
 
     // test bot
 
@@ -27,7 +28,7 @@ pub fn build(b: *std.Build) !void {
     });
     //test_exe.strip = true;
     //test_exe.addModule("websocket", ws.module("websocket"));
-    test_exe.addModule("ziggycord", ziggycord);
+    test_exe.root_module.addImport("ziggycord", ziggycord);
 
     const install_example = b.addInstallArtifact(test_exe, .{});
 
@@ -38,12 +39,12 @@ pub fn build(b: *std.Build) !void {
     // tests (broken not sure why yet)
 
     const tests = b.addTest(.{
-        .root_source_file = std.build.FileSource.relative("src/ziggycord/ziggycord.zig"),
+        .root_source_file = .{ .path = "src/ziggycord/ziggycord.zig" },
         .target = target,
         .optimize = optimize,
     });
-    tests.addModule("websocket", ws.module("websocket"));
-    tests.addModule("ziggycord", ziggycord);
+    //tests.addModule("websocket", ws.module("websocket"));
+    tests.root_module.addImport("ziggycord", ziggycord);
 
     const tests_step = b.step("test", "Run the tests");
     tests_step.dependOn(&tests.step);
@@ -51,12 +52,12 @@ pub fn build(b: *std.Build) !void {
     // autodocs
 
     const autodoc_test = b.addTest(.{
-        .root_source_file = std.Build.FileSource.relative("src/ziggycord/ziggycord.zig"),
+        .root_source_file = .{ .path = "src/ziggycord/ziggycord.zig" },
         .target = target,
         .optimize = optimize,
     });
-    autodoc_test.addModule("websocket", ws.module("websocket"));
-    autodoc_test.addModule("ziggycord", ziggycord);
+    //autodoc_test.addModule("websocket", ws.module("websocket"));
+    autodoc_test.root_module.addImport("ziggycord", ziggycord);
 
     const install_docs = b.addInstallDirectory(.{
         .source_dir = autodoc_test.getEmittedDocs(),

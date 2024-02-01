@@ -150,7 +150,7 @@ pub const GatewayClient = struct {
             var list = std.ArrayList(u8).init(allocator);
             errdefer list.deinit();
             try json.stringifyArbitraryDepth(allocator, message, .{}, list.writer());
-            var slice = try list.toOwnedSlice();
+            const slice = try list.toOwnedSlice();
             log.debug("T -> op{d} {s}", .{ op, slice });
 
             try self.client.write(slice);

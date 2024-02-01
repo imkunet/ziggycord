@@ -66,8 +66,8 @@ pub const HttpClient = struct {
         });
         defer res.deinit();
 
-        var buffer = try allocator.alloc(u8, res.body.?.len);
-        std.mem.copy(u8, buffer, res.body.?);
+        const buffer = try allocator.alloc(u8, res.body.?.len);
+        std.mem.copyForwards(u8, buffer, res.body.?);
 
         for (res.headers.list.items) |value| {
             std.log.info("{s}: {s}", .{ value.name, value.value });

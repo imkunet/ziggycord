@@ -8,8 +8,8 @@
         // https://github.com/karlseguin/websocket.zig
         // Mozilla Public License 2.0
         .websocket = .{
-            .url = "https://github.com/karlseguin/websocket.zig/archive/aa77656ec974b73b614f485d0bab4d1c62b826a1.tar.gz",
-            .hash = "1220e88b7e373e5e0d1f2bf12ecd72219ac1d8d0d4f209154a61762d70634faece65",
+            .url = "https://github.com/karlseguin/websocket.zig/archive/1f2c4a56c642dab52fe12cdda1bd3f56865d1f86.tar.gz",
+            .hash = "1220ce168e550f8904364acd0a72f5cafd40caa08a50ba83aac50b97ba700d7bcf20",
         },
     },
 }
